@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 //apointment
 const { appointment } = require('../models/appointment');
 const { Doctor } = require('../../Doctor/models/doctor');
+const auth = require('../../JWT/jwtMiddleware');
 //express
 const express = require('express');
 
@@ -13,7 +14,7 @@ const router = express.Router()
 //-------------------------------------------Get List
 //read
 //localhost:3000/appointment/
-router.get('/', async (req, res) => {
+router.get('/', [auth.checkReceptionest], async (req, res) => {
     const appoint = await appointment.find(req.appointment).select('-doctorId._id');
     if (appoint) return res.send(appoint);
     return res.status(400).send('Not Found Any Record');
@@ -21,7 +22,7 @@ router.get('/', async (req, res) => {
 });
 
 //-----------------------------------------------Get By ID
-router.get('/:id', async (req, res) => {
+router.get('/:id', [auth.checkReceptionest], async (req, res) => {
 
     const appoint = await appointment.findById(req.params.id);
 
@@ -33,7 +34,7 @@ router.get('/:id', async (req, res) => {
 
 //-----------------------------------------------Add
 //create
-router.post('/', async (req, res) => {
+router.post('/', [auth.checkReceptionest], async (req, res) => {
 
     console.log("hamada");
     const { error } = validationAppointment(req.body);
@@ -62,12 +63,12 @@ router.post('/', async (req, res) => {
 
 
 //-----------------------------------------------Update
-router.put('/:id', async (req, res) => {
+router.put('/:id', [auth.checkReceptionest], async (req, res) => {
     const doctor = await Doctor.findById(req.body.doctorId);
     if (!doctor) return res.status(400).send('Invalid Id');
     //--------------Check Body Request
     const { error } = validationAppointment(req.body);
-    if (error== true) return res.status(400).send(error.details[0].message);
+    if (error == true) return res.status(400).send(error.details[0].message);
 
     let newAppointment = new appointment({
         _id: req.body._id,
@@ -92,13 +93,13 @@ router.put('/:id', async (req, res) => {
 
 
 //-----------------------------------------------Delete
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth.checkReceptionest], async (req, res) => {
     const appoint = await appointment.findByIdAndRemove(req.params.id);
 
     if (!appoint) return res.status(400).send('The genre with the given ID was not found.');
 
-   // console.log("delete");
-    res.send({"DELETE FROM DB\t" : appoint});
+    // console.log("delete");
+    res.send({ "DELETE FROM DB\t": appoint });
 })
 
 module.exports = router

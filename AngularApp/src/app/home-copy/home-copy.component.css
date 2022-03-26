@@ -1,0 +1,60 @@
+.carousel-item>img {
+    height: 450px;
+
+}
+
+.card>img {
+    height: 200px;
+}
+
+
+#contactus {
+    background-color: #191E22;
+    color: #6A6E71;
+    padding: 20px 0px;
+    text-align: center;
+    /* height: 150px; */
+}
+
+.container>ul {
+    list-style: none;
+}
+
+.container>ul>li {
+    display: inline-block;
+    padding: 5px;
+}
+
+
+
+.card {
+    border: none;
+}
+
+.card>img:hover {
+    background-color: #6A6E71;
+    cursor: pointer;
+}
+
+.card>p {
+    transition: all 1s;
+}
+
+.card>img:hover~p {
+    opacity: 1;
+
+}
+a{
+    margin: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font: bold;
+}
+#name{
+    color: gold;
+    font-weight: bold;
+    margin-left: 2px;
+    font-style: normal;
+    size: 100px;
+}

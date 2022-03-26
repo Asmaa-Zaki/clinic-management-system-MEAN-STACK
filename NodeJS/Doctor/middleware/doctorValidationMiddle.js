@@ -8,7 +8,7 @@ module.exports = function validationDoctor(req) {
         phone: Joi.number().required(),
         address: Joi.string().required(),
         medicalSpecialty: Joi.string().max(100).required(),
-        username: Joi.string()
+        username: Joi.string().trim(true)
             .alphanum()
             .min(3)
             .max(30)

@@ -7,7 +7,7 @@ module.exports = function validationPatient(req) {
         SSN: Joi.number().required(),
         phone: Joi.number().required(),
         address: Joi.string().required(),
-        gender: Joi.string().required(),
+        gender: Joi.string().valid('male', 'female'),
         insuranceId: Joi.number().required()
     });
     return schema.validate(req);

@@ -1,53 +1,59 @@
-<table class="table">
-    <tr>
-        <th>
-            <label>Id</label>
-            <i appSortParams class="fa fa-arrow-up" (click)="sortIdAsc()"></i>
-            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortIdDesc()"></i>
-        </th>
-        <th>
-            <label class="fw-bold">Doc Id</label>
-            <i appSortParams class="fa fa-arrow-up" (click)="sortDocIdAsc()"></i>
-            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortDocIdDesc()"></i>
-        </th>
-        <th>
-            <label>Doc Name</label>
-            <i appSortParams class="fa fa-arrow-up" (click)="sortPatIdAsc()"></i>
-            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortPatIdDesc()"></i>
-        </th>
-        <th>
-            <label>Pat Name</label>
-            <i appSortParams class="fa fa-arrow-up" (click)="sortMedIdAsc()"></i>
-            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortMedIdDesc()"></i>
-        </th>
-        <th>
-            <label>Doses</label>
-            <i appSortParams class="fa fa-arrow-up" (click)="sortNumOfDoAsc()"></i>
-            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortNumOfDoDesc()"></i>
-        </th>
-        <th>
-            <label>Date</label>
-            <i appSortParams class="fa fa-arrow-up" (click)="sortDateAsc()"></i>
-            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortDateDesc()"></i>
-        </th>
-        <th>
-            <input type="text" class="w w-75 h-25" [(ngModel)]="searchValue" placeholder="Filter by Doses">
-        </th>
-        <th>
-            <a (click)="show()"><i class=" fa fa-refresh refresh" aria-hidden="true" style="cursor: pointer;"></i></a>
-        </th>
-    </tr>
-    <tr
-        *ngFor="let prescript of (prescriptionService.PrescriptList|filterbyPrescript:searchValue|sortPrescript:direction:column:type)">
-        <td>{{prescript._id}}</td>
-        <td>{{prescript.doctorId}}</td>
-        <td>{{prescript.patientId}}</td>
-        <td>{{prescript.medicineId}}</td>
-        <td>{{prescript.numberOfDoses}}</td>
-        <td>{{prescript.dateOfPrescript}}</td>
-        <a [routerLink]="['edit',prescript._id]" ><i class="fa fa-edit" aria-hidden="true" style="font-weight: bold; font-size: larger;"></i></a>
-        <td>
-            <app-prescription-delete [prescription]="prescript"></app-prescription-delete>
-        </td>
-    </tr>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                <label>Id</label>
+                <i appSortParams class="fa fa-arrow-up" (click)="sortIdAsc()"></i>
+                <i appSortParams class="fa fa-arrow-down sorting" (click)="sortIdDesc()"></i>
+            </th>
+            <th>
+                <label class="fw-bold">Doc Id</label>
+                <i appSortParams class="fa fa-arrow-up" (click)="sortDocIdAsc()"></i>
+                <i appSortParams class="fa fa-arrow-down sorting" (click)="sortDocIdDesc()"></i>
+            </th>
+            <th>
+                <label>Doc Name</label>
+                <i appSortParams class="fa fa-arrow-up" (click)="sortPatIdAsc()"></i>
+                <i appSortParams class="fa fa-arrow-down sorting" (click)="sortPatIdDesc()"></i>
+            </th>
+            <th>
+                <label>Pat Name</label>
+                <i appSortParams class="fa fa-arrow-up" (click)="sortMedIdAsc()"></i>
+                <i appSortParams class="fa fa-arrow-down sorting" (click)="sortMedIdDesc()"></i>
+            </th>
+            <th>
+                <label>Doses</label>
+                <i appSortParams class="fa fa-arrow-up" (click)="sortNumOfDoAsc()"></i>
+                <i appSortParams class="fa fa-arrow-down sorting" (click)="sortNumOfDoDesc()"></i>
+            </th>
+            <th>
+                <label>Date</label>
+                <i appSortParams class="fa fa-arrow-up" (click)="sortDateAsc()"></i>
+                <i appSortParams class="fa fa-arrow-down sorting" (click)="sortDateDesc()"></i>
+            </th>
+            <th>
+                <input type="text" class="w w-75 h-25" [(ngModel)]="searchValue" placeholder="Filter by Doses">
+            </th>
+            <th>
+                <a (click)="show()"><i class=" fa fa-refresh refresh" aria-hidden="true"
+                        style="cursor: pointer;"></i></a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr
+            *ngFor="let prescript of (prescriptionService.PrescriptList|filterbyPrescript:searchValue|sortPrescript:direction:column:type)">
+            <td>{{prescript._id}}</td>
+            <td>{{prescript.doctorId}}</td>
+            <td>{{prescript.patientId}}</td>
+            <td>{{prescript.medicineId}}</td>
+            <td>{{prescript.numberOfDoses}}</td>
+            <td>{{prescript.dateOfPrescript}}</td>
+            <a [routerLink]="['edit',prescript._id]"><i class="fa fa-edit" aria-hidden="true"
+                    style="font-weight: bold; font-size: larger;"></i></a>
+            <td>
+                <app-prescription-delete [prescription]="prescript"></app-prescription-delete>
+            </td>
+        </tr>
+    </tbody>
 </table>

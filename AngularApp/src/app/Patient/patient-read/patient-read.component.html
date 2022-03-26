@@ -1,39 +1,39 @@
-<table class="table">
+<table class="table table-striped table-hover">
     <tr>
         <th>
             <label>Id</label>
-            <i appSortParams  class="fa fa-arrow-up" (click)="sortIdAsc()"></i>
-            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortIdDesc()"></i>
+            <i appSortParams class="fa fa-arrow-up" (click)="sortIdAsc()"></i>
+            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortIdDesc()"></i>
         </th>
         <th>
             <label class="fw-bold">Name</label>
-            <i appSortParams  class="fa fa-arrow-up" (click)="sortPatNameAsc()"></i>
-            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortPatNameDesc()"></i>
+            <i appSortParams class="fa fa-arrow-up" (click)="sortPatNameAsc()"></i>
+            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortPatNameDesc()"></i>
         </th>
         <th>
             <label>SSN</label>
-            <i appSortParams  class="fa fa-arrow-up" (click)="sortSSNAsc()"></i>
-            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortSSNDesc()"></i>
+            <i appSortParams class="fa fa-arrow-up" (click)="sortSSNAsc()"></i>
+            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortSSNDesc()"></i>
         </th>
         <th>
             <label>Phone</label>
-            <i appSortParams  class="fa fa-arrow-up" (click)="sortPhoneAsc()"></i>
-            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortPhoneDesc()"></i>
+            <i appSortParams class="fa fa-arrow-up" (click)="sortPhoneAsc()"></i>
+            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortPhoneDesc()"></i>
         </th>
         <th>
             <label>Address</label>
-            <i appSortParams  class="fa fa-arrow-up" (click)="sortAddressAsc()"></i>
-            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortAddressDesc()"></i>
+            <i appSortParams class="fa fa-arrow-up" (click)="sortAddressAsc()"></i>
+            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortAddressDesc()"></i>
         </th>
         <th>
             <label>gender</label>
-            <i appSortParams  class="fa fa-arrow-up" (click)="sortGenderAsc()"></i>
-            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortGenderDesc()"></i>
+            <i appSortParams class="fa fa-arrow-up" (click)="sortGenderAsc()"></i>
+            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortGenderDesc()"></i>
         </th>
         <th>
             <label>Ins Id</label>
-            <i appSortParams  class="fa fa-arrow-up" (click)="sortInsuranceIdAsc()"></i>
-            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortInsuranceIdDesc()"></i>
+            <i appSortParams class="fa fa-arrow-up" (click)="sortInsuranceIdAsc()"></i>
+            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortInsuranceIdDesc()"></i>
         </th>
         <th>
             <input type="text" class="w w-50 h-25" [(ngModel)]="searchValue" placeholder="Filter by Name">
@@ -50,9 +50,12 @@
         <td>{{pat.address}}</td>
         <td>{{pat.gender}}</td>
         <td>{{pat.insuranceId}}</td>
-        
-        <td> <a [routerLink]="['edit',pat._id]" ><i class="fa fa-edit" aria-hidden="true" style="font-weight: bold; font-size: larger;"></i></a>
+
+        <td> <a [routerLink]="['edit',pat._id]"><i class="fa fa-edit" aria-hidden="true"
+                    style="font-weight: bold; font-size: larger;"></i></a>
         </td>
-        <td><app-patient-delete [patient]="pat"></app-patient-delete></td>
+        <td>
+            <app-patient-delete [patient]="pat"></app-patient-delete>
+        </td>
     </tr>
 </table>

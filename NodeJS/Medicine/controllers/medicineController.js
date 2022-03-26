@@ -1,18 +1,19 @@
 const validationMedicine = require('../middleware/medicineValidationMiddle');
 const _ = require('lodash');
 const { medicine } = require('../models/medicine');
+const auth = require('../../JWT/jwtMiddleware');
 const express = require('express');
 const router = express.Router();
 
 //-------------------------------------------Get List
-router.get('/', async (req, res) => {
+router.get('/', [auth.accessAll], async (req, res) => {
     const med = await medicine.find().select('-__v');
     if (med) return res.send(med);
     return res.status(400).send('Not Found Any Record');
 
 });
 //-----------------------------------------------Get By ID
-router.get('/:id', async (req, res) => {
+router.get('/:id', [auth.accessAll], async (req, res) => {
 
     const med = await medicine.findById(req.params.id);
 
@@ -22,7 +23,7 @@ router.get('/:id', async (req, res) => {
 });
 
 //-----------------------------------------------Add
-router.post('/', async (req, res) => {
+router.post('/', [auth.accessAll], async (req, res) => {
     const { error } = validationMedicine(req.body);
     if (error == true) return res.status(400).send(error.details[0].message);
 
@@ -37,7 +38,7 @@ router.post('/', async (req, res) => {
 })
 
 //-----------------------------------------------Update
-router.put('/:id', async (req, res) => {
+router.put('/:id', [auth.accessAll], async (req, res) => {
     //--------------Check Body Request
     const { error } = validationMedicine(req.body);
     if (error == true) return res.status(400).send(error.details[0].message);
@@ -63,12 +64,12 @@ router.put('/:id', async (req, res) => {
 });
 
 //-----------------------------------------------Delete
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth.accessAll], async (req, res) => {
     const med = await medicine.findByIdAndRemove(req.params.id);
 
     if (!med) return res.status(404).send('The medicine with the given ID was not found.');
 
-    res.send({"DELETE FROM DB\t" : med});
+    res.send({ "DELETE FROM DB\t": med });
 })
 
 module.exports = router

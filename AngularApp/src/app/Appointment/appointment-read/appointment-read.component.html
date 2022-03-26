@@ -32,15 +32,17 @@
             <a (click)="show()"><i class="fa fa-refresh refresh" aria-hidden="true" style="cursor: pointer;"></i></a>
         </th>
     </tr>
-    <tr *ngFor="let appoint of (appointmentService.AppiontList|filterbySpeciality:searchValue|sortComponent:direction:column:type)">
+    <tr
+        *ngFor="let appoint of (appointmentService.AppiontList|filterbySpeciality:searchValue|sortComponent:direction:column:type)">
         <td>{{appoint._id}}</td>
         <td>{{appoint.doctorId}}</td>
         <td>{{appoint.startTime}}</td>
         <td>{{appoint.endTime}}</td>
         <td>{{appoint.medicalSpecialty}}</td>
-      
-            <a [routerLink]="['edit',appoint._id]" ><i class="fa fa-edit" aria-hidden="true" style="font-weight: bold; font-size: larger;"></i></a>
-       
+
+        <a [routerLink]="['edit',appoint._id]"><i class="fa fa-edit" aria-hidden="true"
+                style="font-weight: bold; font-size: larger;"></i></a>
+
         <td>
             <app-appointment-delete [appointment]="appoint"></app-appointment-delete>
         </td>

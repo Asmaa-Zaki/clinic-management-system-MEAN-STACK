@@ -15,7 +15,13 @@ const invoiceSchema = mongoose.Schema({
     dateOfBill: {
         type: Date,
         default: Date.now
+    },
+    payment: {
+        type: String,
+        enum: ['Cash', 'Credit Card'],
+        default: 'Cash'
     }
+
 });
 const Invoice = mongoose.model('Invoice', invoiceSchema);
 

@@ -1,6 +1,7 @@
 const validationClinicService = require('../middleware/clinicServiceValidationMiddle');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
+const auth = require('../../JWT/jwtMiddleware');
 //apointment
 const { clinicService } = require('../models/clinicService');
 
@@ -13,7 +14,7 @@ const router = express.Router()
 //-------------------------------------------Get List
 //read
 //localhost:3000/clinicService/
-router.get('/', async (req, res) => {
+router.get('/', [auth.accessAll], async (req, res) => {
     const clinicServ = await clinicService.find();
     if (clinicServ) return res.send(clinicServ);
     return res.status(400).send('Not Found Any Record');
@@ -21,10 +22,7 @@ router.get('/', async (req, res) => {
 });
 
 //-----------------------------------------------Get By ID
-router.get('/:id', async (req, res) => {
-
-    if (!req.params.id)
-    return res.status(400).send("No record given with id: " + req.params.id)
+router.get('/:id', [auth.accessAll], async (req, res) => {
 
     const clinicServ = await clinicService.findById(req.params.id);
 
@@ -36,11 +34,11 @@ router.get('/:id', async (req, res) => {
 
 //-----------------------------------------------Add
 //create
-router.post('/', async (req, res) => {
+router.post('/', [auth.checkAdmin], async (req, res) => {
     const { error } = validationClinicService(req.body);
-    if (error== true) return res.status(400).send(error.details[0].message);
+    if (error == true) return res.status(400).send(error.details[0].message);
 
-    let clinicServ = new clinicService(_.pick(req.body, ['_id', 'doctorId', 'name', 'description','price']));
+    let clinicServ = new clinicService(_.pick(req.body, ['_id', 'doctorId', 'name', 'description', 'price']));
     //check id if  it found or not -- هنا بشوف ال متسجل قبل كده ولا لا(id)
     //👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯
     const check = await clinicService.findById(req.body._id);
@@ -51,10 +49,10 @@ router.post('/', async (req, res) => {
 })
 
 //-----------------------------------------------Update
-router.put('/:id', async (req, res) => {
+router.put('/:id', [auth.checkAdmin], async (req, res) => {
     //--------------Check Body Request
     const { error } = validationClinicService(req.body);
-    if (error==true) return res.status(400).send(error.details[0].message);
+    if (error == true) return res.status(400).send(error.details[0].message);
 
     if (!req.params.id)
         return res.status(400).send("No record given with id: " + req.params.id)
@@ -77,12 +75,12 @@ router.put('/:id', async (req, res) => {
 });
 
 //-----------------------------------------------Delete
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth.checkAdmin], async (req, res) => {
     const clinicServ = await clinicService.findByIdAndRemove(req.params.id);
 
     if (!clinicServ) return res.status(404).send('The medicine with the given ID was not found.');
 
-    res.send({"DELETE FROM DB" : clinicServ});
+    res.send({ "DELETE FROM DB": clinicServ });
 })
 
 module.exports = router

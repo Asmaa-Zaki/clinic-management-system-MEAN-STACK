@@ -3,40 +3,30 @@ const validationDoctor = require('../middleware/doctorValidationMiddle');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const { Doctor } = require('../models/doctor');
+const auth = require('../../JWT/jwtMiddleware');
 const express = require('express');
 const router = express.Router()
 
 //-------------------------------------------Get List
 //read
 //localhost:3000/doctor/
-router.get('/', async (req, res) => {
+router.get('/', [auth.checkAdmin], async (req, res) => {
     const doc = await Doctor.find();
     if (doc) return res.send(doc);
     return res.status(400).send('Not Found Any Record');
-    // appointment.find((err, docs) => {
-    //     if (!err)
-    //         res.send(docs)
-    //     else
-    //         console.log("Error in Retriving Appointments : " + JSON.stringify(err, undefined, 2))
-    // })
 });
 
 //-----------------------------------------------Get By ID
-router.get('/:id', async (req, res) => {
-    if (!req.params.id)
-        return res.status(400).send("No record given with id: " + req.params.id)
-
+router.get('/:id', [auth.checkAdmin], async (req, res) => {
     const doc = await Doctor.findById(req.params.id);
-
-    if (!doc) return res.status(404).send('The genre with the given ID was not found.');
-
+    if (!doc) return res.status(400).send("Not Found Id");
     res.send(doc);
 
 })
 
 //-----------------------------------------------Add
 //create
-router.post('/', async (req, res) => {
+router.post('/', [auth.checkAdmin], async (req, res) => {
     const { error } = validationDoctor(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
@@ -53,10 +43,10 @@ router.post('/', async (req, res) => {
 
 
 //-----------------------------------------------Update
-router.put('/:id', (req, res) => {
+router.put('/:id', [auth.checkAdmin], (req, res) => {
     //--------------Check Body Request
     const { error } = validationDoctor(req.body);
-    if (error==true) return res.status(400).send(error.details[0].message);
+    if (error == true) return res.status(400).send(error.details[0].message);
 
     if (!req.params.id)
         return res.status(400).send("No record given with id: " + req.params.id)
@@ -84,13 +74,10 @@ router.put('/:id', (req, res) => {
 
 
 //-----------------------------------------------Delete
-router.delete('/:id', async (req, res) => {
-    if (!req.params.id)
-        return res.status(400).send("No record given with id: " + req.params.id)
-
+router.delete('/:id', [auth.checkAdmin], async (req, res) => {
     const doc = await Doctor.findByIdAndRemove(req.params.id);
 
-    if (!doc) return res.status(404).send('The genre with the given ID was not found.');
+    if (!doc) return res.status(400).send('The Doctor with the given ID was not found.');
 
     res.send("DELETE FROM DB\t" + doc);
 })

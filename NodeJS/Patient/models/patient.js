@@ -8,7 +8,11 @@ const patientSchema = mongoose.Schema({
     SSN: { type: Number },
     phone: { type: Number },
     address: { type: String },
-    gender: { type: String },
+    gender: {
+        type: String,
+        enum: ['male', 'female'],
+        default: 'male'
+    },
     insuranceId: { type: Number }
 })
 const patient = mongoose.model('Patient', patientSchema);

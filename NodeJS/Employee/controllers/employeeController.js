@@ -1,18 +1,19 @@
 const validationEmployee = require('../middleware/employeeValidationMiddle')
 const _ = require('lodash');
 const { employee } = require('../models/employee');
+const auth = require('../../JWT/jwtMiddleware');
 const express = require('express');
 const router = express.Router();
 
 //-------------------------------------------Get List
-router.get('/', async (req, res) => {
+router.get('/', [auth.checkAdmin], async (req, res) => {
     const emp = await employee.find(req.employee);
     if (emp) return res.send(emp);
     return res.status(400).send('Not Found Any Record');
 })
 
 //-----------------------------------------------Get By ID
-router.get('/:id', async (req, res) => {
+router.get('/:id', [auth.checkAdmin], async (req, res) => {
     const emp = await employee.findById(req.params.id);
 
     if (!emp) return res.status(404).send('The genre with the given ID was not found.');
@@ -23,7 +24,7 @@ router.get('/:id', async (req, res) => {
 
 //-----------------------------------------------Add
 //create
-router.post('/', async (req, res) => {
+router.post('/', [auth.checkAdmin], async (req, res) => {
     const { error } = validationEmployee(req.body);
     if (error == true) return res.status(400).send(error.details[0].message);
 
@@ -38,7 +39,7 @@ router.post('/', async (req, res) => {
 })
 
 //-----------------------------------------------Update
-router.put('/:id', (req, res) => {
+router.put('/:id', [auth.checkAdmin], (req, res) => {
     //--------------Check Body Request
     const { error } = validationEmployee(req.body);
     if (error == true) return res.status(400).send(error.details[0].message);
@@ -66,7 +67,7 @@ router.put('/:id', (req, res) => {
 
 
 //-----------------------------------------------Delete
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth.checkAdmin], async (req, res) => {
 
     const emp = await employee.findByIdAndRemove(req.params.id);
 

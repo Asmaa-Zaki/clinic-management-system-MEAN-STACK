@@ -1,36 +1,50 @@
-<table class="table table-striped">
-    <tr>
-        <th>
-            <label>Id</label>
-            <!-- <i appSortParams class="fa fa-arrow-up" (click)="sortIdAsc()"></i>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                <label>Id</label>
+                <!-- <i appSortParams class="fa fa-arrow-up" (click)="sortIdAsc()"></i>
             <i appSortParams class="fa fa-arrow-down sorting" (click)="sortIdDesc()"></i> -->
-        </th>
-        <th>
-            <label class="fw-bold">PatienId</label>
-            <!-- <i appSortParams class="fa fa-arrow-up" (click)="sortPatientIdAsc()"></i>
+            </th>
+            <th>
+                <label class="fw-bold">PatienId</label>
+                <!-- <i appSortParams class="fa fa-arrow-up" (click)="sortPatientIdAsc()"></i>
             <i appSortParams class="fa fa-arrow-down sorting" (click)="sortPatientIdDesc()"></i> -->
-        </th>
-        <th>
-            <label>Tax Of Bill</label>
-            <!-- <i appSortParams class="fa fa-arrow-up" (click)="sorttaxAsc()"></i>
+            </th>
+            <th>
+                <label>Tax Of Bill</label>
+                <!-- <i appSortParams class="fa fa-arrow-up" (click)="sorttaxAsc()"></i>
             <i appSortParams class="fa fa-arrow-down sorting" (click)="sorttaxDesc()"></i> -->
-        </th>
-        <th>
-            <label>Date</label>
-            <!-- <i appSortParams class="fa fa-arrow-up" (click)="sortdateAsc()"></i>
+            </th>
+            <th>
+                <label>Date</label>
+                <!-- <i appSortParams class="fa fa-arrow-up" (click)="sortdateAsc()"></i>
             <i appSortParams class="fa fa-arrow-down sorting" (click)="sortdateDesc()"></i> -->
-        </th>
-        <th></th>
-        <th>
-            <a (click)="show()"><i class="fa fa-refresh refresh" aria-hidden="true" style="cursor: pointer;"></i></a>
-        </th>
-    </tr>
-    <tr *ngFor="let invoice of (InvoiceService.InvoiceList)">
-        <td>{{invoice._id}}</td>
-        <td>{{invoice.patientId}}</td>
-        <td>{{invoice.taxOfBill}}</td>
-        <td>{{invoice.dateOfBill|date}}</td>
-        <a [routerLink]="['edit',invoice._id]" ><i class="fa fa-edit" aria-hidden="true" style="font-weight: bold; font-size: larger;"></i></a>
-        <td><app-invoice-delete [invoice]="invoice"></app-invoice-delete></td>
-    </tr>
+            </th>
+            <th>
+                <label>Payment</label>
+                <!-- <i appSortParams class="fa fa-arrow-up" (click)="sortdateAsc()"></i>
+            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortdateDesc()"></i> -->
+            </th>
+            <th></th>
+            <th>
+                <a (click)="show()"><i class="fa fa-refresh refresh" aria-hidden="true"
+                        style="cursor: pointer;"></i></a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let invoice of (InvoiceService.InvoiceList)">
+            <td>{{invoice._id}}</td>
+            <td>{{invoice.patientId}}</td>
+            <td>{{invoice.taxOfBill}}</td>
+            <td>{{invoice.dateOfBill|date}}</td>
+            <td>{{invoice.payment}}</td>
+            <a [routerLink]="['edit',invoice._id]"><i class="fa fa-edit" aria-hidden="true"
+                    style="font-weight: bold; font-size: larger;"></i></a>
+            <td>
+                <app-invoice-delete [invoice]="invoice"></app-invoice-delete>
+            </td>
+        </tr>
+    </tbody>
 </table>

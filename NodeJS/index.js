@@ -12,7 +12,8 @@ const Invoice = require('./Invoice/controller/invoiceController');
 const medicineController = require('./Medicine/controllers/medicineController.js');
 const userController = require('./Users/controllers/userController');
 const employeeController = require('./Employee/controllers/employeeController.js')
-const clinicServiceController = require('./ClinicService/controllers/clinicServiceController')
+const clinicServiceController = require('./ClinicService/controllers/clinicServiceController');
+const loginController = require('./Login/controller/loginController');
 
 //call express 
 var App = express();
@@ -26,7 +27,8 @@ App.listen(3000, () => {
     console.log("Server started at port: 3000")
 })
 
-App.use('/appointment', appointmentController)
+App.use('/login', loginController);
+App.use('/appointment', appointmentController);
 App.use('/medicine', medicineController)
 App.use('/invoice', Invoice);
 App.use('/prescript', Prescription);

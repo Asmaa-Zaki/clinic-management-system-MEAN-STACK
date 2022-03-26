@@ -8,7 +8,7 @@ import { InvoiceService } from 'src/app/Features/invoice.service';
   styleUrls: ['./invoice-delete.component.css']
 })
 export class InvoiceDeleteComponent implements OnInit {
-  @Input() invoice: Invoice = new Invoice(0, 0, 0, new Date("2013-02-01"))
+  @Input() invoice: Invoice = new Invoice(0, 0, 0, new Date("2013-02-01"), "")
   constructor(private InvoiceService: InvoiceService) { }
 
   ngOnInit(): void {
@@ -17,6 +17,6 @@ export class InvoiceDeleteComponent implements OnInit {
   DeleteInvoice() {
     this.InvoiceService.DeleteInvoice(this.invoice).subscribe((res) => {
       alert(`Invoice with Id ${this.invoice._id} deleted`)
-    },(error)=> alert(`Invoice with id ${this.invoice._id} not exist`))
+    }, (error) => alert(`Invoice with id ${this.invoice._id} not exist`))
   }
 }

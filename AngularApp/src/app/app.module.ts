@@ -23,13 +23,14 @@ import { EmployeeReadComponent } from './Employee/employee-read/employee-read.co
 import { EmployeeUpdateComponent } from './Employee/employee-update/employee-update.component';
 import { FilterEmployeeNamePipe } from './pipes/filter-employee-name.pipe';
 import { HomeComponent } from './home/home.component';
-import {NavbarComponent} from './Core/navbar/navbar.component';
+import { HomeCopyComponent } from './home-copy/home-copy.component';
+import { NavbarComponent } from './Core/navbar/navbar.component';
 import { ErrorComponent } from './error/error.component';
 import { ServiceCreateComponent } from './ClinicServices/service-create/service-create.component';
 import { ServiceDeleteComponent } from './ClinicServices/service-delete/service-delete.component';
 import { ServiceReadComponent } from './ClinicServices/service-read/service-read.component';
 import { ServiceUpdateComponent } from './ClinicServices/service-update/service-update.component'
-import {DoctorCreateComponent} from './Doctor/doctor-create/doctor-create.component';
+import { DoctorCreateComponent } from './Doctor/doctor-create/doctor-create.component';
 import { EmployeeComponent } from './Employee/employee/employee.component';
 import { AdminDashboardComponent } from './Core/admin-dashboard/admin-dashboard.component';
 import { DoctorDeleteComponent } from './Doctor/doctor-delete/doctor-delete.component';
@@ -110,7 +111,8 @@ import { UsersReadComponent } from './Users/users-read/users-read.component';
     DoctorCreateComponent,
     EmployeeComponent,
     AdminDashboardComponent,
-    UsersReadComponent
+    UsersReadComponent,
+    HomeCopyComponent
   ],
   imports: [
     BrowserModule,

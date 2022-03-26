@@ -6,19 +6,18 @@ const { medicineSchema } = require('../../Medicine/models/medicine');
 const prescriptSchema = mongoose.Schema({
     _id: {
         type: Number,
-        required: true
+
     },
     doctorId: {
         type: doctorSchema,
-        required: true
+
     },
     patientId: {
         type: patientSchema,
-        required: true
+
     },
     medicineId: {
         type: medicineSchema,
-        required: true
     },
     numberOfDoses: {
         type: String

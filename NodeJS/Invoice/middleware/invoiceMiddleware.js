@@ -5,7 +5,8 @@ module.exports = function validationInvoice(req) {
         _id: Joi.number().required(),
         patientId: Joi.number().required(),
         taxOfBill: Joi.number().required(),
-        dateOfBill: Joi.date().required()
+        dateOfBill: Joi.date().required(),
+        payment: Joi.string().valid('Cash', 'Credit Card')
     })
     return schema.validate(req);
 };

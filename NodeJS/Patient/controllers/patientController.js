@@ -3,32 +3,22 @@ const validationPatient = require('../middleware/patientValidationMiddle');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const { patient } = require('../models/patient');
+const auth = require('../../JWT/jwtMiddleware');
 const express = require('express');
 const router = express.Router()
 
 //-------------------------------------------Get List
 //read
 //localhost:3000/patient/
-router.get('/', async (req, res) => {
+router.get('/', [auth.checkReceptionest], async (req, res) => {
     const pat = await patient.find();
     if (pat) return res.send(pat);
     return res.status(400).send('Not Found Any Record');
-    // appointment.find((err, docs) => {
-    //     if (!err)
-    //         res.send(docs)
-    //     else
-    //         console.log("Error in Retriving Appointments : " + JSON.stringify(err, undefined, 2))
-    // })
+
 });
 
 //-----------------------------------------------Get By ID
-router.get('/:id', async (req, res) => {
-    if (!req.params.id)
-        return res.status(400).send("No record given with id: " + req.params.id)
-
-    if (!req.params.id)
-        return res.status(400).send("No record given with id: " + req.params.id)
-
+router.get('/:id', [auth.checkReceptionest], async (req, res) => {
     const pat = await patient.findById(req.params.id);
 
     if (!pat) return res.status(404).send('The genre with the given ID was not found.');
@@ -39,9 +29,9 @@ router.get('/:id', async (req, res) => {
 
 //-----------------------------------------------Add
 //create
-router.post('/', async (req, res) => {
+router.post('/', [auth.checkReceptionest], async (req, res) => {
     const { error } = validationPatient(req.body);
-    if (error== true) return res.status(400).send(error.details[0].message);
+    if (error == true) return res.status(400).send(error.details[0].message);
 
     let pat = new patient(_.pick(req.body, ['_id', 'patientName', 'SSN', 'phone',
         'address', 'gender', 'insuranceId']));
@@ -56,10 +46,10 @@ router.post('/', async (req, res) => {
 
 
 //-----------------------------------------------Update
-router.put('/:id', (req, res) => {
+router.put('/:id', [auth.checkReceptionest], (req, res) => {
     //--------------Check Body Request
     const { error } = validationPatient(req.body);
-    if (error==true) return res.status(400).send(error.details[0].message);
+    if (error == true) return res.status(400).send(error.details[0].message);
 
     if (!req.params.id)
         return res.status(400).send("No record given with id: " + req.params.id)
@@ -86,15 +76,13 @@ router.put('/:id', (req, res) => {
 
 
 //-----------------------------------------------Delete
-router.delete('/:id', async (req, res) => {
-    if (!req.params.id)
-        return res.status(400).send("No record given with id: " + req.params.id)
+router.delete('/:id', [auth.checkReceptionest], async (req, res) => {
 
     const pat = await patient.findByIdAndRemove(req.params.id);
 
     if (!pat) return res.status(404).send('The genre with the given ID was not found.');
 
-    res.send({"DELETE FROM DB\t": pat});
+    res.send({ "DELETE FROM DB\t": pat });
 })
 
 module.exports = router

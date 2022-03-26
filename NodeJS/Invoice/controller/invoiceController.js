@@ -2,23 +2,24 @@ const mongoose = require('mongoose');
 const validationIncvoice = require('../middleware/invoiceMiddleware');
 const { Invoice } = require('../model/InoviceModel');
 const { patient } = require('../../Patient/models/patient');
+const auth = require('../../JWT/jwtMiddleware');
 const express = require('express');
 const router = express.Router();
 
 //--------------------------------------Get List
-router.get('/', async (req, res) => {
+router.get('/', [auth.checkReceptionest], async (req, res) => {
     const invoice = await Invoice.find()
     res.send(invoice);
 });//End Get
 
 //--------------------------------------Get By Id
-router.get('/:id', async (req, res) => {
+router.get('/:id', [auth.checkReceptionest], async (req, res) => {
     const invoice = await Invoice.findById(req.params.id);
     if (!invoice) return res.status(400).send("Invalid Id");
 });// End Gert ID
 
 //--------------------------------------Add
-router.post('/', async (req, res) => {
+router.post('/', [auth.checkReceptionest], async (req, res) => {
     const pat = await patient.findById(req.body.patientId);
     if (!pat) return res.status(400).send('Invalid patient Id');
 
@@ -41,7 +42,7 @@ router.post('/', async (req, res) => {
 });//end ofAdd
 
 //--------------------------------------Update
-router.put('/:id', async (req, res) => {
+router.put('/:id', [auth.checkReceptionest], async (req, res) => {
     const pat = await patient.findById(req.body.patientId);
     if (!pat) return res.status(400).send('Invalid Id');
 
@@ -59,14 +60,14 @@ router.put('/:id', async (req, res) => {
     }, { new: true });
 
     if (!invoice) return res.status(400).send('Invalid Invoice Id');
-    res.send({"Updated  \t" : invoice});
+    res.send({ "Updated  \t": invoice });
 
 });//end App
 
 //--------------------------------------Delete
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth.checkReceptionest], async (req, res) => {
     const invoice = await Invoice.findByIdAndRemove(req.params.id);
     if (!invoice) return res.status(400).send("Invalid ID");
-    res.send({"Deleted \t" : invoice});
+    res.send({ "Deleted \t": invoice });
 });
 module.exports = router;
