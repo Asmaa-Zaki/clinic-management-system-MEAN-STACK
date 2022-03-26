@@ -1,0 +1,38 @@
+<table class="table">
+    <tr>
+        <th>
+            <label>Id</label>
+            <i appSortParams  class="fa fa-arrow-up" (click)="sortIdAsc()"></i>
+            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortIdDesc()"></i>
+        </th>
+        <th>
+            <label class="fw-bold">Name</label>
+            <i appSortParams  class="fa fa-arrow-up" (click)="sortNameAsc()"></i>
+            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortNameDesc()"></i>
+        </th>
+        <th>
+            <label>Brand</label>
+            <i appSortParams  class="fa fa-arrow-up" (click)="sortBrandAsc()"></i>
+            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortBrandDesc()"></i>
+        </th>
+        <th>
+            <label>Description</label>
+            <i appSortParams  class="fa fa-arrow-up" (click)="sortDescAsc()"></i>
+            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortDescDesc()"></i>
+        </th>
+        <th>
+            <input type="text" class="w w-75 h-25" [(ngModel)]="searchValue" placeholder="Filter by Name">
+        </th>
+        <th>
+            <a (click)="show()"><i class="fa fa-refresh refresh" aria-hidden="true" style="cursor: pointer;"></i></a>
+        </th>
+    </tr>
+    <tr *ngFor="let medicin of (medicineService.MedicineList|sortComponent:direction:column:type|filterMedicineName:searchValue)">
+        <td>{{medicin._id}}</td>
+        <td>{{medicin.medicineName}}</td>
+        <td>{{medicin.brand}}</td>
+        <td>{{medicin.description}}</td>
+        <a [routerLink]="['edit',medicin._id]" ><i class="fa fa-edit" aria-hidden="true" style="font-weight: bold; font-size: larger;"></i></a>
+        <td><app-medicine-delete [medicine]="medicin"></app-medicine-delete></td>
+    </tr>
+</table>

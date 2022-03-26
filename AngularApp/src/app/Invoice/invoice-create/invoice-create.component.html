@@ -1,0 +1,15 @@
+<br>
+<div>
+<form #form="ngForm">
+<label style=" width: 100px;">Id </label>
+<input name="id" type="text" [(ngModel)]="InvoiceService.nInvoice._id" required><br><br>
+<label style="width: 100px;">PatientId </label>
+<input name="patientId" type="text" [(ngModel)]="InvoiceService.nInvoice.patientId" required><br><br>
+<label style="width: 100px;">tax Of Bill </label>
+<input name="Tax" type="text" [(ngModel)]="InvoiceService.nInvoice.taxOfBill" required><br><br>
+<label style="width: 100px;">date Of Bill </label>
+<input name="date" type="text" [(ngModel)]="InvoiceService.nInvoice.dateOfBill" required><br><br>
+<input type="button" style="margin-left: 30%;" [disabled]="form.invalid" (click)="save()" value="Add">
+<input type="button" [disabled]="form.invalid"  (click)="update()" value="Update">
+</form>
+</div>

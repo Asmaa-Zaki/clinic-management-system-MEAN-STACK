@@ -1,0 +1,48 @@
+
+<table class="table">
+    <tr>
+        <th>
+            <label>Id</label>
+            <i appSortParams  class="fa fa-arrow-up" (click)="sortIdAsc()"></i>
+            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortIdDesc()"></i>
+        </th>
+        <th>
+            <label class="fw-bold">First Name</label>
+            <i appSortParams  class="fa fa-arrow-up" (click)="sortFirstNameAsc()"></i>
+            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortFirstNameDesc()"></i>
+        </th>
+        <th>
+            <label>Last Name</label>
+            <i appSortParams  class="fa fa-arrow-up" (click)="sortLastNameAsc()"></i>
+            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortLastNameDesc()"></i>
+        </th>
+        <th>
+            <label>Email</label>
+            <i appSortParams  class="fa fa-arrow-up" (click)="sortEmailAsc()"></i>
+            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortEmailDesc()"></i>
+        </th>
+        <th>
+            <label>Phone</label>
+            <i appSortParams  class="fa fa-arrow-up" (click)="sortPhoneAsc()"></i>
+            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortPhoneDesc()"></i>
+        </th>
+        <th>
+            <input type="text" class="w w-75 h-25" [(ngModel)]="searchValue" placeholder="Filter by First Name">
+        </th>
+        <th>
+            <a (click)="show()"><i class="fa fa-refresh refresh" aria-hidden="true" style="cursor: pointer;"></i></a>
+        </th>
+    </tr>
+    <tr *ngFor="let employee of (empService.EmployeeList|filterEmployeeName:searchValue|sortComponent:direction:column:type)">
+        <td>{{employee._id}}</td>
+        <td>{{employee.firstName}}</td>
+        <td>{{employee.lastName}}</td>
+        <td>{{employee.email}}</td>
+        <td>{{employee.phone}}</td>
+        <!-- <td><app-employee-update [employee]="employee"></app-employee-update></td> -->
+        <a [routerLink]="['edit',employee._id]" ><i class="fa fa-edit" aria-hidden="true" style="font-weight: bold; font-size: larger;"></i></a>
+        <td><app-employee-delete [employee]="employee"></app-employee-delete></td>
+        
+    </tr>
+</table>
+

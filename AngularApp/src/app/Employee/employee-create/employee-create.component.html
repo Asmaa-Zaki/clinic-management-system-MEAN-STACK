@@ -1,0 +1,31 @@
+<br>
+<div>
+<form #form="ngForm">
+<label style="width: 100px;">Id </label>
+<input type="text" name="id" [(ngModel)]="usersSer.nUser._id" [(ngModel)]="employeeService.nEmployee._id" required><br><br>
+<label style="width: 100px;">First Name </label>
+<input type="text" name="fname" [(ngModel)]="employeeService.nEmployee.firstName"  required><br><br>
+<label style="width: 100px;">Last Name </label>
+<input type="text" name="lname" [(ngModel)]="employeeService.nEmployee.lastName" required><br><br>
+<label style="width: 100px;">Email </label>
+<input type="text" name="email" [(ngModel)]="employeeService.nEmployee.email"  required><br><br>
+<label style="width: 100px;">Phone </label>
+<input type="text" name="phone" [(ngModel)]="employeeService.nEmployee.phone" required><br><br>
+<label style="width: 100px;">Username </label>
+<input type="text" name="username" [(ngModel)]="employeeService.nEmployee.userName" [(ngModel)]="usersSer.nUser.username" required><br><br>
+<label style="width: 100px;">Password </label>
+<input type="text" name="password" [(ngModel)]="employeeService.nEmployee.password" [(ngModel)]="usersSer.nUser.password" required><br><br>
+<label style="width: 100px;">Type </label>
+<input type="radio" name="type"  value="Nurse" [(ngModel)]="employeeService.nEmployee.type" [(ngModel)]="usersSer.nUser.type" required>
+<label>Nurse</label>
+<input type="radio" name="type" value="Reciptionist" [(ngModel)]="employeeService.nEmployee.type" [(ngModel)]="usersSer.nUser.type" >
+<label>Reciptionist</label>
+<input type="radio" name="type" value="Office Boy" [(ngModel)]="employeeService.nEmployee.type" [(ngModel)]="usersSer.nUser.type" >
+<label>Office Boy </label><br><br>
+<!-- <input type="text" [(ngModel)]="employeeService.nEmployee.type" [(ngModel)]="usersSer.nUser.type" required=""><br><br> -->
+<input type="button" style="margin-left: 30%;" [disabled]="form.invalid" (click)="save()" value="Add">
+<input type="button" [disabled]="form.invalid"  (click)="update()" value="Update">
+</form>
+</div>
+
+

@@ -1,0 +1,26 @@
+label
+{
+    font-weight: bold;
+}
+input[type=button]:enabled{
+    border: none;
+    background: #222f53;
+    color: #fff;
+    cursor: pointer;
+    color: white;
+}
+input[type=button]
+{
+
+    border-radius: .5rem;
+    width: 24%;
+    margin: 5px;
+    margin-top: 2%;
+}
+
+div
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

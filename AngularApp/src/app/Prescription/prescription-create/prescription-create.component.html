@@ -1,0 +1,20 @@
+
+<br>
+<div>
+<form #form="ngForm">
+<label style="width: 120px;">Id </label>
+<input name="id" type="text" [(ngModel)]="prescriptionService.nPrescription._id" required><br><br>
+<label style="width: 120px;">DoctorId </label>
+<input name="doctorId" type="text" [(ngModel)]="prescriptionService.nPrescription.doctorId" required><br><br>
+<label style="width: 120px;">Patient Name </label>
+<input name="patient Name" type="text" [(ngModel)]="prescriptionService.nPrescription.patientId" required><br><br>
+<label style="width: 120px;">Medicine Name </label>
+<input name="Medicine name" type="text" [(ngModel)]="prescriptionService.nPrescription.medicineId" required><br><br>
+<label style="width: 120px;">Doses </label>
+<input name="doses" type="text" [(ngModel)]="prescriptionService.nPrescription.numberOfDoses" required=""><br><br>
+<label style="width: 120px;">Date </label>
+<input name="date" type="text" [(ngModel)]="prescriptionService.nPrescription.dateOfPrescript" required=""><br><br>
+<input type="button" style="margin-left: 40%;" [disabled]="form.invalid" (click)="save()" value="Add">
+<input type="button" [disabled]="form.invalid"  (click)="update()" value="Update">
+</form>
+</div>

@@ -1,0 +1,17 @@
+<br>
+<div>
+<form #form="ngForm">
+<label style="width: 100px;">Id </label>
+<input type="text" name="id" [(ngModel)]="clinicSerService.nClinicServ._id" required><br><br>
+<label style="width: 100px;">DoctorId </label>
+<input type="text" name="doctorId" [(ngModel)]="clinicSerService.nClinicServ.doctorId" required><br><br>
+<label style="width: 100px;">Name </label>
+<input type="text" name="Name" [(ngModel)]="clinicSerService.nClinicServ.name" required><br><br>
+<label style="width: 100px;">Description </label>
+<input type="text" name="Description" [(ngModel)]="clinicSerService.nClinicServ.description" required><br><br>
+<label style="width: 100px;">Price</label>
+<input type="text" name="price" [(ngModel)]="clinicSerService.nClinicServ.price" required><br><br>
+<input type="button" style="margin-left: 37%;" [disabled]="form.invalid" (click)="save()" value="Add">
+<input type="button" [disabled]="form.invalid"  (click)="update()" value="Update">
+</form>
+</div>

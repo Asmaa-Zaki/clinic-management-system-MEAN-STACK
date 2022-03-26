@@ -1,0 +1,22 @@
+<br>
+<div>
+<form #form="ngForm">
+<label style="width: 120px;">Id </label>
+<input name="id" type="text" [(ngModel)]="PatientService.nPatient._id" required><br><br>
+<label style="width: 120px;">Patient Name </label>
+<input name="name" type="text" [(ngModel)]="PatientService.nPatient.patientName" required><br><br>
+<label style="width: 120px;">SSN </label>
+<input name="ssn" type="text" [(ngModel)]="PatientService.nPatient.SSN" required><br><br>
+<label style="width: 120px;">Phone </label>
+<input name="phone" type="text" [(ngModel)]="PatientService.nPatient.phone" required><br><br>
+<label style="width: 120px;">Address </label>
+<input name="addres" type="text" [(ngModel)]="PatientService.nPatient.address" required><br><br>
+<label style="width: 120px;">Gender </label>
+<input name="gender" type="text" [(ngModel)]="PatientService.nPatient.gender" required><br><br>
+<label style="width: 120px;">Insurance Id </label>
+<input name="insurance" type="text" [(ngModel)]="PatientService.nPatient.insuranceId" required><br><br>
+<input type="button" style="margin-left: 40%;" [disabled]="form.invalid" (click)="save()" value="Add">
+<input type="button" [disabled]="form.invalid"  (click)="update()" value="Update">
+</form>
+</div>
+
