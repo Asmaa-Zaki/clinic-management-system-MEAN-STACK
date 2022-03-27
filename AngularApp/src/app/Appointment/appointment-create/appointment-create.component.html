@@ -19,18 +19,22 @@
 </div> -->
 <br>
 <div>
-<form #form="ngForm">
-<label style="width: 100px;">Id </label>
-<input name="id" type="text" [(ngModel)]="appointmentService.nAppointment._id" required><br><br>
-<label style="width: 100px;">DoctorId </label>
-<input name="docid" type="text" [(ngModel)]="appointmentService.nAppointment.doctorId" required><br><br>
-<label style="width: 100px;">StartTime </label>
-<input name="stime"type="text" [(ngModel)]="appointmentService.nAppointment.startTime" required><br><br>
-<label style="width: 100px;">EndTime </label>
-<input name="etime" type="text" [(ngModel)]="appointmentService.nAppointment.endTime" required><br><br>
-<label style="width: 100px;">Specialty </label>
-<input name="spec" type="text" [(ngModel)]="appointmentService.nAppointment.medicalSpecialty" required><br><br>
-<input type="button" style="margin-left: 30%;" [disabled]="form.invalid" (click)="save()" value="Add">
-<input type="button" [disabled]="form.invalid"  (click)="update()" value="Update">
-</form>
+    <form #form="ngForm">
+        <label style="width: 100px;">Id </label>
+        <input name="id" type="text" [(ngModel)]="appointmentService.nAppointment._id" required><br><br>
+        <label style="width: 100px;">DoctorId </label>
+        <input name="docid" type="text" [(ngModel)]="appointmentService.nAppointment.doctorId.doctorName"
+            required><br><br>
+        <label style="width: 100px;">PatientId </label>
+        <input name="docid" type="text" [(ngModel)]="appointmentService.nAppointment.patientId.patientName"
+            required><br><br>
+        <label style="width: 100px;">StartTime </label>
+        <input name="stime" type="text" [(ngModel)]="appointmentService.nAppointment.startTime" required><br><br>
+        <label style="width: 100px;">EndTime </label>
+        <input name="etime" type="text" [(ngModel)]="appointmentService.nAppointment.endTime" required><br><br>
+        <label style="width: 100px;">Specialty </label>
+        <input name="spec" type="text" [(ngModel)]="appointmentService.nAppointment.medicalSpecialty" required><br><br>
+        <input type="button" style="margin-left: 30%;" [disabled]="form.invalid" (click)="save()" value="Add">
+        <input type="button" [disabled]="form.invalid" (click)="update()" value="Update">
+    </form>
 </div>

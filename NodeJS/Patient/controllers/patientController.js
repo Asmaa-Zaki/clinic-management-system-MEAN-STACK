@@ -1,5 +1,4 @@
 const validationPatient = require('../middleware/patientValidationMiddle');
-//const validationMedicine = require('../middleware/medicineValidationMiddle');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const { patient } = require('../models/patient');
@@ -8,8 +7,6 @@ const express = require('express');
 const router = express.Router()
 
 //-------------------------------------------Get List
-//read
-//localhost:3000/patient/
 router.get('/', [auth.checkReceptionest], async (req, res) => {
     const pat = await patient.find();
     if (pat) return res.send(pat);
@@ -35,8 +32,6 @@ router.post('/', [auth.checkReceptionest], async (req, res) => {
 
     let pat = new patient(_.pick(req.body, ['_id', 'patientName', 'SSN', 'phone',
         'address', 'gender', 'insuranceId']));
-    //check id if  it found or not -- هنا بشوف ال متسجل قبل كده ولا لا(id)
-    //👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯
     const check = await patient.findById(req.body._id);
     if (check) return res.status(400).send('The ID already Registred!');
 

@@ -38,37 +38,37 @@ export class PrescriptionReadComponent implements OnInit {
   sortDocIdAsc() {
     this.direction = 'asc'
     this.column = 'doctorId'
-    this.type = 'number'
+    this.type = 'string'
   }
 
   sortDocIdDesc() {
     this.direction = 'desc'
     this.column = 'doctorId'
-    this.type = 'number'
+    this.type = 'string'
   }
 
   sortPatIdAsc() {
     this.direction = 'asc'
     this.column = 'patientId'
-    this.type = 'number'
+    this.type = 'string'
   }
 
   sortPatIdDesc() {
     this.direction = 'desc'
     this.column = 'patientId'
-    this.type = 'number'
+    this.type = 'string'
   }
 
   sortMedIdAsc() {
     this.direction = 'asc'
     this.column = 'medicineId'
-    this.type = 'number'
+    this.type = 'string'
   }
 
   sortMedIdDesc() {
     this.direction = 'desc'
     this.column = 'medicineId'
-    this.type = 'number'
+    this.type = 'string'
   }
 
   sortNumOfDoAsc() {

@@ -14,7 +14,7 @@ const patientSchema = mongoose.Schema({
         default: 'male'
     },
     insuranceId: { type: Number }
-})
+});
 const patient = mongoose.model('Patient', patientSchema);
 
 //export the model

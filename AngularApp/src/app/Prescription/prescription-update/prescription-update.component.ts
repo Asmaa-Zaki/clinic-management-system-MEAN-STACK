@@ -23,6 +23,6 @@ export class PrescriptionUpdateComponent implements OnInit {
   SavePrescript(pres: Prescription) {
     this.prescriptionService.Editprescript(pres).subscribe((res) => {
       alert(`Prescription with id ${this.prescription._id} updated`)
-    },(error)=>alert(`Prescription with id ${this.prescription._id} not exist`))
+    }, (error) => alert(`Prescription with id ${this.prescription._id} not exist`))
   }
 }

@@ -8,7 +8,7 @@ import { Appointment } from 'src/app/Module/appointment';
   styleUrls: ['./appointment-delete.component.css']
 })
 export class AppointmentDeleteComponent implements OnInit {
-  @Input() appointment: Appointment = new Appointment(0, 0, 0, 0, "")
+  @Input() appointment: Appointment = new Appointment(0, 0, 0, 0, 0, "")
 
   constructor(private appointmentService: AppointmentService) { }
 
@@ -17,7 +17,7 @@ export class AppointmentDeleteComponent implements OnInit {
 
   DeleteAppointment() {
     this.appointmentService.DeleteAppoint(this.appointment).subscribe((res) => {
-      alert("Appointment with Id: "+this.appointment._id+" Deleted")
+      alert("Appointment with Id: " + this.appointment._id + " Deleted")
     })
   }
 

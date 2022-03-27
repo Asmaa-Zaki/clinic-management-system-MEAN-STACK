@@ -16,19 +16,18 @@ import { empty } from 'rxjs';
 
 export class AppointmentCreateComponent implements OnInit {
 
-  constructor(public appointmentService: AppointmentService, public usersSer:AppointmentService ,public router: Router, public ar: ActivatedRoute) { }
+  constructor(public appointmentService: AppointmentService, public usersSer: AppointmentService, public router: Router, public ar: ActivatedRoute) { }
 
-  nApppoint?: Appointment= new Appointment(0, 0, 0, 0 , "")
+  nApppoint?: Appointment = new Appointment(0, 0, 0, 0, 0, "")
 
   private updat: AppointmentUpdateComponent = new AppointmentUpdateComponent(this.appointmentService)
 
   ngOnInit(): void {
-    this.ar.params.subscribe((r)=>{
-      this.nApppoint= this.appointmentService.AppiontList.find((doc)=>{
+    this.ar.params.subscribe((r) => {
+      this.nApppoint = this.appointmentService.AppiontList.find((doc) => {
         return doc._id == r['id']
       })
-      if(this.nApppoint != undefined)
-      {
+      if (this.nApppoint != undefined) {
         this.appointmentService.nAppointment = this.nApppoint
       }
     })
@@ -38,13 +37,11 @@ export class AppointmentCreateComponent implements OnInit {
   save() {
     this.appointmentService.AddToList().subscribe((res) => {
       this.router.navigate(['admin/appointmentList'])
-    },(error)=>{alert(`this Id ${this.nApppoint?._id} already exist`)})
+    }, (error) => { alert(`this Id ${error} already exist`) })
   }
 
-  update()
-  {
-    if(this.nApppoint!= undefined)
-    {
+  update() {
+    if (this.nApppoint != undefined) {
       this.updat.SaveAppoint(this.nApppoint)
       this.router.navigate(['admin/appointmentList'])
     }
