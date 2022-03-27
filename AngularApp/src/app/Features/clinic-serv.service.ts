@@ -8,7 +8,7 @@ import { tap } from 'rxjs';
 })
 
 export class ClinicServService {
-  nClinicServ: ClinicServ = new ClinicServ(0, 0, "", "", 0)
+  nClinicServ: ClinicServ = new ClinicServ(1, 1, "", "", 1000)
 
   readonly baseURL = 'http://localhost:3000/clinicService'
 

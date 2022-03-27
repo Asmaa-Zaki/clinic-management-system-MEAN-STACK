@@ -2,26 +2,92 @@
 <div>
 <form #form="ngForm">
 <label style="width: 100px;">Id </label>
-<input type="text" name="id" [(ngModel)]="usersSer.nUser._id" [(ngModel)]="employeeService.nEmployee._id" required><br><br>
+<input type="number" name="id" min="0" #id="ngModel" [(ngModel)]="usersSer.nUser._id" [(ngModel)]="employeeService.nEmployee._id" required
+[ngClass]="{'invalid-input': form.submitted && !id.valid}"><br><br>
+<div *ngIf="id.invalid && (id.dirty || id.touched )">
+   <div class="valid" *ngIf="id.errors?.['required']">
+       Id is required
+   </div>
+</div>
+
 <label style="width: 100px;">First Name </label>
-<input type="text" name="fname" [(ngModel)]="employeeService.nEmployee.firstName"  required><br><br>
+<input type="text" name="fname" #fname="ngModel" [(ngModel)]="employeeService.nEmployee.firstName"  required
+[ngClass]="{'invalid-input': form.submitted && !fname.valid}" minlength="3"><br><br>
+<div *ngIf="fname.invalid && (fname.dirty || fname.touched )">
+    <div class="valid" *ngIf="fname.errors?.['required']">
+        FName is required
+    </div>
+    <div class="valid" *ngIf="fname.errors?.['minlength']">
+        FName must be at least 3 char
+    </div>
+</div>
+
 <label style="width: 100px;">Last Name </label>
-<input type="text" name="lname" [(ngModel)]="employeeService.nEmployee.lastName" required><br><br>
+<input type="text" name="lname" #lname="ngModel" [(ngModel)]="employeeService.nEmployee.lastName" required
+[ngClass]="{'invalid-input': form.submitted && !lname.valid}" minlength="3"><br><br>
+<div *ngIf="lname.invalid && (lname.dirty || lname.touched )">
+    <div class="valid" *ngIf="lname.errors?.['required']">
+        LName is required
+    </div>
+    <div class="valid" *ngIf="lname.errors?.['minlength']">
+        LName be at least 3 char
+    </div>
+</div>
+
 <label style="width: 100px;">Email </label>
-<input type="text" name="email" [(ngModel)]="employeeService.nEmployee.email"  required><br><br>
+<input type="text" name="email" #email="ngModel" [(ngModel)]="employeeService.nEmployee.email"  required pattern="^[^@]+@[^@]+\.[^@]+$"
+[ngClass]="{'invalid-input': form.submitted && !email.valid}"><br><br>
+<div *ngIf="email.invalid && (email.dirty || email.touched )">
+    <div class="valid" *ngIf="email.errors?.['required']">
+        Email is required
+    </div>
+    <div class="valid" *ngIf="email.errors?.['pattern']">
+        Wrong Email
+    </div>
+</div>
+
 <label style="width: 100px;">Phone </label>
-<input type="text" name="phone" [(ngModel)]="employeeService.nEmployee.phone" required><br><br>
+<input type="number" name="phone" #phone="ngModel" [(ngModel)]="employeeService.nEmployee.phone" required
+[ngClass]="{'invalid-input': form.submitted && !phone.valid}" minlength="11"><br><br>
+<div *ngIf="phone.invalid && (phone.dirty || phone.touched )">
+    <div class="valid" *ngIf="phone.errors?.['required']" >
+        Phone is required
+    </div>
+    <div class="valid" *ngIf="phone.errors?.['minlength']">
+        Phone must be 11 numbers
+    </div>
+</div>
+
 <label style="width: 100px;">Username </label>
-<input type="text" name="username" [(ngModel)]="employeeService.nEmployee.userName" [(ngModel)]="usersSer.nUser.username" required><br><br>
+<input type="text" name="username" #username="ngModel" [(ngModel)]="employeeService.nEmployee.userName" [(ngModel)]="usersSer.nUser.username" required
+[ngClass]="{'invalid-input': form.submitted && !username.valid}" minlength="3"><br><br>
+<div *ngIf="username.invalid && (username.dirty || username.touched )">
+    <div class="valid" *ngIf="username.errors?.['required']">
+        Username is required
+    </div>
+    <div class="valid" *ngIf="username.errors?.['minlength']">
+        Username must be at least 3 char
+    </div>
+</div>
+
 <label style="width: 100px;">Password </label>
-<input type="text" name="password" [(ngModel)]="employeeService.nEmployee.password" [(ngModel)]="usersSer.nUser.password" required><br><br>
+<input type="password" name="password" #password="ngModel" [(ngModel)]="employeeService.nEmployee.password" [(ngModel)]="usersSer.nUser.password" required
+[ngClass]="{'invalid-input': form.submitted && !password.valid}" minlength="3"><br><br>
+<div *ngIf="password.invalid && (password.dirty || password.touched )">
+    <div class="valid" *ngIf="password.errors?.['required']">
+        Password is required
+    </div>
+    <div class="valid" *ngIf="password.errors?.['minlength']">
+        Password must be at least 3 char
+    </div>
+</div>
+
 <label style="width: 100px;">Type </label>
-<input type="radio" name="type"  value="Nurse" [(ngModel)]="employeeService.nEmployee.type" [(ngModel)]="usersSer.nUser.type" required>
-<label>Nurse</label>
-<input type="radio" name="type" value="Reciptionist" [(ngModel)]="employeeService.nEmployee.type" [(ngModel)]="usersSer.nUser.type" >
+<input type="radio" name="type"  value="Recipt" [(ngModel)]="employeeService.nEmployee.type" [(ngModel)]="usersSer.nUser.type" required>
 <label>Reciptionist</label>
-<input type="radio" name="type" value="Office Boy" [(ngModel)]="employeeService.nEmployee.type" [(ngModel)]="usersSer.nUser.type" >
-<label>Office Boy </label><br><br>
+
+<input type="radio" name="type" value="Admin" [(ngModel)]="employeeService.nEmployee.type" [(ngModel)]="usersSer.nUser.type" >
+<label> Admin </label><br><br>
 <!-- <input type="text" [(ngModel)]="employeeService.nEmployee.type" [(ngModel)]="usersSer.nUser.type" required=""><br><br> -->
 <input type="button" style="margin-left: 30%;" [disabled]="form.invalid" (click)="save()" value="Add">
 <input type="button" [disabled]="form.invalid"  (click)="update()" value="Update">

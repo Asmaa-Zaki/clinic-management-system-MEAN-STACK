@@ -8,7 +8,7 @@ import { Invoice } from '../Module/invoice';
   providedIn: 'root'
 })
 export class InvoiceService {
-  nInvoice: Invoice = new Invoice(0, 0, 0, new Date(2015 - 1 - 1), "");
+  nInvoice: Invoice = new Invoice(1, 0, 0, new Date(2015 - 1 - 1), "");
 
   readonly baseURL = 'http://localhost:3000/invoice'
   constructor(private http: HttpClient) { }

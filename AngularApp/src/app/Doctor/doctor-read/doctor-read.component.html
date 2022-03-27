@@ -1,42 +1,42 @@
 <table class="table">
     <tr>
         <th>
-            <label>Id</label>
+            <label>Id</label><br>
             <i appSortParams  class="fa fa-arrow-up" (click)="sortIdAsc()"></i>
             <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortIdDesc()"></i>
         </th>
         <th>
-            <label class="fw-bold">Doc Name</label>
+            <label class="fw-bold">Doc Name</label><br>
             <i appSortParams  class="fa fa-arrow-up" (click)="sortDocNameAsc()"></i>
             <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortDocNameDesc()"></i>
         </th>
-        <!-- <th>
-            <label>SSN</label>
+        <th>
+            <label>SSN</label><br>
             <i appSortParams  class="fa fa-arrow-up" (click)="sortSSNAsc()"></i>
             <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortSSNDesc()"></i>
-        </th> -->
+        </th>
         <th>
-            <label>Phone</label>
+            <label>Phone</label><br>
             <i appSortParams  class="fa fa-arrow-up" (click)="sortPhoneAsc()"></i>
             <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortPhoneDesc()"></i>
         </th>
         <th>
-            <label>Address</label>
+            <label>Address</label><br>
             <i appSortParams  class="fa fa-arrow-up" (click)="sortAddressAsc()"></i>
             <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortAddressDesc()"></i>
         </th>
         <th>
-            <label>Sepciality</label>
+            <label>Sepciality</label><br>
             <i appSortParams  class="fa fa-arrow-up" (click)="sortSpecialityAsc()"></i>
             <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortSpecialityDesc()"></i>
         </th>
         <th>
-            <label>Username</label>
+            <label>Username</label><br>
             <i appSortParams  class="fa fa-arrow-up" (click)="sortUsernameAsc()"></i>
             <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortUsernameDesc()"></i>
         </th>
         <th>
-            <label>Password </label>
+            <label>Password </label><br>
             <i appSortParams  class="fa fa-arrow-up" (click)="sortPasswordAsc()"></i>
             <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortPasswordDesc()"></i>
         </th>
@@ -50,7 +50,7 @@
     <tr *ngFor="let doc of (doctorService.DocList|filterbyDocname:searchValue|sortDoctor:direction:column:type)">
         <td>{{doc._id}}</td>
         <td>{{doc.doctorName}}</td>
-        <!-- <td>{{doc.SSN}}</td> -->
+        <td>{{doc.SSN}}</td>
         <td>{{doc.phone}}</td>
         <td>{{doc.address}}</td>
         <td>{{doc.medicalSpecialty}}</td>

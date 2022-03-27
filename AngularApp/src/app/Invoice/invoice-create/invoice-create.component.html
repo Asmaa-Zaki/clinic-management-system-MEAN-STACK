@@ -2,18 +2,53 @@
 <div>
     <form #form="ngForm">
         <label style=" width: 100px;">Id </label>
-        <input name="id" type="text" [(ngModel)]="InvoiceService.nInvoice._id" required><br><br>
+        <input name="id" #id="ngModel" type="number" min="1" [(ngModel)]="InvoiceService.nInvoice._id" required
+         [ngClass]="{'invalid-input': form.submitted && !id.valid}"><br><br>
+        <div *ngIf="id.invalid && (id.dirty || id.touched )">
+           <div class="valid" *ngIf="id.errors?.['required']">
+               Id is required
+           </div>
+       </div>
+
+
         <label style="width: 100px;">PatientId </label>
-        <input name="patientId" type="text" [(ngModel)]="InvoiceService.nInvoice.patientId.patientName"
-            required><br><br>
+        <input name="patientId" type="number" min="1" #patientId="ngModel" [(ngModel)]="InvoiceService.nInvoice.patientId.patientName"
+        required [ngClass]="{'invalid-input': form.submitted && !patientId.valid}"><br><br>
+        <div *ngIf="patientId.invalid && (patientId.dirty || patientId.touched )">
+            <div class="valid" *ngIf="patientId.errors?.['required']">
+                PatientId is required
+            </div>
+        </div>
+
+
         <label style="width: 100px;">tax Of Bill </label>
-        <input name="Tax" type="text" [(ngModel)]="InvoiceService.nInvoice.taxOfBill" required><br><br>
+        <input name="Tax" type="number" #Tax="ngModel" [(ngModel)]="InvoiceService.nInvoice.taxOfBill" 
+        required [ngClass]="{'invalid-input': form.submitted && !Tax.valid}"><br><br>
+        <div *ngIf="Tax.invalid && (Tax.dirty || Tax.touched )">
+            <div class="valid" *ngIf="Tax.errors?.['required']">
+                Tax is required
+            </div>
+        </div>
+
+
         <label style="width: 100px;">date Of Bill </label>
-        <input name="date" type="text" [(ngModel)]="InvoiceService.nInvoice.dateOfBill" required><br><br>
-        <label style="margin-right: 2px;">Cash</label>
-        <input name="payment" type="radio" value="Cash" style="margin-right: 10px;" />
-        <label style="margin-right: 2px;">Credit Card</label>
-        <input name="payment" type="radio" value="Credit Card" /><br>
+        <input name="date" #date="ngModel" type="date" [(ngModel)]="InvoiceService.nInvoice.dateOfBill" required
+        [ngClass]="{'invalid-input': form.submitted && !Tax.valid}"><br><br>
+        <div *ngIf="date.invalid && (date.dirty || date.touched )">
+            <div class="valid" *ngIf="date.errors?.['required']">
+                Date is required
+            </div>
+        </div>
+
+
+        <input name="payment" type="radio" value="Cash" style="margin-right: 5px; margin-left: 35%;" required/>
+        <label style="margin-right:15px;">Cash</label>
+
+
+        <input name="payment" type="radio" value="Credit Card" style="margin-right: 5px;"/>
+        <label style="margin-right: 2px;">Credit Card</label><br>
+
+
         <input type="button" style="margin-left: 30%;" [disabled]="form.invalid" (click)="save()" value="Add">
         <input type="button" [disabled]="form.invalid" (click)="update()" value="Update">
     </form>

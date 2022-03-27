@@ -7,7 +7,7 @@ import { Medicine } from '../Module/medicine';
 })
 export class MedicineService {
 
-  nMedicine: Medicine = new Medicine(0, "", "", "")
+  nMedicine: Medicine = new Medicine(1, "", "", "")
 
   readonly baseURL= 'http://localhost:3000/medicine'
 

@@ -7,7 +7,7 @@ import { tap } from 'rxjs';
   providedIn: 'root'
 })
 export class PrescriptionService {
-  nPrescription: Prescription = new Prescription(0, 0, 0, 0, "", new Date());
+  nPrescription: Prescription = new Prescription(1, 1, 0, 0, "", new Date());
   readonly baseURL = 'http://localhost:3000/prescript'
 
   constructor(private http: HttpClient) { }

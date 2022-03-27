@@ -11,7 +11,7 @@ import { AppComponent } from '../app.component';
 
 export class AppointmentService {
 
-  nAppointment: Appointment = new Appointment(0, 0, 0, 0, 0, "")
+  nAppointment: Appointment = new Appointment(1, 0, 0, 1, 1, "")
 
   readonly baseURL = 'http://localhost:3000/appointment'
 

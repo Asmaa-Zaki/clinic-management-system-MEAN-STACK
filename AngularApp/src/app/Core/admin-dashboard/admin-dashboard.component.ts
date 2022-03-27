@@ -24,27 +24,7 @@ export class AdminDashboardComponent implements OnInit {
   constructor(public userService: UsersService) { }
 
   ngOnInit(): void {
-    // if(this.type != "doctor" && this.type!="Reciptionist")
-    // {
-    //   this.type="Doctor"
-    // }
-    // this.title=" Users"
 
-    // if(UsersService.current=="doctor")
-    // {
-    //   this.type="Doctor"
-    //   this.doctor= UsersService.currentUser as Doctor
-    //   this.doctorActive=true
-    //   this.name=this.doctor.doctorName
-    // }
-    // else if(UsersService.current=="admin")
-    // {
-    //   this.type="Admin"
-    //   this.admin= UsersService.currentUser as Employee
-    //   this.name= this.admin.firstName
-    //   this.adminActive= true
-
-    // }
   }
 
   logOut()

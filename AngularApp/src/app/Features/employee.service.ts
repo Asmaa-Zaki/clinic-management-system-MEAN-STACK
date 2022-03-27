@@ -7,7 +7,7 @@ import { Employee } from '../Module/employee';
 })
 export class EmployeeService {
 
-  nEmployee: Employee= new Employee(0, "", "", "", 0, "", "", "")
+  nEmployee: Employee= new Employee(1, "", "", "", 0, "", "", "")
 
   readonly baseURL = 'http://localhost:3000/employee'
 

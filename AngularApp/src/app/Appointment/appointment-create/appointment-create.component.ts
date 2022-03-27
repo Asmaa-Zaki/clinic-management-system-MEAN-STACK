@@ -18,7 +18,7 @@ export class AppointmentCreateComponent implements OnInit {
 
   constructor(public appointmentService: AppointmentService, public usersSer: AppointmentService, public router: Router, public ar: ActivatedRoute) { }
 
-  nApppoint?: Appointment = new Appointment(0, 0, 0, 0, 0, "")
+  nApppoint?: Appointment = new Appointment(1, 1, 1, 0, 0, "")
 
   private updat: AppointmentUpdateComponent = new AppointmentUpdateComponent(this.appointmentService)
 
@@ -35,9 +35,17 @@ export class AppointmentCreateComponent implements OnInit {
 
 
   save() {
-    this.appointmentService.AddToList().subscribe((res) => {
-      this.router.navigate(['admin/appointmentList'])
-    }, (error) => { alert(`this Id ${error} already exist`) })
+    console.log(this.appointmentService.AppiontList)
+    if(this.appointmentService.AppiontList.filter((appoint)=>appoint.doctorId==this.appointmentService.nAppointment.doctorId && appoint.startTime== this.appointmentService.nAppointment.startTime) == undefined)
+      {
+        this.appointmentService.AddToList().subscribe((res) => {
+        this.router.navigate(['admin/appointmentList'])
+       }, (error) => { alert(`this Id ${this.appointmentService.nAppointment} already exist`) })
+      }
+    else
+    {
+      alert("This Doctor Already Busy in this Time")
+    }
   }
 
   update() {

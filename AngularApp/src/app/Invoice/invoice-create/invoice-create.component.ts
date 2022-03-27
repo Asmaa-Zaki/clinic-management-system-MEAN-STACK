@@ -10,7 +10,7 @@ import { InvoiceUpdateComponent } from '../invoice-update/invoice-update.compone
   styleUrls: ['./invoice-create.component.css']
 })
 export class InvoiceCreateComponent implements OnInit {
-  nInvoice?: Invoice = new Invoice(0, 0, 0, new Date(), "")
+  nInvoice?: Invoice = new Invoice(1, 1, 0, new Date(), "")
   private updat: InvoiceUpdateComponent = new InvoiceUpdateComponent(this.InvoiceService)
   constructor(public InvoiceService: InvoiceService, public router: Router, public ar: ActivatedRoute) { }
 

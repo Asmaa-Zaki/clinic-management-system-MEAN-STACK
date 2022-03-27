@@ -6,7 +6,7 @@ import { Users } from '../Module/users';
   providedIn: 'root'
 })
 export class UsersService {
-  @Input() nUser: Users= new Users(0, "", "", "")
+  @Input() nUser: Users= new Users(1, "", "", "")
   static active= false
   static current=""
   static currentUser:any
