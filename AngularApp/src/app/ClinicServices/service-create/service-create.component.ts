@@ -29,7 +29,10 @@ export class ServiceCreateComponent implements OnInit {
   save() {
     this.clinicSerService.AddToList().subscribe((res) => {
       this.router.navigate(['admin/serviceList'])
-    }, (error) => { alert(`This Id ${this.clinicSerService.nClinicServ._id} already exist`) })
+    }, (error) => {
+      console.log(error);
+      alert(`This Id ${error} already exist`)
+    })
   }
   update() {
     if (this.nService != undefined) {

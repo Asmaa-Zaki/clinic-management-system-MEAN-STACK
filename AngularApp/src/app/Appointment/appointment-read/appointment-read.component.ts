@@ -22,8 +22,8 @@ export class AppointmentReadComponent implements OnInit {
     this.show()
   }
 
-  show() {
-    this.appointmentService.GetList().subscribe((res) => {
+  async show() {
+    (await this.appointmentService.GetList()).subscribe((res) => {
       this.appointmentService.AppiontList = res as Appointment[];
     })
   }
@@ -43,10 +43,21 @@ export class AppointmentReadComponent implements OnInit {
   sortDocIdAsc() {
     this.direction = 'asc'
     this.column = 'doctorId'
-    this.type = 'number'
+    this.type = 'string'
   }
 
   sortDocIdDesc() {
+    this.direction = 'desc'
+    this.column = 'doctorId'
+    this.type = 'string'
+  }
+  sortPatIdAsc() {
+    this.direction = 'asc'
+    this.column = 'doctorId'
+    this.type = 'number'
+  }
+
+  sortPatIdDesc() {
     this.direction = 'desc'
     this.column = 'doctorId'
     this.type = 'number'

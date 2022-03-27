@@ -57,22 +57,25 @@ exports.checkDoctorOnly = (req, res, next) => {
 
 };
 exports.checkReceptionest = (req, res, next) => {
+    console.log("ddd");
     const reqToken = req.header('x-auth-token');
     if (!reqToken) {
         return res.status(401).send('Access rejected');
     }
     try {
-        console.log(PrivateTokenKey);
+
         const decodedToken = jwt.verify(reqToken, 'PrivateTokenKey');
         if (decodedToken.type == 'Recipt' || decodedToken.type == 'Admin') {
             next();
         }
         else {
+            console.log("ddd");
             res.status(400).send('Invalid Token!');
         }
 
     }
     catch (ex) {
+        console.log("هييddd");
         res.status(400).send('Invalid Token!');
     }
 }

@@ -36,7 +36,7 @@
     <tbody>
         <tr *ngFor="let invoice of (InvoiceService.InvoiceList)">
             <td>{{invoice._id}}</td>
-            <td>{{invoice.patientId}}</td>
+            <td>{{invoice.patientId?.patientName}}</td>
             <td>{{invoice.taxOfBill}}</td>
             <td>{{invoice.dateOfBill|date}}</td>
             <td>{{invoice.payment}}</td>

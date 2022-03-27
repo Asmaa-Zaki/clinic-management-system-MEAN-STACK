@@ -8,7 +8,7 @@ import { Appointment } from 'src/app/Module/appointment';
   styleUrls: ['./appointment-update.component.css']
 })
 export class AppointmentUpdateComponent implements OnInit {
-  @Input() appointment:Appointment= new Appointment(0,0,0,0,"")
+  @Input() appointment: Appointment = new Appointment(0, 0, 0, 0, 0, "")
   //@Output() cAppointment:Appointment= new Appointment(0,0,0,0,"")
   //appoint: Appointment= new Appointment(0,0,0,0,"")
   constructor(private appointymentService: AppointmentService) { }
@@ -16,16 +16,14 @@ export class AppointmentUpdateComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  EditAppoint()
-  {
+  EditAppoint() {
     console.log(this.appointment)
-    this.appointymentService.nAppointment=this.appointment
+    this.appointymentService.nAppointment = this.appointment
   }
 
-  SaveAppoint(app:Appointment)
-  {
-    this.appointymentService.EditAppoint(app).subscribe((res)=>{
+  SaveAppoint(app: Appointment) {
+    this.appointymentService.EditAppoint(app).subscribe((res) => {
       alert("updated")
-    },(error)=>alert("not exist"))
+    }, (error) => alert("not exist"))
   }
 }

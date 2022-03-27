@@ -2,28 +2,28 @@
     <tr>
         <th>
             <label>Id</label>
-            <i appSortParams  class="fa fa-arrow-up" (click)="sortIdAsc()"></i>
-            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortIdDesc()"></i>
+            <i appSortParams class="fa fa-arrow-up" (click)="sortIdAsc()"></i>
+            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortIdDesc()"></i>
         </th>
         <th>
             <label class="fw-bold">DoctorId</label>
-            <i appSortParams  class="fa fa-arrow-up" (click)="sortDocIdAsc()"></i>
-            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortDocIdDesc()"></i>
+            <i appSortParams class="fa fa-arrow-up" (click)="sortDocIdAsc()"></i>
+            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortDocIdDesc()"></i>
         </th>
         <th>
             <label>Name</label>
-            <i appSortParams  class="fa fa-arrow-up" (click)="sortNameAsc()"></i>
-            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortNameDesc()"></i>
+            <i appSortParams class="fa fa-arrow-up" (click)="sortNameAsc()"></i>
+            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortNameDesc()"></i>
         </th>
         <th>
             <label>Description</label>
-            <i appSortParams  class="fa fa-arrow-up" (click)="sortDescAsc()"></i>
-            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortDescDesc()"></i>
+            <i appSortParams class="fa fa-arrow-up" (click)="sortDescAsc()"></i>
+            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortDescDesc()"></i>
         </th>
         <th>
             <label>Price</label>
-            <i appSortParams  class="fa fa-arrow-up" (click)="sortPriceAsc()"></i>
-            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortPriceDesc()"></i>
+            <i appSortParams class="fa fa-arrow-up" (click)="sortPriceAsc()"></i>
+            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortPriceDesc()"></i>
         </th>
         <th>
             <input type="text" class="w w-75 h-25" [(ngModel)]="searchValue" placeholder="Filter by Name">
@@ -34,11 +34,14 @@
     </tr>
     <tr *ngFor="let clinicS of (clinicservService.ClinicServLists|sortComponent:direction:column:type)">
         <td>{{clinicS._id}}</td>
-        <td>{{clinicS.doctorId}}</td>
+        <td>{{clinicS.doctorId?._id}}</td>
         <td>{{clinicS.name}}</td>
         <td>{{clinicS.description}}</td>
         <td>{{clinicS.price}}</td>
-        <a [routerLink]="['edit',clinicS._id]" ><i class="fa fa-edit" aria-hidden="true" style="font-weight: bold; font-size: larger;"></i></a>
-        <td><app-service-delete [cService]="clinicS"></app-service-delete></td>
+        <a [routerLink]="['edit',clinicS._id]"><i class="fa fa-edit" aria-hidden="true"
+                style="font-weight: bold; font-size: larger;"></i></a>
+        <td>
+            <app-service-delete [cService]="clinicS"></app-service-delete>
+        </td>
     </tr>
 </table>

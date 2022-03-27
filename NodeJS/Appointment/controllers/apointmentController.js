@@ -16,7 +16,7 @@ const router = express.Router()
 //read
 //localhost:3000/appointment/
 router.get('/', [auth.checkReceptionest], async (req, res) => {
-    const appoint = await appointment.find(req.appointment).select('-doctorId._id');
+    const appoint = await appointment.find(req.appointment);
     if (appoint) return res.send(appoint);
     return res.status(400).send('Not Found Any Record');
 

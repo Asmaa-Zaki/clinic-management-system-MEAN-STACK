@@ -6,7 +6,8 @@ const invoiceSchema = mongoose.Schema({
         required: true
     },
     patientId: {
-        type: patientSchema
+        type: patientSchema,
+        required: true
     },
     taxOfBill: {
         type: Number,

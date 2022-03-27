@@ -16,20 +16,20 @@ export class InvoiceService {
   //addToList
   AddToList() {
     console.log(this.nInvoice);
-    return this.http.post(this.baseURL, this.nInvoice)
+    return this.http.post<any>(this.baseURL, this.nInvoice).pipe(tap(res => console.log(res)));
   }
 
   GetList() {
-    return this.http.get(this.baseURL)
+    return this.http.get<any>(this.baseURL).pipe(tap(res => console.log(res)));
   }
 
   DeleteInvoice(inv: Invoice) {
-    return this.http.delete(this.baseURL + '/' + inv._id)
+    return this.http.delete<any>(this.baseURL + '/' + inv._id)
   }
 
   EditInvoice(invoice: Invoice) {
     console.log("" + (this.baseURL) + `/${invoice._id}`)
-    return this.http.put(this.baseURL + `/${invoice._id}`, invoice)
+    return this.http.put<any>(this.baseURL + `/${invoice._id}`, invoice)
 
   }
 }

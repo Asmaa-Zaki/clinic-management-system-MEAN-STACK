@@ -11,7 +11,7 @@ const express = require('express');
 const router = express.Router();
 router.post('/', async (req, res, next) => {
     //------------------Check username
-    if (req.body.type == 'doctor') {
+    if (req.body.type == 'Doctor') {
         //------------------Check username
         let userDoc = await Doctor.findOne({ username: req.body.username });
         if (!userDoc) return res.status(400).send('Invalid doc UserName or Password');
@@ -34,6 +34,7 @@ router.post('/', async (req, res, next) => {
             return res.status(400).send('Invalid Emp qqUserName or Password');
         } else {
             if (req.body.type == 'Admin') {
+                console.log("hahahhahahhah");
                 const token = jwt.sign({ _id: this._id, type: "Admin" }, 'PrivateTokenKey');
                 res.status(200).send({ token: token, data: userEmp });
             }
