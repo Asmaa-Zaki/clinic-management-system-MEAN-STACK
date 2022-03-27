@@ -31,9 +31,7 @@ export class DoctorCreateComponent implements OnInit {
   {
     this.DoctorService.AddToList().subscribe((res)=>{
       this.userSerive.nUser.type=this.type
-      this.userSerive.AddToList().subscribe((res)=>{
         this.router.navigate(['admin/doctorList'])
-      })
     },(error)=>{alert("this Id already exist")})
   } 
 

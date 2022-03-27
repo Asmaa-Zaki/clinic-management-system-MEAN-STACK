@@ -11,7 +11,7 @@ const express = require('express');
 const router = express.Router();
 
 //---------------------------------------------get
-router.get('/', [auth.checkDoctor], async (req, res) => {
+router.get('/', [auth.accessAll], async (req, res) => {
     const prescript = await Prescription.find();
     if (!prescript) return res.status.apply(400).send('Not Found');
     res.send(prescript);
@@ -24,7 +24,7 @@ router.get('/:id', [auth.accessAll], async (req, res) => {
 })
 
 //-----------------------------------------------------
-router.post('/', [auth.checkDoctor], async (req, res) => {
+router.post('/', [auth.checkDoctorOnly], async (req, res) => {
     const { error } = validationPrescription(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     console.log("haha");
@@ -59,7 +59,7 @@ router.post('/', [auth.checkDoctor], async (req, res) => {
     res.send(prescript);
 });//End Post
 //---------------------------------------------Update
-router.put('/:id', [auth.checkDoctor], async (req, res) => {
+router.put('/:id', [auth.checkDoctorOnly], async (req, res) => {
     const { error } = validationPrescription(req.body);
     if (error == true) return res.status(400).send(error.details[0].message);
     console.log("haha");
@@ -90,10 +90,10 @@ router.put('/:id', [auth.checkDoctor], async (req, res) => {
         },
         { new: true });
     if (!prescript) return res.status(400).send('Invalid Id');
-    res.send({ 'Updated\t': prescript });
+    res.send('Updated\t' + prescript);
 });// End Update
 //---------------------------------------------Delete
-router.delete('/:id', [auth.checkDoctor], async (req, res) => {
+router.delete('/:id', [auth.checkDoctorOnly], async (req, res) => {
     const prescript = await Prescription.findByIdAndRemove(req.params.id);
     if (!prescript) return res.status(400).send('Invalid Id');
     res.send({ 'Deleted\t': prescript });

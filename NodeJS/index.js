@@ -1,7 +1,14 @@
+
 const { mongoose } = require('./db.js');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+//call express 
+var App = express();
+
+//use middleware
+App.use(express.json());
+App.use(cors());
 
 //controller
 const doctorController = require('./Doctor/controllers/doctorController');
@@ -14,13 +21,6 @@ const userController = require('./Users/controllers/userController');
 const employeeController = require('./Employee/controllers/employeeController.js')
 const clinicServiceController = require('./ClinicService/controllers/clinicServiceController');
 const loginController = require('./Login/controller/loginController');
-
-//call express 
-var App = express();
-
-//use middleware
-App.use(bodyParser.json())
-App.use(cors({ origin: 'http://localhost:4200' }));
 
 //listen
 App.listen(3000, () => {

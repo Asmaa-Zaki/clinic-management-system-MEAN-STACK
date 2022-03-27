@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 //apointment
 const { appointment } = require('../models/appointment');
 const { Doctor } = require('../../Doctor/models/doctor');
+const { patient } = require('../../Patient/models/patient');
 const auth = require('../../JWT/jwtMiddleware');
 //express
 const express = require('express');
@@ -39,21 +40,26 @@ router.post('/', [auth.checkReceptionest], async (req, res) => {
     console.log("hamada");
     const { error } = validationAppointment(req.body);
     if (error) return res.status(400).send(error.details[0].message);
+
     const doctor = await Doctor.findById(req.body.doctorId);
     if (!doctor) return res.status(400).send('Invalid doctor Id');
 
+    const pat = await patient.findById(req.body.patientId);
+    if (!pat) return res.status(400).send('Invalid patient Id');
     let appoint = new appointment({
         _id: req.body._id,
         doctorId: {
             _id: doctor._id,
             doctorName: doctor.doctorName
         },
+        patientId: {
+            _id: pat._id,
+            patientName: pat.patientName
+        },
         startTime: req.body.startTime,
         endTime: req.body.endTime,
         medicalSpecialty: req.body.medicalSpecialty
-    })//(_.pick(req.body, ['_id', 'doctorId', 'startTime', 'endTime', 'medicalSpecialty']));
-    //check id if  it found or not -- هنا بشوف ال متسجل قبل كده ولا لا(id)
-    //👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯
+    });
     const check = await appointment.findById(req.body._id);
     if (check) return res.status(400).send('The ID already Registred!');
 
@@ -69,26 +75,28 @@ router.put('/:id', [auth.checkReceptionest], async (req, res) => {
     //--------------Check Body Request
     const { error } = validationAppointment(req.body);
     if (error == true) return res.status(400).send(error.details[0].message);
-
-    let newAppointment = new appointment({
+    const pat = await patient.findById(req.body.patientId);
+    if (!pat) return res.status(400).send('Invalid patient Id');
+    let appoint = new appointment({
         _id: req.body._id,
         doctorId: {
             _id: doctor._id,
-            name: doctor.name
+            doctorName: doctor.doctorName
+        },
+        patientId: {
+            _id: pat._id,
+            patientName: pat.patientName
         },
         startTime: req.body.startTime,
         endTime: req.body.endTime,
         medicalSpecialty: req.body.medicalSpecialty
-    });
-    //(_.pick(req.body, ['_id', 'doctorId', 'startTime', 'endTime', 'medicalSpecialty']));
-
+    })
     appointment.findByIdAndUpdate(req.params.id, { $set: newAppointment }, { new: true }, (err, doc) => {
         if (!err)
             res.send(doc)
         else
             console.log("Error in Appointment Update: " + JSON.stringify(err, undefined, 2))
     })
-    // res.send(newAppointment)
 })
 
 

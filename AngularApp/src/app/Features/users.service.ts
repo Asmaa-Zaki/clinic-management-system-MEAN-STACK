@@ -11,30 +11,66 @@ export class UsersService {
   static current=""
   static currentUser:any
 
-  readonly baseURL= 'http://localhost:3000/users'
+  readonly baseURL= 'http://localhost:3000/login'
 
   constructor(private http: HttpClient) { }
 
   usersList: Users[]= []
 
   //addToList
-  AddToList() {
+  postUser() {
     return this.http.post(this.baseURL, this.nUser)
   }
 
-  GetList() {
-    return this.http.get(this.baseURL)
+  login(authCridential:any)
+  {
+    return this.http.post(this.baseURL, authCridential)
   }
 
-  DeleteAppoint()
+  setToken(name:string,token:string)
   {
-    return this.http.delete(this.baseURL+'/'+this.nUser._id)
+    localStorage.setItem(name, token)
   }
 
-  EditAppoint()
+  deleteToken()
   {
-      return this.http.put(this.baseURL+`/`+this.nUser._id,this.nUser)
-      
+    localStorage.removeItem('token')
   }
+
+  getUserPayLoad()
+  {
+    var token= localStorage.getItem('token')
+    if(token)
+    {
+       var userPayLoad= atob(token.split('.')[1])
+       return JSON.parse(userPayLoad)
+    }
+    else
+    {
+      return null
+    }
+  }
+
+  isLoggedIn()
+  {
+     var userPlayLoad= this.getUserPayLoad()
+     if(userPlayLoad)
+     {
+       return true
+     }
+     else
+     {
+       return false
+     }
+  }
+
+//  jwt() {
+//     // create authorization header with jwt token
+//     let currentUser = JSON.parse(localStorage.getItem('token')||'{}');
+//     if (currentUser && currentUser.token) {
+//         let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
+//         return new RequestOptions({ headers: headers });
+//     }
+// }
 
 }

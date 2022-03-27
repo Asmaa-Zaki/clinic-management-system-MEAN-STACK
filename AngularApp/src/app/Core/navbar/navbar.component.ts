@@ -13,17 +13,18 @@ export class NavbarComponent implements OnInit{
  
   constructor(public user:UsersService) { }
   ngOnInit(): void {
-    this.user.GetList().subscribe((user)=>
-    {
-      if(UsersService.active==true)
-      {
-        this.logged=true
-      }
-      else
-      {
-        this.logged=false
-      }
-    })
-   console.log(this.logged)
-  }
+  //   this.user.GetList().subscribe((user)=>
+  //   {
+  //     if(UsersService.active==true)
+  //     {
+  //       this.logged=true
+  //     }
+  //     else
+  //     {
+  //       this.logged=false
+  //     }
+  //   })
+  //  console.log(this.logged)
+  // }
+}
 }

@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AppointmentCreateComponent } from './Appointment/appointment-create/appointment-create.component';
 import { AppointmentReadComponent } from './Appointment/appointment-read/appointment-read.component';
+import { AuthGuard } from './Auth/auth.guard';
+import { HomeGuard } from './Auth/home.guard';
 import { ServiceCreateComponent } from './ClinicServices/service-create/service-create.component';
 import { ServiceReadComponent } from './ClinicServices/service-read/service-read.component';
 import { AdminDashboardComponent } from './Core/admin-dashboard/admin-dashboard.component';
@@ -24,10 +26,10 @@ import { PrescriptionReadComponent } from './Prescription/prescription-read/pres
 import { UsersReadComponent } from './Users/users-read/users-read.component';
 
 const routes: Routes= [
-  {path:"home", component:HomeComponent},
+  {path:"home", component:HomeComponent, canActivate:[HomeGuard]},
   {path:"", redirectTo:"/home",pathMatch:"full"},
   {path:"doctor",component: AdminDashboardComponent,},
-  {path:"admin",component: AdminDashboardComponent, children:
+  {path:"admin",component: AdminDashboardComponent, canActivate:[AuthGuard], children:
   [{path:"appointmentCreate", component: AppointmentCreateComponent},
     {path:"appointmentList", component: AppointmentReadComponent},
     {path:"appointmentList/edit/:id", component:AppointmentCreateComponent},

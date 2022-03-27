@@ -2,12 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppointmentCreateComponent } from './Appointment/appointment-create/appointment-create.component';
 import { AppointmentReadComponent } from './Appointment/appointment-read/appointment-read.component';
 import { AppointmentUpdateComponent } from './Appointment/appointment-update/appointment-update.component';
 import { AppointmentDeleteComponent } from './Appointment/appointment-delete/appointment-delete.component';
 import { FormsModule, NgForm } from '@angular/forms';
-import { AppointmentService } from './Features/appointment.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterbySpecialityPipe } from './pipes/filterby-speciality.pipe';
 import { MedicineCreateComponent } from './Medicine/medicine-create/medicine-create.component';
@@ -55,6 +53,11 @@ import { SortPatientPipe } from './pipes/sort-patient.pipe';
 import { SortPrescriptPipe } from './pipes/sort-prescript.pipe';
 import { FilterbyPrescriptPipe } from './pipes/filterby-prescript.pipe';
 import { UsersReadComponent } from './Users/users-read/users-read.component';
+import { AppointmentCreateComponent } from './Appointment/appointment-create/appointment-create.component';
+import { AppointmentService } from './Features/appointment.service';
+import { SignInComponent } from './User/sign-in/sign-in.component';
+import { UsersService } from './Features/users.service';
+import { AuthGuard } from './Auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -112,7 +115,8 @@ import { UsersReadComponent } from './Users/users-read/users-read.component';
     EmployeeComponent,
     AdminDashboardComponent,
     UsersReadComponent,
-    HomeCopyComponent
+    HomeCopyComponent,
+    SignInComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,7 +124,7 @@ import { UsersReadComponent } from './Users/users-read/users-read.component';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [AppointmentService, MedicineService],
+  providers: [AppointmentService, MedicineService, UsersService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

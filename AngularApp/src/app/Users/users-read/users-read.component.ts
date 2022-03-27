@@ -17,9 +17,9 @@ export class UsersReadComponent implements OnInit {
 
   show()
   {
-    this.userService.GetList().subscribe((res)=>{
-      this.userService.usersList = res as Users[]
-    })
+    // this.userService.GetList().subscribe((res)=>{
+    //   this.userService.usersList = res as Users[]
+    // })
   }
 
 }

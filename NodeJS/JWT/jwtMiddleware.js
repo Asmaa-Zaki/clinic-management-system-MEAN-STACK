@@ -35,7 +35,27 @@ exports.checkDoctor = (req, res, next) => {
         res.status(400).send('Invalid Token!');
     }
 
-}
+};
+exports.checkDoctorOnly = (req, res, next) => {
+    const reqToken = req.header('x-auth-token');
+    if (!reqToken) {
+        return res.status(401).send('Access rejected');
+    }
+    try {
+        const decodedToken = jwt.verify(reqToken, 'PrivateTokenKey');
+        if (decodedToken.type == 'Doctor') {
+            next();
+        }
+        else {
+            res.status(400).send('Invalid Token!');
+        }
+
+    }
+    catch (ex) {
+        res.status(400).send('Invalid Token!');
+    }
+
+};
 exports.checkReceptionest = (req, res, next) => {
     const reqToken = req.header('x-auth-token');
     if (!reqToken) {

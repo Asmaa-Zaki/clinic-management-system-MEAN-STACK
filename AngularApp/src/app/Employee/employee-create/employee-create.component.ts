@@ -34,11 +34,9 @@ export class EmployeeCreateComponent implements OnInit {
   save()
   {
       this.employeeService.AddToList().subscribe((res)=>{
-        this.usersSer.AddToList().subscribe((res)=>{
           this.router.navigate(['admin/employeeList'])
           alert("employee added")
           console.log(this.employeeService.nEmployee?.type)
-        })
       },(error)=>{alert("this Id already exist")})
   }
 

@@ -10,14 +10,14 @@ const router = express.Router()
 //-------------------------------------------Get List
 //read
 //localhost:3000/doctor/
-router.get('/', [auth.checkAdmin], async (req, res) => {
+router.get('/', [auth.checkReceptionest], async (req, res) => {
     const doc = await Doctor.find();
     if (doc) return res.send(doc);
     return res.status(400).send('Not Found Any Record');
 });
 
 //-----------------------------------------------Get By ID
-router.get('/:id', [auth.checkAdmin], async (req, res) => {
+router.get('/:id', [auth.checkReceptionest], async (req, res) => {
     const doc = await Doctor.findById(req.params.id);
     if (!doc) return res.status(400).send("Not Found Id");
     res.send(doc);
@@ -32,8 +32,6 @@ router.post('/', [auth.checkAdmin], async (req, res) => {
 
     let doc = new Doctor(_.pick(req.body, ['_id', 'doctorName', 'SSN', 'phone',
         'address', 'medicalSpecialty', 'username', 'password']));
-    //check id if  it found or not -- هنا بشوف ال متسجل قبل كده ولا لا(id)
-    //👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯
     const check = await Doctor.findById(req.body._id);
     if (check) return res.status(400).send('The ID already Registred!');
 

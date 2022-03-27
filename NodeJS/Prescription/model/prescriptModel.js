@@ -23,7 +23,7 @@ const prescriptSchema = mongoose.Schema({
         type: String
     },
     dateOfPrescript: {
-        type: String
+        type: Date
 
     }
 });
