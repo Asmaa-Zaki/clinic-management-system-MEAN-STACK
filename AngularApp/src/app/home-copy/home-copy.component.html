@@ -12,7 +12,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active " aria-current="page" href="#home"
+                        <a class="nav-link active " aria-current="page" [routerLink]="['/']"
                             style="color: rgb(184, 200, 212);">Home</a>
                     </li>
                     <li class="nav-item">
@@ -22,8 +22,8 @@
                         <a style="color: rgb(184, 200, 212);" class="nav-link   " href=" #contactus">ContactUs</a>
                     </li>
                     <li class="nav-item ms-3  ">
-                        <a style="background-color: rgb(63, 87, 109);border-radius: 3px;"
-                            class="nav-link data-bs-toggle= text-light" model data-bs-target="#mymodel"><i
+                        <a (click)="login()" style="background-color: rgb(63, 87, 109);border-radius: 3px;"
+                            class="nav-link data-bs-toggle= text-light" style="cursor: pointer;" model data-bs-target="#mymodel"><i
                                 class="fa fa-sign-in text-primary" aria-hidden="true"></i>
                             Login</a>
                     </li>
