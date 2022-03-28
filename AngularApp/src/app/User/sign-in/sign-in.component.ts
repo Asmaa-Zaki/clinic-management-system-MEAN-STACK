@@ -20,8 +20,8 @@ export class SignInComponent implements OnInit {
   userName:string=""
   passWord:string=""
  // username= ""
-
- localData= JSON.parse(localStorage.getItem("data")||'{}')
+ localData: any
+ 
 
   constructor(private userSer: UsersService, public doctSer:DoctorService, public empServ: EmployeeService, public router: Router) { }
 
@@ -41,7 +41,9 @@ export class SignInComponent implements OnInit {
     this.userSer.login(form.value).subscribe((res)=>{
         console.log(JSON.stringify(res))
         this.userSer.setToken('data',JSON.stringify(res))
+        this.localData= JSON.parse(localStorage.getItem("data")||'{}') 
         this.token= this.localData.token
+        console.log(this.token)
         this.userSer.setToken('token',this.token)
         this.router.navigate(['admin'])
     },(err)=>{
