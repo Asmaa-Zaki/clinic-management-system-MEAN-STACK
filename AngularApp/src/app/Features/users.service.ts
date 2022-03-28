@@ -27,7 +27,7 @@ export class UsersService {
     return this.http.post(this.baseURL, authCridential)
   }
 
-  setToken(name:string,token:string)
+  setToken(name:string,token:any)
   {
     localStorage.setItem(name, token)
   }
@@ -72,5 +72,10 @@ export class UsersService {
 //         return new RequestOptions({ headers: headers });
 //     }
 // }
+
+  getToken()
+  {
+    return localStorage.getItem('token')
+  }
 
 }

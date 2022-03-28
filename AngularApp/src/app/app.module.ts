@@ -6,7 +6,7 @@ import { AppointmentReadComponent } from './Appointment/appointment-read/appoint
 import { AppointmentUpdateComponent } from './Appointment/appointment-update/appointment-update.component';
 import { AppointmentDeleteComponent } from './Appointment/appointment-delete/appointment-delete.component';
 import { FormsModule, NgForm } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FilterbySpecialityPipe } from './pipes/filterby-speciality.pipe';
 import { MedicineCreateComponent } from './Medicine/medicine-create/medicine-create.component';
 import { MedicineDeleteComponent } from './Medicine/medicine-delete/medicine-delete.component';
@@ -58,6 +58,7 @@ import { AppointmentService } from './Features/appointment.service';
 import { SignInComponent } from './User/sign-in/sign-in.component';
 import { UsersService } from './Features/users.service';
 import { AuthGuard } from './Auth/auth.guard';
+import { TokenInterceptorService } from './Features/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -124,7 +125,12 @@ import { AuthGuard } from './Auth/auth.guard';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [AppointmentService, MedicineService, UsersService, AuthGuard],
+  providers: [AppointmentService, MedicineService, UsersService, AuthGuard,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
