@@ -15,36 +15,36 @@ import { Employee } from 'src/app/Module/employee';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  type=""
-  token:string=""
-  userName:string=""
-  passWord:string=""
- // username= ""
+  type = ""
+  token: string = ""
+  userName: string = ""
+  passWord: string = ""
+  // username= ""
 
- localData= JSON.parse(localStorage.getItem("data")||'{}')
+  localData: any
 
-  constructor(private userSer: UsersService, public doctSer:DoctorService, public empServ: EmployeeService, public router: Router) { }
+  constructor(private userSer: UsersService, public doctSer: DoctorService, public empServ: EmployeeService, public router: Router) { }
 
   ngOnInit(): void {
     this.doctSer.GetList().subscribe((res) => {
       this.doctSer.DocList = res as Doctor[];
     })
-    this.empServ.GetList().subscribe((res)=>{
-      this.empServ.EmployeeList= res as Employee[]
+    this.empServ.GetList().subscribe((res) => {
+      this.empServ.EmployeeList = res as Employee[]
       console.log(this.empServ.EmployeeList)
     })
-    
+
   }
 
-  onSubmit(form: NgForm)
-  {
-    this.userSer.login(form.value).subscribe((res)=>{
-        console.log(JSON.stringify(res))
-        this.userSer.setToken('data',JSON.stringify(res))
-        this.token= this.localData.token
-        this.userSer.setToken('token',this.token)
-        this.router.navigate(['admin'])
-    },(err)=>{
+  onSubmit(form: NgForm) {
+    this.localData = JSON.parse(localStorage.getItem("data") || '{}')
+    this.userSer.login(form.value).subscribe((res) => {
+      console.log(JSON.stringify(res))
+      this.userSer.setToken('data', JSON.stringify(res))
+      this.token = this.localData.token
+      this.userSer.setToken('token', this.token)
+      this.router.navigate(['admin'])
+    }, (err) => {
       alert(err.error.message)
     })
   }
