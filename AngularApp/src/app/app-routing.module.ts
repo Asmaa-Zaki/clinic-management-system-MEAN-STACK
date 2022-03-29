@@ -19,9 +19,11 @@ import { MedicineCreateComponent } from './Medicine/medicine-create/medicine-cre
 import { MedicineReadComponent } from './Medicine/medicine-read/medicine-read.component';
 import { PatientCreateComponent } from './Patient/patient-create/patient-create.component';
 import { PatientReadComponent } from './Patient/patient-read/patient-read.component';
+import { PatientprofileComponent } from './patientprofile/patientprofile.component';
 import { PrescriptionCreateComponent } from './Prescription/prescription-create/prescription-create.component';
 import { PrescriptionReadComponent } from './Prescription/prescription-read/prescription-read.component';
 import { UsersReadComponent } from './Users/users-read/users-read.component';
+// import {PatientprofileComponent} from "./patientprofile.component"
 
 const routes: Routes= [
   {path:"home", component:HomeComponent},
@@ -55,13 +57,15 @@ const routes: Routes= [
     {path:"serviceCreate", component:ServiceCreateComponent},
     {path:"serviceList", component:ServiceReadComponent},
     {path:"serviceList/edit/:id", component:ServiceCreateComponent},
-    {path:"UsersList", component:UsersReadComponent}
+    {path:"UsersList", component:UsersReadComponent},
+    {path:"patientList/patientProfile/:id", component: PatientprofileComponent }
   ]},
   //{path:"admin", loadChildren: ()=> import('./Core/admin-routing.module').then(m=>m.AdminRoutingModule)},
   {path:"employee", component:EmployeeComponent},
   // {path:"employee", loadChildren:()=>import('./Employee/employee-routing.module').then(m=>m.EmployeeRoutingModule)},
   // {path:"appointment", loadChildren:()=>import('./Appointment/appointment-routing.module').then(m=>m.AppointmentRoutingModule)},
   {path:"**", component:ErrorComponent}, //must be the last
+  
 ]
 
 

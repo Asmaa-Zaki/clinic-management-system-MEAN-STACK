@@ -8,7 +8,7 @@ import { Employee } from 'src/app/Module/employee';
   styleUrls: ['./employee-update.component.css']
 })
 export class EmployeeUpdateComponent implements OnInit {
-  @Input() employee: Employee= new Employee(0, "", "", "", 0, "", "", "")
+  @Input() employee: Employee= new Employee(0, "", "", "", 0, "", "","", "")
 
   constructor(private empService: EmployeeService) {}
 

@@ -22,20 +22,38 @@
 <form #form="ngForm">
 <label style="width: 120px;">Id </label>
 <input name="id" type="text" [(ngModel)]="DoctorService.nDoctor._id" [(ngModel)]="userSerive.nUser._id" required><br><br>
+
+
 <label style="width: 120px;">Doctor Name </label>
 <input name="doctorName" type="text" [(ngModel)]="DoctorService.nDoctor.doctorName" required><br><br>
+
+
 <label style="width: 120px;">SSN </label>
 <input name="SSN" type="text" [(ngModel)]="DoctorService.nDoctor.SSN" required><br><br>
+
+
 <label style="width: 120px;">Phone </label>
 <input name="phone" type="text" [(ngModel)]="DoctorService.nDoctor.phone" required><br><br>
+
+
 <label style="width: 120px;">Addrees </label>
 <input name="address" type="text" [(ngModel)]="DoctorService.nDoctor.address" required><br><br>
+
+
 <label style="width: 120px;">Specialty </label>
 <input name="medical" type="text" [(ngModel)]="DoctorService.nDoctor.medicalSpecialty" required><br><br>
+
+
 <label style="width: 120px;">Username </label>
 <input name="username" type="text" [(ngModel)]="DoctorService.nDoctor.username" [(ngModel)]="userSerive.nUser.username" required><br><br>
+
+
 <label style="width: 120px;">Password </label>
 <input name="password" type="text" [(ngModel)]="DoctorService.nDoctor.password" [(ngModel)]="userSerive.nUser.password" required><br><br>
+
+<label style="width: 120px;"> Image URL </label>
+<input name="imgurl" type="file" [(ngModel)]="DoctorService.nDoctor.imageURL"> 
+
 <input type="button" style="margin-left: 40%;" [disabled]="form.invalid" (click)="save()" value="Add">
 <input type="button" [disabled]="form.invalid"  (click)="update()" value="Update">
 </form>

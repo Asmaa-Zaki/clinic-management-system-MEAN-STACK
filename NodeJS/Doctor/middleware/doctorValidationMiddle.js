@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const { join } = require('lodash');
 
 module.exports = function validationDoctor(req) {
     const schema = Joi.object({
@@ -8,6 +9,7 @@ module.exports = function validationDoctor(req) {
         phone: Joi.number().required(),
         address: Joi.string().required(),
         medicalSpecialty: Joi.string().max(100).required(),
+        imageURL: join.string().required(),
         username: Joi.string().trim(true)
             .alphanum()
             .min(3)

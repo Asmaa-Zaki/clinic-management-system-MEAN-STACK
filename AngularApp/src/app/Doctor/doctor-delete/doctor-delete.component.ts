@@ -9,7 +9,7 @@ import { Doctor } from 'src/app/Module/doctor';
   styleUrls: ['./doctor-delete.component.css']
 })
 export class DoctorDeleteComponent implements OnInit {
-  @Input() doctor: Doctor = new Doctor(0,"",0,0,"","","","")
+  @Input() doctor: Doctor = new Doctor(0,"",0,0,"","","","","")
  
 
   constructor(private doctorService:DoctorService) { }

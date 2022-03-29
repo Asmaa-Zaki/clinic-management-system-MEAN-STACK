@@ -1,5 +1,6 @@
 const { required } = require('joi')
 const Joi = require('joi')
+const { join } = require('lodash')
 
 module.exports = function validationEmployee(req) {
     const schema = Joi.object({
@@ -10,6 +11,7 @@ module.exports = function validationEmployee(req) {
         phone: Joi.number().required(),
         userName: Joi.string().required(),
         password: Joi.string().required(),
+        imageURL: join.string().required(),
         type: Joi.string().required()
     })
     return schema.validate(req)

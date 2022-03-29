@@ -13,6 +13,7 @@ const patientSchema = mongoose.Schema({
         enum: ['male', 'female'],
         default: 'male'
     },
+    imageURL: {type: String},
     insuranceId: { type: Number }
 })
 const patient = mongoose.model('Patient', patientSchema);

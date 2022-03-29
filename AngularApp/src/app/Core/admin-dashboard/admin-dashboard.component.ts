@@ -9,8 +9,8 @@ import { Employee } from 'src/app/Module/employee';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-  doctor:Doctor= new Doctor(0, "", 0, 0, "", "", "", "")
-  admin: Employee= new Employee(0,"", "", "", 0, "", "", "admin")
+  doctor:Doctor= new Doctor(0, "", 0, 0, "", "", "","" ,"")
+  admin: Employee= new Employee(0,"", "", "", 0, "", "","", "admin")
 
   title: string=""
   doctorActive= false

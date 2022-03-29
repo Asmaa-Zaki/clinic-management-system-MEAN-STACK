@@ -1,0 +1,26 @@
+<body>
+<!-- <h1> Hello user </h1> -->
+<div class="profile-card">
+    <div class="card-header"> 
+        <img class="pic" src="{{this.PatientService.nPatient.imageURL}}">
+        <div class="card">
+        <div class="data">
+        <label> Patient ID: &nbsp; {{this.PatientService.nPatient._id}}  </label>    
+        <br>
+      
+        <label>Patient Name: &nbsp; {{this.PatientService.nPatient.patientName}} </label>
+        <br>
+        <label>Gender: &nbsp; {{this.PatientService.nPatient.gender}} </label>
+        <br>
+        <label>Phone Number:&nbsp;{{this.PatientService.nPatient.phone}} </label>
+        <br>
+        <label>Address: &nbsp; {{this.PatientService.nPatient.address}} </label>
+        <br>
+        <label>Insurance Id: &nbsp; {{this.PatientService.nPatient.insuranceId}}</label>
+    </div>
+    <div class="border"></div>
+    </div>
+    </div>
+</div>
+
+</body>

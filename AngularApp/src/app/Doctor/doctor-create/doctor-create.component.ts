@@ -13,7 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class DoctorCreateComponent implements OnInit {
   type="doctor"
   constructor(public DoctorService:DoctorService, public userSerive: UsersService,public router: Router, public ar: ActivatedRoute) { }
-  nDoctor?: Doctor= new Doctor(0, "", 0, 0,"", "", "", "")
+  nDoctor?: Doctor= new Doctor(0, "", 0, 0,"", "", "", "","")
   private updat: DoctorUpdateComponent = new DoctorUpdateComponent(this.DoctorService)
   ngOnInit(): void {
     this.ar.params.subscribe((r)=>{

@@ -28,7 +28,7 @@ router.post('/', [auth.checkAdmin], async (req, res) => {
     const { error } = validationEmployee(req.body);
     if (error == true) return res.status(400).send(error.details[0].message);
 
-    let emp = new employee(_.pick(req.body, ['_id', 'firstName', 'lastName', 'email', 'phone', 'userName', 'password', 'type']));
+    let emp = new employee(_.pick(req.body, ['_id', 'firstName', 'lastName', 'email', 'phone', 'userName', 'password','imageURL', 'type']));
     //check id if  it found or not -- هنا بشوف ال متسجل قبل كده ولا لا(id)
     //👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯
     const check = await employee.findById(req.body._id);
@@ -49,9 +49,10 @@ router.put('/:id', [auth.checkAdmin], (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        phone: req.body.phone,
+        phone: req.body.phone, 
         userName: req.body.userName,
         password: req.body.password,
+        imageURL: req.body.imageURL,
         type: req.body.type
     })
 

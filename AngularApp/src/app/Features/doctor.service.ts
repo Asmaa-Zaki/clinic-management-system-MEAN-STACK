@@ -9,7 +9,7 @@ import { AppComponent } from '../app.component';
 })
 export class DoctorService {
 
-  nDoctor: Doctor=new Doctor(0,"",0,0,"","","","");
+  nDoctor: Doctor=new Doctor(0,"",0,0,"","","","","");
   readonly baseURL = 'http://localhost:3000/doctor'
 
   constructor(private http: HttpClient) { }

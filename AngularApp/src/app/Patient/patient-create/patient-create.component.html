@@ -13,6 +13,11 @@
 <input name="addres" type="text" [(ngModel)]="PatientService.nPatient.address" required><br><br>
 <label style="width: 120px;">Gender </label>
 <input name="gender" type="text" [(ngModel)]="PatientService.nPatient.gender" required><br><br>
+
+<label style="width: 120px;"> Image URL </label>
+<input name="imgurl" type="file" [(ngModel)]="PatientService.nPatient.imageURL" required><br><br>
+
+
 <label style="width: 120px;">Insurance Id </label>
 <input name="insurance" type="text" [(ngModel)]="PatientService.nPatient.insuranceId" required><br><br>
 <input type="button" style="margin-left: 40%;" [disabled]="form.invalid" (click)="save()" value="Add">

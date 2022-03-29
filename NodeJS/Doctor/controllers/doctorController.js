@@ -31,7 +31,7 @@ router.post('/', [auth.checkAdmin], async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
 
     let doc = new Doctor(_.pick(req.body, ['_id', 'doctorName', 'SSN', 'phone',
-        'address', 'medicalSpecialty', 'username', 'password']));
+        'address', 'medicalSpecialty', 'imageURL' ,'username', 'password']));
     //check id if  it found or not -- هنا بشوف ال متسجل قبل كده ولا لا(id)
     //👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯
     const check = await Doctor.findById(req.body._id);
@@ -58,6 +58,7 @@ router.put('/:id', [auth.checkAdmin], (req, res) => {
         phone: req.body.phone,
         address: req.body.address,
         medicalSpecialty: req.body.medicalSpecialty,
+        imageURL: req.body.imageURL,
         username: req.body.username,
         password: req.body.password
     })

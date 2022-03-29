@@ -16,7 +16,7 @@ export class EmployeeCreateComponent implements OnInit {
 
   constructor(public employeeService: EmployeeService, public usersSer:UsersService ,public router: Router, public ar: ActivatedRoute) { }
 
-  nEmp?: Employee= new Employee(0, "", "", "", 0, "", "", "")
+  nEmp?: Employee= new Employee(0, "", "", "", 0, "", "","" ,"")
   private updat:EmployeeUpdateComponent= new EmployeeUpdateComponent(this.employeeService);
   
   ngOnInit(): void {

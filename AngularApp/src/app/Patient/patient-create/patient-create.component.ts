@@ -13,7 +13,7 @@ export class PatientCreateComponent implements OnInit {
 
   constructor(public PatientService: PatientService, public router: Router, public ar: ActivatedRoute) { }
 
-  nPatient?= new Patient(0, "", 0, 0, "","",0)
+  nPatient?= new Patient(0, "", 0, 0, "","","",0)
   private updat: PatientUpdateComponent = new PatientUpdateComponent(this.PatientService)
 
   ngOnInit(): void {

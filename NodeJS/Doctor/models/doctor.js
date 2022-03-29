@@ -9,6 +9,7 @@ const doctorSchema = mongoose.Schema({
     phone: { type: Number },
     address: { type: String },
     medicalSpecialty: { type: String },
+    imageURL: {type: String},
     username: { type: String, unique: true },
     password: { type: String }
 

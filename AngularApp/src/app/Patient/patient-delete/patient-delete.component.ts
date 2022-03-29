@@ -8,7 +8,7 @@ import { Patient } from 'src/app/Module/patient';
   styleUrls: ['./patient-delete.component.css']
 })
 export class PatientDeleteComponent implements OnInit {
-  @Input() patient: Patient = new Patient(0,"",0,0,"","",0)
+  @Input() patient: Patient = new Patient(0,"",0,0,"","","",0)
   constructor(private patientService:PatientService) { }
 
   ngOnInit(): void {

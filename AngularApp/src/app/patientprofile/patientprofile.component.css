@@ -1,0 +1,107 @@
+/* .header-image {
+    background-size: cover;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.card {
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 80%;
+    margin-top: 2%;
+    margin: auto;
+    background-color: #4e30d3;
+    width: 200px;
+    height: 200px;
+
+}
+
+.main-div {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+label {
+    color: white;
+    font-weight: bold;
+    display: block; 
+    width: 150px;
+    float: left;
+}  */
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Ubuntu", sans-serif;
+    box-sizing: border-box;
+    text-decoration: none;
+  }
+  
+  body{
+    height: 100vh;
+    /* background: url(bg.jpg) no-repeat center; */
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .profile-card{
+    width: 400px;
+    text-align: center;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .card-header{
+    background: #2c3a47;
+    padding: 60px 40px;
+  }
+  
+  .pic{
+    display: inline-block;
+    padding: 8px;
+    background: linear-gradient(130deg, #74b9ff, #e66767);
+    margin: auto;
+    border-radius: 50%;
+    background-size: 200% 200%;
+    animation: animated-gradient 2s linear infinite;
+  }
+  
+  @keyframes animated-gradient{
+    25%{
+      background-position: left bottom;
+    }
+    50%{
+      background-position: right bottom;
+    }
+    75%{
+      background-position: right top;
+    }
+    100%{
+      background-position: left top;
+    }
+  }
+  
+  .pic img{
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+  
+  .data{
+    color: blue;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 10px 0;
+  }
+  .border{
+    width: 1px;
+    height: 30px;
+    background: #bbb;
+  }

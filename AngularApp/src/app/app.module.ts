@@ -55,6 +55,7 @@ import { SortPatientPipe } from './pipes/sort-patient.pipe';
 import { SortPrescriptPipe } from './pipes/sort-prescript.pipe';
 import { FilterbyPrescriptPipe } from './pipes/filterby-prescript.pipe';
 import { UsersReadComponent } from './Users/users-read/users-read.component';
+import { PatientprofileComponent } from './patientprofile/patientprofile.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { UsersReadComponent } from './Users/users-read/users-read.component';
     EmployeeComponent,
     AdminDashboardComponent,
     UsersReadComponent,
-    HomeCopyComponent
+    HomeCopyComponent,
+    PatientprofileComponent
   ],
   imports: [
     BrowserModule,

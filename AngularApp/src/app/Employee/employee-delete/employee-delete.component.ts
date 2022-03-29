@@ -8,7 +8,7 @@ import { Employee } from 'src/app/Module/employee';
   styleUrls: ['./employee-delete.component.css']
 })
 export class EmployeeDeleteComponent implements OnInit {
-  @Input() employee: Employee = new Employee(0, "", "", "", 0, "", "","")
+  @Input() employee: Employee = new Employee(0, "", "", "", 0, "", "","","")
   constructor(private emplService: EmployeeService) { }
 
   ngOnInit(): void {

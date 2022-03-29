@@ -11,6 +11,7 @@ let employee = mongoose.model('Employee',
     phone: {type: Number},
     userName: {type: String},
     password: {type: String},
+    imageURL: {type: String},
     type: {type: String}
 })
 

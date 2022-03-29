@@ -41,6 +41,11 @@
             <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortPasswordDesc()"></i>
         </th>
         <th>
+            <label>Image URL</label>
+            <!-- <i appSortParams  class="fa fa-arrow-up" (click)="sortPasswordAsc()"></i>
+            <i appSortParams  class="fa fa-arrow-down sorting" (click)="sortPasswordDesc()"></i> -->
+        </th>
+        <th>
             <input type="text" class="w w-75 h-25" [(ngModel)]="searchValue" placeholder="Filter by doctorName">
         </th>
         <th>
@@ -56,6 +61,7 @@
         <td>{{doc.medicalSpecialty}}</td>
         <td>{{doc.username}}</td>
         <td>{{doc.password}}</td>
+        <td><img src="{{doc.imageURL}}" style="width: 100px; height: 100px;"></td>
         <a [routerLink]="['edit',doc._id]" ><i class="fa fa-edit" aria-hidden="true" style="font-weight: bold; font-size: larger;"></i></a>
         <td><app-doctor-delete [doctor]="doc"></app-doctor-delete></td>
     </tr>

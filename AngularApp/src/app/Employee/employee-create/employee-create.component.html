@@ -15,6 +15,11 @@
 <input type="text" name="username" [(ngModel)]="employeeService.nEmployee.userName" [(ngModel)]="usersSer.nUser.username" required><br><br>
 <label style="width: 100px;">Password </label>
 <input type="text" name="password" [(ngModel)]="employeeService.nEmployee.password" [(ngModel)]="usersSer.nUser.password" required><br><br>
+
+<label  style="width: 100px;"> Image URL </label>
+<input type="file" name="imgurl" [(ngModel)]="employeeService.nEmployee.imageURL" required><br><br>
+ 
+
 <label style="width: 100px;">Type </label>
 <input type="radio" name="type"  value="Nurse" [(ngModel)]="employeeService.nEmployee.type" [(ngModel)]="usersSer.nUser.type" required>
 <label>Nurse</label>

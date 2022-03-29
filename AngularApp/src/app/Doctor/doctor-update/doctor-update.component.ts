@@ -8,9 +8,9 @@ import { Doctor } from 'src/app/Module/doctor';
   styleUrls: ['./doctor-update.component.css']
 })
 export class DoctorUpdateComponent implements OnInit {
-  @Input() doctor:Doctor= new Doctor(0,"",0,0,"","","","")
+  @Input() doctor:Doctor= new Doctor(0,"",0,0,"","","","","")
 
-  doc: Doctor= new Doctor(0,"",0,0,"","","","")
+  doc: Doctor= new Doctor(0,"",0,0,"","","","","")
   constructor(private doctorService: DoctorService) { }
 
   ngOnInit(): void {
