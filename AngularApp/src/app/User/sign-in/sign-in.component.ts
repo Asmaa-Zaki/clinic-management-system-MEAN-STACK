@@ -15,15 +15,15 @@ import { Employee } from 'src/app/Module/employee';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  type=""
-  token:string=""
-  userName:string=""
-  passWord:string=""
- // username= ""
- localData: any
- 
+  type = ""
+  token: string = ""
+  userName: string = ""
+  passWord: string = ""
+  // username= ""
 
-  constructor(private userSer: UsersService, public doctSer:DoctorService, public empServ: EmployeeService, public router: Router) { }
+  localData: any
+
+  constructor(private userSer: UsersService, public doctSer: DoctorService, public empServ: EmployeeService, public router: Router) { }
 
   ngOnInit(): void {
   }
