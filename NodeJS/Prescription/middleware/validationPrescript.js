@@ -7,7 +7,7 @@ module.exports = function validationPrescript(req) {
         patientId: Joi.number().required(),
         medicineId: Joi.number().required(),
         numberOfDoses: Joi.string(),
-        dateOfPrescript: Joi.string()
+        dateOfPrescript: Joi.date()
     });
     return schema.validate(req);
 }

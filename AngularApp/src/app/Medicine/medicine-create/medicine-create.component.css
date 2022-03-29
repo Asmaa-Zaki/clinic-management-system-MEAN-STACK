@@ -24,3 +24,13 @@ div
     flex-direction: column;
     align-items: center;
 }
+
+.valid
+{
+    color:red;
+    margin-left: 26%;
+    margin-top: -7%;
+    margin-bottom: 3%;
+    font-size: small;
+    font-weight: bold;
+}

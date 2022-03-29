@@ -1,12 +1,15 @@
+
 const { mongoose } = require('./db.js');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-var path= require('path')
-var multer = require('multer');
+//call express 
+var App = express();
 
-// var patient = patientSchema.find({});
-// var uploadModel= require('./Patient/Upload.js');
+//use middleware
+App.use(express.json());
+App.use(cors());
+
 //controller
 const doctorController = require('./Doctor/controllers/doctorController');
 const patientController = require('./Patient/controllers/patientController');
@@ -22,13 +25,6 @@ const router = require('./Doctor/controllers/doctorController');
 const { patientSchema } = require('./Patient/models/patient.js');
 const { required } = require('joi');
 // const {UploadSchema} = required('./Patient/Upload.js');
-
-//call express 
-var App = express();
-
-//use middleware
-App.use(bodyParser.json())
-App.use(cors({ origin: 'http://localhost:4200' }));
 
 //listen
 App.listen(3000, () => {

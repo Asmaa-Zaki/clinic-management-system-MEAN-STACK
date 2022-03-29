@@ -1,5 +1,4 @@
 const validationPatient = require('../middleware/patientValidationMiddle');
-//const validationMedicine = require('../middleware/medicineValidationMiddle');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const { patient } = require('../models/patient');
@@ -54,21 +53,15 @@ var multer = require('multer');
 // });
 
 //-------------------------------------------Get List
-//read
-//localhost:3000/patient/
-router.get('/', [auth.checkReceptionest], async (req, res) => {
-
-    // router.get('/', async (req, res) => {
-        const pat = await patient.find();
+router.get('/', [auth.accessAll], async (req, res) => {
+    const pat = await patient.find();
     if (pat) return res.send(pat);
     return res.status(400).send('Not Found Any Record');
 
 });
 
-// //-----------------------------------------------Get By ID
- router.get('/:id', [auth.checkReceptionest], async (req, res) => {
-    // router.get('/:id', async (req, res) => {
-
+//-----------------------------------------------Get By ID
+router.get('/:id', [auth.accessAll], async (req, res) => {
     const pat = await patient.findById(req.params.id);
 
     if (!pat) return res.status(404).send('The genre with the given ID was not found.');
@@ -94,8 +87,7 @@ router.post('/', [auth.checkReceptionest], async (req, res) => {
 
     let pat = new patient(_.pick(req.body, ['_id', 'patientName', 'SSN', 'phone',
         'address', 'gender','imageURL', 'insuranceId']));
-    //check id if  it found or not -- هنا بشوف ال متسجل قبل كده ولا لا(id)
-    //👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯
+  
     const check = await patient.findById(req.body._id);
     if (check) return res.status(400).send('The ID already Registred!');
 
@@ -131,8 +123,7 @@ router.put('/:id', [auth.checkReceptionest], (req, res) => {
             res.send(pat)
         else
             console.log("Error in Patient Update: " + JSON.stringify(err, undefined, 2))
-    })
-    // res.send(newAppointment)
+    });
 })
 
 

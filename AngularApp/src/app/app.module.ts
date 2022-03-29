@@ -2,13 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppointmentCreateComponent } from './Appointment/appointment-create/appointment-create.component';
 import { AppointmentReadComponent } from './Appointment/appointment-read/appointment-read.component';
 import { AppointmentUpdateComponent } from './Appointment/appointment-update/appointment-update.component';
 import { AppointmentDeleteComponent } from './Appointment/appointment-delete/appointment-delete.component';
 import { FormsModule, NgForm } from '@angular/forms';
-import { AppointmentService } from './Features/appointment.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FilterbySpecialityPipe } from './pipes/filterby-speciality.pipe';
 import { MedicineCreateComponent } from './Medicine/medicine-create/medicine-create.component';
 import { MedicineDeleteComponent } from './Medicine/medicine-delete/medicine-delete.component';
@@ -25,7 +23,7 @@ import { FilterEmployeeNamePipe } from './pipes/filter-employee-name.pipe';
 import { HomeComponent } from './home/home.component';
 import { HomeCopyComponent } from './home-copy/home-copy.component';
 import { NavbarComponent } from './Core/navbar/navbar.component';
-import { ErrorComponent } from './error/error.component';
+import { ErrorComponent } from './notFound/error.component';
 import { ServiceCreateComponent } from './ClinicServices/service-create/service-create.component';
 import { ServiceDeleteComponent } from './ClinicServices/service-delete/service-delete.component';
 import { ServiceReadComponent } from './ClinicServices/service-read/service-read.component';
@@ -55,6 +53,13 @@ import { SortPatientPipe } from './pipes/sort-patient.pipe';
 import { SortPrescriptPipe } from './pipes/sort-prescript.pipe';
 import { FilterbyPrescriptPipe } from './pipes/filterby-prescript.pipe';
 import { UsersReadComponent } from './Users/users-read/users-read.component';
+import { AppointmentCreateComponent } from './Appointment/appointment-create/appointment-create.component';
+import { AppointmentService } from './Features/appointment.service';
+import { SignInComponent } from './User/sign-in/sign-in.component';
+import { UsersService } from './Features/users.service';
+import { AuthGuard } from './Auth/auth.guard';
+import { TokenInterceptorService } from './Features/token-interceptor.service';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { PatientprofileComponent } from './patientprofile/patientprofile.component';
 
 @NgModule({
@@ -114,6 +119,9 @@ import { PatientprofileComponent } from './patientprofile/patientprofile.compone
     AdminDashboardComponent,
     UsersReadComponent,
     HomeCopyComponent,
+    SignInComponent,
+    ForbiddenComponent,
+
     PatientprofileComponent
   ],
   imports: [
@@ -122,7 +130,12 @@ import { PatientprofileComponent } from './patientprofile/patientprofile.compone
     FormsModule,
     HttpClientModule,
   ],
-  providers: [AppointmentService, MedicineService],
+  providers: [AppointmentService, MedicineService, UsersService, AuthGuard,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

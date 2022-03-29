@@ -1,20 +1,67 @@
-
 <br>
 <div>
-<form #form="ngForm">
-<label style="width: 120px;">Id </label>
-<input name="id" type="text" [(ngModel)]="prescriptionService.nPrescription._id" required><br><br>
-<label style="width: 120px;">DoctorId </label>
-<input name="doctorId" type="text" [(ngModel)]="prescriptionService.nPrescription.doctorId" required><br><br>
-<label style="width: 120px;">Patient Name </label>
-<input name="patient Name" type="text" [(ngModel)]="prescriptionService.nPrescription.patientId" required><br><br>
-<label style="width: 120px;">Medicine Name </label>
-<input name="Medicine name" type="text" [(ngModel)]="prescriptionService.nPrescription.medicineId" required><br><br>
-<label style="width: 120px;">Doses </label>
-<input name="doses" type="text" [(ngModel)]="prescriptionService.nPrescription.numberOfDoses" required=""><br><br>
-<label style="width: 120px;">Date </label>
-<input name="date" type="text" [(ngModel)]="prescriptionService.nPrescription.dateOfPrescript" required=""><br><br>
-<input type="button" style="margin-left: 40%;" [disabled]="form.invalid" (click)="save()" value="Add">
-<input type="button" [disabled]="form.invalid"  (click)="update()" value="Update">
-</form>
+    <form #form="ngForm">
+        <label style="width: 120px;">Id </label>
+        <input name="id" #id="ngModel" type="number" min="1" [(ngModel)]="prescriptionService.nPrescription._id" required
+        [ngClass]="{'invalid-input': form.submitted && !id.valid}"><br><br>
+        <div *ngIf="id.invalid && (id.dirty || id.touched )">
+           <div class="valid" *ngIf="id.errors?.['required']">
+               Id is required
+           </div>
+       </div>
+
+        <label style="width: 120px;">DoctorId </label>
+        <input name="doctorId" #doctorId="ngModel" type="number" min="1" [(ngModel)]="prescriptionService.nPrescription.doctorId"
+        required [ngClass]="{'invalid-input': form.submitted && !doctorId.valid}"><br><br>
+        <div *ngIf="doctorId.invalid && (doctorId.dirty || doctorId.touched )">
+            <div class="valid" *ngIf="doctorId.errors?.['required']">
+                DoctorId is required
+            </div>
+        </div> 
+
+        <label style="width: 120px;">Patient Name </label>
+        <input name="patientName"  #patientName="ngModel" type="text" [(ngModel)]="prescriptionService.nPrescription.patientId"
+        required [ngClass]="{'invalid-input': form.submitted && !patientName.valid}"><br><br>
+        <div *ngIf="patientName.invalid && (patientName.dirty || patientName.touched )">
+            <div class="valid" *ngIf="patientName.errors?.['required']">
+                PatientName is required
+            </div>
+        </div> 
+
+
+        <label style="width: 120px;">Medicine Name </label>
+        <input name="medicineName" #medicineName="ngModel" type="text" [(ngModel)]="prescriptionService.nPrescription.medicineId"
+        required [ngClass]="{'invalid-input': form.submitted && !medicineName.valid}" minlength="3"><br><br>
+        <div *ngIf="medicineName.invalid && (medicineName.dirty || medicineName.touched )">
+            <div class="valid" *ngIf="medicineName.errors?.['required']">
+                MedicineName is required
+            </div>
+            <div class="valid" *ngIf="medicineName.errors?.['minlength']">
+                MedicineName at least 3 char
+            </div>
+        </div> 
+
+
+        <label style="width: 120px;">Doses </label>
+        <input name="doses" #doses="ngModel" type="number" min="1" [(ngModel)]="prescriptionService.nPrescription.numberOfDoses"
+        required [ngClass]="{'invalid-input': form.submitted && !doses.valid}" minlength="3"><br><br>
+        <div *ngIf="doses.invalid && (doses.dirty || doses.touched )">
+            <div class="valid" *ngIf="doses.errors?.['required']">
+                Doses is required
+            </div>
+        </div> 
+
+        <label style="width: 120px;">Date </label>
+        <input name="date" #date="ngModel" type="date" [(ngModel)]="prescriptionService.nPrescription.dateOfPrescript"
+        required [ngClass]="{'invalid-input': form.submitted && !date.valid}"><br><br>
+        <div *ngIf="date.invalid && (date.dirty || date.touched )">
+            <div class="valid" *ngIf="date.errors?.['required']">
+                Date is required
+            </div>
+        </div> 
+
+
+        <input type="button" style="margin-left: 40%;" [disabled]="form.invalid" (click)="save()" value="Add">
+        <input type="button" [disabled]="form.invalid" (click)="update()" value="Update">
+    </form>
 </div>

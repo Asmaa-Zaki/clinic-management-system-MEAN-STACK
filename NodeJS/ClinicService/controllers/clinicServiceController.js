@@ -1,4 +1,5 @@
 const validationClinicService = require('../middleware/clinicServiceValidationMiddle');
+const { Doctor } = require('../../Doctor/models/doctor');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const auth = require('../../JWT/jwtMiddleware');
@@ -38,14 +39,23 @@ router.post('/', [auth.checkAdmin], async (req, res) => {
     const { error } = validationClinicService(req.body);
     if (error == true) return res.status(400).send(error.details[0].message);
 
-    let clinicServ = new clinicService(_.pick(req.body, ['_id', 'doctorId', 'name', 'description', 'price']));
-    //check id if  it found or not -- هنا بشوف ال متسجل قبل كده ولا لا(id)
-    //👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯
+    const doctor = await Doctor.findById(req.body.doctorId);
+    if (!doctor) return res.status(400).send('Invalid doc Id');
+    let clinic = new clinicService({
+        _id: req.body._id,
+        doctorId: {
+            _id: doctor._id,
+            doctorName: doctor.doctorName
+        },
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price
+    });
     const check = await clinicService.findById(req.body._id);
     if (check) return res.status(400).send('The ID already Registred!');
 
-    clinicServ = await clinicServ.save();
-    res.send(clinicServ);
+    clinic = await clinic.save();
+    res.send(clinic);
 })
 
 //-----------------------------------------------Update
@@ -54,24 +64,21 @@ router.put('/:id', [auth.checkAdmin], async (req, res) => {
     const { error } = validationClinicService(req.body);
     if (error == true) return res.status(400).send(error.details[0].message);
 
-    if (!req.params.id)
-        return res.status(400).send("No record given with id: " + req.params.id)
-
-    let newClinicService = new clinicService({
-        _id: req.params.id,
-        doctorId: req.body.doctorId,
+    const doctor = await Doctor.findById(req.body.doctorId);
+    if (!doctor) return res.status(400).send('Invalid doc Id');
+    let clinic = new clinicService({
+        _id: req.body._id,
+        doctorId: {
+            _id: doctor._id,
+            doctorName: doctor.doctorName
+        },
         name: req.body.name,
         description: req.body.description,
         price: req.body.price
-    })
-
-
-    clinicService.findByIdAndUpdate(req.params.id, { $set: newClinicService }, { new: true }, (err, doc) => {
-        if (!err)
-            res.send(doc)
-        else
-            console.log("Error in clinicService Update: " + JSON.stringify(err, undefined, 2))
-    })
+    });
+    const cs = clinicService.findByIdAndUpdate(req.body.id, { clinic }, { new: true });
+    if (!cs) return res.status(400).send("Invalid Id ");
+    res.send('Updated\t' + cs);
 });
 
 //-----------------------------------------------Delete

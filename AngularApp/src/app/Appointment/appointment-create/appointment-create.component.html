@@ -1,36 +1,65 @@
-<!-- <div class="row">
-    <div class="col s12">
-        <div class="card">
-            <div class="card-content white-text">
-                <div class="row">
-                    <div class="col s5">
-
-                    </div>
-                    <form (click)="employeeForm()" >
-                        
-                    </form>
-                    <div class="col s7">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 <br>
 <div>
-<form #form="ngForm">
-<label style="width: 100px;">Id </label>
-<input name="id" type="text" [(ngModel)]="appointmentService.nAppointment._id" required><br><br>
-<label style="width: 100px;">DoctorId </label>
-<input name="docid" type="text" [(ngModel)]="appointmentService.nAppointment.doctorId" required><br><br>
-<label style="width: 100px;">StartTime </label>
-<input name="stime"type="text" [(ngModel)]="appointmentService.nAppointment.startTime" required><br><br>
-<label style="width: 100px;">EndTime </label>
-<input name="etime" type="text" [(ngModel)]="appointmentService.nAppointment.endTime" required><br><br>
-<label style="width: 100px;">Specialty </label>
-<input name="spec" type="text" [(ngModel)]="appointmentService.nAppointment.medicalSpecialty" required><br><br>
-<input type="button" style="margin-left: 30%;" [disabled]="form.invalid" (click)="save()" value="Add">
-<input type="button" [disabled]="form.invalid"  (click)="update()" value="Update">
-</form>
+    <form #form="ngForm">
+        <label style="width: 100px;">Id </label>
+        <input name="id" #id="ngModel" type="number" min="1" [(ngModel)]="appointmentService.nAppointment._id" required
+        [ngClass]="{'invalid-input': form.submitted && !id.valid}"><br><br>
+        <div *ngIf="id.invalid && (id.dirty || id.touched )">
+           <div class="valid" *ngIf="id.errors?.['required']">
+               Id is required
+           </div>
+       </div>       
+        
+        <label style="width: 100px;">DoctorId </label>
+        <input name="docid" #docid="ngModel" min="1" type="number" [(ngModel)]="doctorId"
+        required [ngClass]="{'invalid-input': form.submitted && !id.valid}"><br><br>
+        <div *ngIf="docid.invalid && (docid.dirty || docid.touched )">
+            <div class="valid" *ngIf="docid.errors?.['required']">
+                DoctorId is required
+            </div>
+        </div>
+        
+        <label style="width: 100px;">PatientId </label>
+        <input name="patientId" #patientId="ngModel" min="1" type="number" [(ngModel)]="patientIId"
+        required [ngClass]="{'invalid-input': form.submitted && !patientId.valid}"><br><br>
+        <div *ngIf="patientId.invalid && (patientId.dirty || patientId.touched )">
+            <div class="valid" *ngIf="patientId.errors?.['required']">
+                PatientId is required
+            </div>
+        </div>
+
+
+        <label style="width: 100px;">StartTime </label>
+        <input name="stime" #stime="ngModel" type="number" style="width: 190px;" [(ngModel)]="appointmentService.nAppointment.startTime" required
+        [ngClass]="{'invalid-input': form.submitted && !stime.valid}" min="1" max="12"><br><br>
+        <div *ngIf="stime.invalid && (stime.dirty || stime.touched )">
+            <div class="valid" *ngIf="stime.errors?.['required']">
+                StartTime is required
+            </div>
+        </div>
+        
+        <label style="width: 100px;">EndTime </label>
+        <input name="etime" #etime="ngModel" style="width: 190px;" type="number" [(ngModel)]="appointmentService.nAppointment.endTime" required
+        [ngClass]="{'invalid-input': form.submitted && !etime.valid}" min="1" max="12"><br><br>
+        <div *ngIf="etime.invalid && (etime.dirty || etime.touched )">
+            <div class="valid" *ngIf="etime.errors?.['required']">
+                EndTime is required
+            </div>
+        </div>
+       
+        <label style="width: 100px;">Specialty </label>
+        <input name="spec" #spec="ngModel" type="text" [(ngModel)]="appointmentService.nAppointment.medicalSpecialty" required
+        [ngClass]="{'invalid-input': form.submitted && !spec.valid}" minlength="3"><br><br>
+        <div *ngIf="spec.invalid && (spec.dirty || spec.touched )">
+            <div class="valid" *ngIf="spec.errors?.['required']">
+                Speciality is required
+            </div>
+            <div class="valid" *ngIf="spec.errors?.['minlength']">
+                Speciality at least 3 char
+            </div>
+        </div>
+       
+        <input type="button" style="margin-left: 30%;" [disabled]="form.invalid" (click)="save()" value="Add">
+        <input type="button" [disabled]="form.invalid" (click)="update()" value="Update">
+    </form>
 </div>

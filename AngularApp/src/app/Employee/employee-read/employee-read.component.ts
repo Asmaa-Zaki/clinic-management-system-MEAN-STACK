@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/Features/employee.service';
 import { Employee } from 'src/app/Module/employee';
 import { NavbarComponent } from 'src/app/Core/navbar/navbar.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +17,7 @@ export class EmployeeReadComponent implements OnInit {
   column: string=''
   type: string=''
 
-  constructor(public empService: EmployeeService) { }
+  constructor(public empService: EmployeeService, private router: Router) { }
 
   ngOnInit(): void {
     this.show()
@@ -25,6 +27,15 @@ export class EmployeeReadComponent implements OnInit {
   {
     this.empService.GetList().subscribe((res)=>{
       this.empService.EmployeeList = res as Employee[];
+    }, (error)=> {
+      if(error instanceof HttpErrorResponse)
+      {
+        if(error.status === 403)
+        {
+          alert("U don't have permission")
+          this.router.navigate(['forbidden'])
+        }
+      }
     })
   }
 

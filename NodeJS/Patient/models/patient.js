@@ -15,7 +15,7 @@ const patientSchema = mongoose.Schema({
     },
     imageURL: {type: String},
     insuranceId: { type: Number }
-})
+});
 const patient = mongoose.model('Patient', patientSchema);
 
 //export the model

@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-striped table-hover">
     <tr>
         <th>
             <label>Id</label>
@@ -9,6 +9,11 @@
             <label class="fw-bold">DoctorId</label>
             <i appSortParams class="fa fa-arrow-up" (click)="sortDocIdAsc()"></i>
             <i appSortParams class="fa fa-arrow-down sorting" (click)="sortDocIdDesc()"></i>
+        </th>
+        <th>
+            <label class="fw-bold">PatientId</label>
+            <i appSortParams class="fa fa-arrow-up" (click)="sortPatIdAsc()"></i>
+            <i appSortParams class="fa fa-arrow-down sorting" (click)="sortPatIdDesc()"></i>
         </th>
         <th>
             <label>StartTime</label>
@@ -35,7 +40,8 @@
     <tr
         *ngFor="let appoint of (appointmentService.AppiontList|filterbySpeciality:searchValue|sortComponent:direction:column:type)">
         <td>{{appoint._id}}</td>
-        <td>{{appoint.doctorId}}</td>
+        <td>{{appoint.doctorId?.doctorName}}</td>
+        <td>{{appoint.patientId?.patientName}}</td>
         <td>{{appoint.startTime}}</td>
         <td>{{appoint.endTime}}</td>
         <td>{{appoint.medicalSpecialty}}</td>

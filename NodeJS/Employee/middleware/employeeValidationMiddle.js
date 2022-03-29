@@ -9,7 +9,7 @@ module.exports = function validationEmployee(req) {
         lastName: Joi.string().required(),
         email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
         phone: Joi.number().required(),
-        userName: Joi.string().required(),
+        username: Joi.string().required(),
         password: Joi.string().required(),
         imageURL: join.string().required(),
         type: Joi.string().required()

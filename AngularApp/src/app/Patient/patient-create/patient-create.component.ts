@@ -3,6 +3,7 @@ import {Patient} from '../../Module/patient'
 import { PatientService } from '../../Features/patient.service'
 import { Router, ActivatedRoute } from '@angular/router';
 import { PatientUpdateComponent } from '../patient-update/patient-update.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-patient-create',
@@ -12,9 +13,11 @@ import { PatientUpdateComponent } from '../patient-update/patient-update.compone
 export class PatientCreateComponent implements OnInit {
 
   constructor(public PatientService: PatientService, public router: Router, public ar: ActivatedRoute) { }
-
+  type:any
+  path=""
+  data:any
   nPatient?= new Patient(0, "", 0, 0, "","","",0)
-  private updat: PatientUpdateComponent = new PatientUpdateComponent(this.PatientService)
+  private updat: PatientUpdateComponent = new PatientUpdateComponent(this.PatientService, this.router)
 
   ngOnInit(): void {
     this.ar.params.subscribe((r)=>{
@@ -26,21 +29,51 @@ export class PatientCreateComponent implements OnInit {
         this.PatientService.nPatient = this.nPatient
       }
     })
+
+    this.data= JSON.parse(localStorage.getItem("data")||'{}') 
+    this.type= this.data.data.type
+    if(this.type== "admin")
+    {
+      this.path= "admin/patientList"
+    }
+    else if(this.type== "Recpt")
+    {
+      this.path= "recept/patientList"
+    }
+    else
+    {
+      this.path= "doctor/patientList"
+    }
   }
 
   save()
   {
     this.PatientService.AddToList().subscribe((res)=>{
-      this.router.navigate(['admin/patientList'])
-    },(error)=>{alert(`this Id ${this.PatientService.nPatient._id}already exist`)})
-  } 
+      this.router.navigate([this.path])
+    }, (error)=> {
+      if(error instanceof HttpErrorResponse)
+      {
+        if(error.status === 403)
+        {
+          alert("U don't have permission")
+          this.router.navigate(['forbidden'])
+        }
+        else if(error.status === 400)
+        {alert("this Id already exist")}
+      }
+    })
+  }
 
   update()
   {
     if(this.nPatient != undefined)
     {
       this.updat.SavePat(this.nPatient)
-      this.router.navigate(['admin/patientList'])
+      this.router.navigate([this.path])
+    }
+    else
+    {
+      this.router.navigate([this.path])
     }
   }
 }

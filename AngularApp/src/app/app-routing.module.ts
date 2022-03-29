@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { AppointmentCreateComponent } from './Appointment/appointment-create/appointment-create.component';
 import { AppointmentReadComponent } from './Appointment/appointment-read/appointment-read.component';
+import { AuthGuard } from './Auth/auth.guard';
+import { HomeGuard } from './Auth/home.guard';
 import { ServiceCreateComponent } from './ClinicServices/service-create/service-create.component';
 import { ServiceReadComponent } from './ClinicServices/service-read/service-read.component';
 import { AdminDashboardComponent } from './Core/admin-dashboard/admin-dashboard.component';
@@ -11,7 +13,7 @@ import { DoctorReadComponent } from './Doctor/doctor-read/doctor-read.component'
 import { EmployeeCreateComponent } from './Employee/employee-create/employee-create.component';
 import { EmployeeReadComponent } from './Employee/employee-read/employee-read.component';
 import { EmployeeComponent } from './Employee/employee/employee.component';
-import { ErrorComponent } from './error/error.component';
+import { ErrorComponent } from './notFound/error.component';
 import { HomeComponent } from './home/home.component';
 import { InvoiceCreateComponent } from './Invoice/invoice-create/invoice-create.component';
 import { InvoiceReadComponent } from './Invoice/invoice-read/invoice-read.component';
@@ -23,13 +25,14 @@ import { PatientprofileComponent } from './patientprofile/patientprofile.compone
 import { PrescriptionCreateComponent } from './Prescription/prescription-create/prescription-create.component';
 import { PrescriptionReadComponent } from './Prescription/prescription-read/prescription-read.component';
 import { UsersReadComponent } from './Users/users-read/users-read.component';
-// import {PatientprofileComponent} from "./patientprofile.component"
+import {PatientprofileComponent} from "./patientprofile.component"
+import {HomeCopyComponent} from './home-copy/home-copy.component'
+import { ReceptGuard } from './Auth/recept.guard';
+import { AdminGuard } from './Auth/admin.guard';
+import { DoctorGuard } from './Auth/doctor.guard';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
-const routes: Routes= [
-  {path:"home", component:HomeComponent},
-  {path:"", redirectTo:"/home",pathMatch:"full"},
-  {path:"doctor",component: AdminDashboardComponent,},
-  {path:"admin",component: AdminDashboardComponent, children:
+let childrens=
   [{path:"appointmentCreate", component: AppointmentCreateComponent},
     {path:"appointmentList", component: AppointmentReadComponent},
     {path:"appointmentList/edit/:id", component:AppointmentCreateComponent},
@@ -57,13 +60,20 @@ const routes: Routes= [
     {path:"serviceCreate", component:ServiceCreateComponent},
     {path:"serviceList", component:ServiceReadComponent},
     {path:"serviceList/edit/:id", component:ServiceCreateComponent},
-    {path:"UsersList", component:UsersReadComponent},
-    {path:"patientList/patientProfile/:id", component: PatientprofileComponent }
-  ]},
+    {path:"patientList/patientProfile/:id", component: PatientprofileComponent },
   //{path:"admin", loadChildren: ()=> import('./Core/admin-routing.module').then(m=>m.AdminRoutingModule)},
-  {path:"employee", component:EmployeeComponent},
-  // {path:"employee", loadChildren:()=>import('./Employee/employee-routing.module').then(m=>m.EmployeeRoutingModule)},
-  // {path:"appointment", loadChildren:()=>import('./Appointment/appointment-routing.module').then(m=>m.AppointmentRoutingModule)},
+    {path:"UsersList", component:UsersReadComponent}
+  ]
+
+const routes: Routes= [
+  {path:"forbidden", component: ForbiddenComponent},
+  {path:"home", component:HomeCopyComponent, canActivate:[HomeGuard]},
+  {path:"login", component:HomeComponent, canActivate:[HomeGuard]},
+  {path:"", redirectTo:"/home",pathMatch:"full"},
+  {path:'doctor',component: AdminDashboardComponent, canActivate:[AuthGuard, DoctorGuard], children:childrens},
+  {path:'recept',component: AdminDashboardComponent,canActivate:[AuthGuard,ReceptGuard], children:childrens},
+  {path:"admin",component: AdminDashboardComponent, canActivate:[AuthGuard, AdminGuard], children:childrens},
+ 
   {path:"**", component:ErrorComponent}, //must be the last
   
 ]

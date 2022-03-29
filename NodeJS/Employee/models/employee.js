@@ -16,4 +16,4 @@ let employee = mongoose.model('Employee',
 })
 
 //export the employee model
-module.exports = {employee}
+module.exports = { employee }

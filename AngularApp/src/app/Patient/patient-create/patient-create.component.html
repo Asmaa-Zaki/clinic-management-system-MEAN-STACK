@@ -2,15 +2,62 @@
 <div>
 <form #form="ngForm">
 <label style="width: 120px;">Id </label>
-<input name="id" type="text" [(ngModel)]="PatientService.nPatient._id" required><br><br>
+<input name="id" #id="ngModel" type="number" min="1" [(ngModel)]="PatientService.nPatient._id" required 
+[ngClass]="{'invalid-input': form.submitted && !id.valid}"><br><br>
+<div *ngIf="id.invalid && (id.dirty || id.touched )">
+   <div class="valid" *ngIf="id.errors?.['required']">
+       Id is required
+   </div>
+</div>
+
+
 <label style="width: 120px;">Patient Name </label>
-<input name="name" type="text" [(ngModel)]="PatientService.nPatient.patientName" required><br><br>
+<input name="name" #name="ngModel" type="text" [(ngModel)]="PatientService.nPatient.patientName" required
+[ngClass]="{'invalid-input': form.submitted && !name.valid}" minlength="3"><br><br>
+<div *ngIf="name.invalid && (name.dirty || name.touched )">
+   <div class="valid" *ngIf="name.errors?.['required']">
+    Name is required
+   </div>
+   <div class="valid" *ngIf="name.errors?.['minlength']">
+    Name must be at least 3 char
+   </div>
+</div>
+
+
 <label style="width: 120px;">SSN </label>
-<input name="ssn" type="text" [(ngModel)]="PatientService.nPatient.SSN" required><br><br>
+<input name="ssn" #SSN="ngModel" type="number" [(ngModel)]="PatientService.nPatient.SSN" required
+[ngClass]="{'invalid-input': form.submitted && !SSN.valid}"><br><br>
+<div *ngIf="SSN.invalid && (SSN.dirty || SSN.touched )">
+    <div class="valid" *ngIf="SSN.errors?.['required']">
+        SSN is required
+    </div>
+</div>
+
 <label style="width: 120px;">Phone </label>
-<input name="phone" type="text" [(ngModel)]="PatientService.nPatient.phone" required><br><br>
+<input name="phone" #phone="ngModel" type="text" [(ngModel)]="PatientService.nPatient.phone" required
+[ngClass]="{'invalid-input': form.submitted && !phone.valid}" minlength="10" ><br><br>
+<div *ngIf="phone.invalid && (phone.dirty || phone.touched )">
+    <div class="valid" *ngIf="phone.errors?.['required']">
+        Phone is required
+    </div>
+    <div class="valid" *ngIf="phone.errors?.['minlength']">
+        Phone must be 10 numbers
+    </div>
+</div>
+
+
 <label style="width: 120px;">Address </label>
-<input name="addres" type="text" [(ngModel)]="PatientService.nPatient.address" required><br><br>
+<input name="addres" #address="ngModel" type="text" [(ngModel)]="PatientService.nPatient.address" required
+[ngClass]="{'invalid-input': form.submitted && !address.valid}" minlength="3"><br><br>
+<div *ngIf="address.invalid && (address.dirty || address.touched )">
+    <div class="valid" *ngIf="address.errors?.['required']">
+        Address is required
+    </div>
+    <div class="valid" *ngIf="address.errors?.['minlength']">
+        Address must be at least 3 char
+    </div>
+</div>
+
 <label style="width: 120px;">Gender </label>
 <input name="gender" type="text" [(ngModel)]="PatientService.nPatient.gender" required><br><br>
 
@@ -18,8 +65,28 @@
 <input name="imgurl" type="file" [(ngModel)]="PatientService.nPatient.imageURL" required><br><br>
 
 
+<input name="gender" #gender="ngModel" type="text" [(ngModel)]="PatientService.nPatient.gender" required
+[ngClass]="{'invalid-input': form.submitted && !gender.valid}" minlength="4"><br><br>
+<div *ngIf="gender.invalid && (gender.dirty || gender.touched )">
+    <div class="valid" *ngIf="gender.errors?.['required']">
+        Gender is required
+    </div>
+    <div class="valid" *ngIf="gender.errors?.['minlength']">
+        Gender must be male or female
+    </div>
+</div>
+
+
 <label style="width: 120px;">Insurance Id </label>
-<input name="insurance" type="text" [(ngModel)]="PatientService.nPatient.insuranceId" required><br><br>
+<input name="insurance" #insurance="ngModel"  type="number" [(ngModel)]="PatientService.nPatient.insuranceId" required
+[ngClass]="{'invalid-input': form.submitted && !insurance.valid}"><br><br>
+<div *ngIf="insurance.invalid && (insurance.dirty || insurance.touched )">
+   <div class="valid" *ngIf="insurance.errors?.['required']">
+    Insurance Id is required
+   </div>
+</div>
+
+
 <input type="button" style="margin-left: 40%;" [disabled]="form.invalid" (click)="save()" value="Add">
 <input type="button" [disabled]="form.invalid"  (click)="update()" value="Update">
 </form>

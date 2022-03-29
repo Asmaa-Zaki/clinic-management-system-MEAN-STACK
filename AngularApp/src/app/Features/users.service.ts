@@ -6,35 +6,65 @@ import { Users } from '../Module/users';
   providedIn: 'root'
 })
 export class UsersService {
-  @Input() nUser: Users= new Users(0, "", "", "")
-  static active= false
-  static current=""
-  static currentUser:any
+  @Input() nUser: Users= new Users(1, "", "", "")
 
-  readonly baseURL= 'http://localhost:3000/users'
+  Errror: any
+
+  readonly baseURL= 'http://localhost:3000/login'
 
   constructor(private http: HttpClient) { }
 
   usersList: Users[]= []
 
   //addToList
-  AddToList() {
+  postUser() {
     return this.http.post(this.baseURL, this.nUser)
   }
 
-  GetList() {
-    return this.http.get(this.baseURL)
-  }
-
-  DeleteAppoint()
+  login(authCridential:any)
   {
-    return this.http.delete(this.baseURL+'/'+this.nUser._id)
+    return this.http.post(this.baseURL, authCridential)
   }
 
-  EditAppoint()
+  setToken(name:string,token:any)
   {
-      return this.http.put(this.baseURL+`/`+this.nUser._id,this.nUser)
-      
+    localStorage.setItem(name, token)
   }
 
+  deleteToken()
+  {
+    localStorage.removeItem('token')
+  }
+
+  getUserPayLoad()
+  {
+    var token= localStorage.getItem('token')
+    if(token)
+    {
+       var userPayLoad= atob(token.split('.')[1])
+       return JSON.parse(userPayLoad)
+    }
+    else
+    {
+      return null
+    }
+  }
+
+  isLoggedIn()
+  {
+     var userPlayLoad= this.getUserPayLoad()
+     if(userPlayLoad)
+     {
+       return true
+     }
+     else
+     {
+       return false
+     }
+  }
+
+  getToken()
+  {
+    return localStorage.getItem('token')
+  }
 }

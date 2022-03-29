@@ -29,8 +29,7 @@ router.post('/', [auth.checkAdmin], async (req, res) => {
     if (error == true) return res.status(400).send(error.details[0].message);
 
     let emp = new employee(_.pick(req.body, ['_id', 'firstName', 'lastName', 'email', 'phone', 'userName', 'password','imageURL', 'type']));
-    //check id if  it found or not -- هنا بشوف ال متسجل قبل كده ولا لا(id)
-    //👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯👨🏼‍🦯
+   
     const check = await employee.findById(req.body._id);
     if (check) return res.status(400).send('The ID already Registred!');
 
@@ -63,7 +62,7 @@ router.put('/:id', [auth.checkAdmin], (req, res) => {
         else
             console.log("Error in Employee Update: " + JSON.stringify(err, undefined, 2))
     })
-    // res.send(newEmployee)
+
 })
 
 
@@ -75,7 +74,6 @@ router.delete('/:id', [auth.checkAdmin], async (req, res) => {
     if (!emp) return res.status(404).send('The genre with the given ID was not found.');
 
     res.send({ "DELETE FROM DB\t": emp });
-    //res.send("DELETE FROM DB\t" + emp);
 })
 
 module.exports = router

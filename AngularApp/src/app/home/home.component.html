@@ -1,26 +1,11 @@
-<!-- <label style="width: 100px;" >Username</label>
-<input type="text" ><br><br>
-<label style="width: 100px;">Pasword</label>
-<input type="text" ><br><br>
-<label style="width: 100px;">Type </label>
-<input type="radio" name="type"  value="Nurse"   >
-<label>Nurse</label>
-<input type="radio" name="type" >
-<label>Reciptionist</label>
-<input type="radio" name="type" >
-<label>Office Boy </label>
-<input type="radio" name="type" >
-<label>Doctor</label><br>
-<button (click)="sign()">sign</button> -->
-
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <nav class="navbar navbar-expand-lg navbar navbar-light fixed-top " style="background-color: #172447;height: 75px;">
     <div class="container-fluid ">
-        <a class="navbar-brand" href="#"><i class="fa-solid fa-house-chimney-medical fa-3x text-warning"
-                style="width: 50px;"><label id="name">Injection 💉</label></i> </a>
+        <a class="navbar-brand"><i class="fa-solid fa-house-chimney-medical fa-2x text-white"
+                style="width: 40px;"><label id="name">Injection 💉</label></i> </a>
         <button class=" navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -28,8 +13,8 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active " aria-current="page" href="#home"
-                        style="color: rgb(184, 200, 212); font-weight: Bold; font-size: 25px;"><i class="fa fa-home"
+                    <a  [routerLink]="['/']" class="nav-link active " aria-current="page"
+                        style="color: rgb(255, 255, 255); font-weight: Bold; font-size: 25px;"><i class="fa fa-home"
                             aria-hidden="true"></i>Home</a>
                 </li>
 
@@ -38,7 +23,7 @@
     </div>
 </nav>
 
-<div class="container register" style="margin-top: 80px;">
+<div class="container register" style="margin-top: 100px;">
     <div class="row">
         <div class="col-md-3 register-left">
             <img src="../../assets/doctor.png" alt="" style="width: 150px;" />
@@ -52,51 +37,7 @@
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <h3 class="register-heading">Sign In</h3>
                     <div class="row register-form">
-                        <form class="container" #form="ngForm">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="text" name="username" class="form-control" placeholder="UserName *"
-                                        [(ngModel)]="userName" required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="password" class="form-control" placeholder="Password *"
-                                        [(ngModel)]="passWord" required />
-                                </div>
-                                <div class="form-group" style="margin: 1px 23%;">
-                                    <div class="maxl">
-                                        <label class="radio  col-md-4">
-                                            <input type="radio" name="type" [(ngModel)]="type" value="Reciptionist">
-                                            <span> Recipt </span>
-                                        </label>
-                                        <label class="radio  col-md-4">
-                                            <input type="radio" name="type" value="Nurse" [(ngModel)]="type" required>
-                                            <span>Nurse </span>
-                                        </label>
-                                        <label class="radio  col-md-4">
-                                            <input type="radio" name="type" value="Admin" [(ngModel)]="type">
-                                            <span>Admin </span>
-                                        </label>
-                                        <br>
-                                        <label class="radio col-md-4">
-                                            <input type="radio" name="type" value="doctor" [(ngModel)]="type">
-                                            <span>Doctor </span>
-                                        </label>
-                                        <label class="radio  col-md-6">
-                                            <input type="radio" name="type" value="Office Boy" [(ngModel)]="type">
-                                            <span>Office Boy </span>
-                                        </label>
-                                        <br>
-                                        <label class="radio  col-md-6">
-                                            <input type="button" name="sign" [disabled]="form.invalid"
-                                                class="btnRegister" value="Sign" (click)="sign()">
-                                        </label>
-                                        <div *ngIf="logged==false" style="color: red; margin-left: 15%;">
-                                            Inavlid Username or Password
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                       <app-sign-in></app-sign-in>
                     </div>
                 </div>
 

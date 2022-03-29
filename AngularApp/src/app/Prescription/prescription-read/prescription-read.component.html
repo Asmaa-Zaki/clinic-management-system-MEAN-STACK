@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover ">
     <thead>
         <tr>
             <th>
@@ -12,12 +12,12 @@
                 <i appSortParams class="fa fa-arrow-down sorting" (click)="sortDocIdDesc()"></i>
             </th>
             <th>
-                <label>Doc Name</label>
+                <label>Patient Name</label>
                 <i appSortParams class="fa fa-arrow-up" (click)="sortPatIdAsc()"></i>
                 <i appSortParams class="fa fa-arrow-down sorting" (click)="sortPatIdDesc()"></i>
             </th>
             <th>
-                <label>Pat Name</label>
+                <label>Medicine Name</label>
                 <i appSortParams class="fa fa-arrow-up" (click)="sortMedIdAsc()"></i>
                 <i appSortParams class="fa fa-arrow-down sorting" (click)="sortMedIdDesc()"></i>
             </th>
@@ -44,13 +44,13 @@
         <tr
             *ngFor="let prescript of (prescriptionService.PrescriptList|filterbyPrescript:searchValue|sortPrescript:direction:column:type)">
             <td>{{prescript._id}}</td>
-            <td>{{prescript.doctorId}}</td>
-            <td>{{prescript.patientId}}</td>
-            <td>{{prescript.medicineId}}</td>
+            <td>{{prescript.doctorId?.doctorName}}</td>
+            <td>{{prescript.patientId?.patientName}}</td>
+            <td>{{prescript.medicineId?.medicineName}}</td>
             <td>{{prescript.numberOfDoses}}</td>
             <td>{{prescript.dateOfPrescript}}</td>
-            <a [routerLink]="['edit',prescript._id]"><i class="fa fa-edit" aria-hidden="true"
-                    style="font-weight: bold; font-size: larger;"></i></a>
+            <td><a [routerLink]="['edit',prescript._id]"><i class="fa fa-edit" aria-hidden="true"
+                    style="font-weight: bold; font-size: larger;"></i></a></td>
             <td>
                 <app-prescription-delete [prescription]="prescript"></app-prescription-delete>
             </td>

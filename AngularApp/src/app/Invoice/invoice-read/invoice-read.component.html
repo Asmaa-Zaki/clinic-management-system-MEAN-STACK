@@ -36,12 +36,12 @@
     <tbody>
         <tr *ngFor="let invoice of (InvoiceService.InvoiceList)">
             <td>{{invoice._id}}</td>
-            <td>{{invoice.patientId}}</td>
+            <td>{{invoice.patientId?.patientName}}</td>
             <td>{{invoice.taxOfBill}}</td>
             <td>{{invoice.dateOfBill|date}}</td>
             <td>{{invoice.payment}}</td>
-            <a [routerLink]="['edit',invoice._id]"><i class="fa fa-edit" aria-hidden="true"
-                    style="font-weight: bold; font-size: larger;"></i></a>
+            <td><a [routerLink]="['edit',invoice._id]"><i class="fa fa-edit" aria-hidden="true"
+                    style="font-weight: bold; font-size: larger;"></i></a></td> 
             <td>
                 <app-invoice-delete [invoice]="invoice"></app-invoice-delete>
             </td>

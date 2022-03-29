@@ -11,7 +11,7 @@ const express = require('express');
 const router = express.Router();
 router.post('/', async (req, res, next) => {
     //------------------Check username
-    if (req.body.type == 'doctor') {
+    if (req.body.type == 'Doctor') {
         //------------------Check username
         let userDoc = await Doctor.findOne({ username: req.body.username });
         if (!userDoc) return res.status(400).send('Invalid doc UserName or Password');
@@ -19,7 +19,7 @@ router.post('/', async (req, res, next) => {
         if (userDoc.password != req.body.password)
             return res.status(400).send('Invalid doc UserName or Password');
         //creeate token
-        const token = jwt.sign({ _id: this._id, type: "doctor" }, 'PrivateTokenKey');
+        const token = jwt.sign({ _id: this._id, type: "Doctor" }, 'PrivateTokenKey');
         res.status(200).send({ token: token, data: userDoc });
     }
     else {
@@ -27,16 +27,21 @@ router.post('/', async (req, res, next) => {
         // let userEmp = 
         let userEmp = await employee.findOne({ username: req.body.username });
         if (!userEmp) return res.status(400).send('Invalid Emp wwUserName or Password');
-        console.log(userEmp);
+
         //------------------Check Password
-        // const checkPass = await bcrypt.compare( userEmp.password,req.body.password);
-        // if (checkPass) return res.status(400).send('Invalid Emp ppUserName');
         if (userEmp.password != req.body.password) {
             console.log(userEmp.password);
             return res.status(400).send('Invalid Emp qqUserName or Password');
         } else {
-            const token = jwt.sign({ _id: this._id, type: "employee" }, 'PrivateTokenKey');
-            res.status(200).send({ token: token, data: userEmp });
+            if (req.body.type == 'Admin') {
+                console.log("hahahhahahhah");
+                const token = jwt.sign({ _id: this._id, type: "Admin" }, 'PrivateTokenKey');
+                res.status(200).send({ token: token, data: userEmp });
+            }
+            else {
+                const token = jwt.sign({ _id: this._id, type: "Recipt" }, 'PrivateTokenKey');
+                res.status(200).send({ token: token, data: userEmp });
+            }
         }
     }
 });

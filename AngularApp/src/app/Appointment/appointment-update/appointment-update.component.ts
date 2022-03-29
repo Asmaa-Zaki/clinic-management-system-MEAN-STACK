@@ -1,4 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppointmentService } from 'src/app/Features/appointment.service';
 import { Appointment } from 'src/app/Module/appointment';
 
@@ -8,24 +10,31 @@ import { Appointment } from 'src/app/Module/appointment';
   styleUrls: ['./appointment-update.component.css']
 })
 export class AppointmentUpdateComponent implements OnInit {
-  @Input() appointment:Appointment= new Appointment(0,0,0,0,"")
-  //@Output() cAppointment:Appointment= new Appointment(0,0,0,0,"")
-  //appoint: Appointment= new Appointment(0,0,0,0,"")
-  constructor(private appointymentService: AppointmentService) { }
+  @Input() appointment: Appointment = new Appointment(0, 0, 0, 0, 0, "")
+  constructor(private appointymentService: AppointmentService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  EditAppoint()
-  {
+  EditAppoint() {
     console.log(this.appointment)
-    this.appointymentService.nAppointment=this.appointment
+    this.appointymentService.nAppointment = this.appointment
   }
 
-  SaveAppoint(app:Appointment)
-  {
-    this.appointymentService.EditAppoint(app).subscribe((res)=>{
+  SaveAppoint(app: Appointment) {
+    this.appointymentService.EditAppoint(app).subscribe((res) => {
       alert("updated")
-    },(error)=>alert("not exist"))
+    }, (error)=> {
+      if(error instanceof HttpErrorResponse)
+      {
+        if(error.status === 403)
+        {
+          alert("U don't have permission")
+          this.router.navigate(['forbidden'])
+        }
+        else if(error.status === 400)
+        {alert("not exist")}
+      }
+    })
   }
 }

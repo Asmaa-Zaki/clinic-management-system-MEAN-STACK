@@ -1,58 +1,103 @@
-<!-- <div class="row">
-    <div class="col s12">
-        <div class="card">
-            <div class="card-content white-text">
-                <div class="row">
-                    <div class="col s5">
-
-                    </div>
-                    <form (click)="employeeForm()" >
-                        
-                    </form>
-                    <div class="col s7">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 <div>
 <br>
 <form #form="ngForm">
 <label style="width: 120px;">Id </label>
-<input name="id" type="text" [(ngModel)]="DoctorService.nDoctor._id" [(ngModel)]="userSerive.nUser._id" required><br><br>
-
+<input name="id" type="number" min="1" #id="ngModel" [(ngModel)]="DoctorService.nDoctor._id" [(ngModel)]="userSerive.nUser._id" required
+ [ngClass]="{'invalid-input': form.submitted && !id.valid}"><br><br>
+ <div *ngIf="id.invalid && (id.dirty || id.touched )">
+    <div class="valid" *ngIf="id.errors?.['required']">
+        Id is required
+    </div>
+</div>
 
 <label style="width: 120px;">Doctor Name </label>
-<input name="doctorName" type="text" [(ngModel)]="DoctorService.nDoctor.doctorName" required><br><br>
-
+<input name="doctorName" #doctorName="ngModel" type="text" [(ngModel)]="DoctorService.nDoctor.doctorName" required minlength="3"
+[ngClass]="{'invalid-input': form.submitted && !doctorName.valid}"><br><br>
+<div *ngIf="doctorName.invalid && (doctorName.dirty || doctorName.touched )">
+    <div class="valid" *ngIf="doctorName.errors?.['required']">
+        Doctor Name is required
+    </div>
+    <div class="valid" *ngIf="doctorName.errors?.['minlength']">
+        Doctor must be at least 3 characters
+    </div>
+</div>
 
 <label style="width: 120px;">SSN </label>
-<input name="SSN" type="text" [(ngModel)]="DoctorService.nDoctor.SSN" required><br><br>
-
+<input name="SSN" type="number" #SSN="ngModel" [(ngModel)]="DoctorService.nDoctor.SSN" required minlength="9"
+[ngClass]="{'invalid-input': form.submitted && !SSN.valid}"><br><br>
+<div *ngIf="SSN.invalid && (SSN.dirty || SSN.touched )">
+    <div class="valid" *ngIf="SSN.errors?.['required']">
+        SSN is required
+    </div>
+    <div class="valid" *ngIf="SSN.errors?.['minlength']">
+        SSN must be 9 characters
+    </div>
+</div>
 
 <label style="width: 120px;">Phone </label>
-<input name="phone" type="text" [(ngModel)]="DoctorService.nDoctor.phone" required><br><br>
-
+<input name="phone" type="number" #phone="ngModel" [(ngModel)]="DoctorService.nDoctor.phone" required
+[ngClass]="{'invalid-input': form.submitted && !phone.valid}" minlength="10" ><br><br>
+<div *ngIf="phone.invalid && (phone.dirty || phone.touched )">
+    <div class="valid" *ngIf="phone.errors?.['required']" >
+        Phone is required
+    </div>
+    <div class="valid" *ngIf="phone.errors?.['minlength']">
+        Phone must be 10 numbers
+    </div>
+</div>
 
 <label style="width: 120px;">Addrees </label>
-<input name="address" type="text" [(ngModel)]="DoctorService.nDoctor.address" required><br><br>
-
+<input name="address" #address="ngModel" type="text" [(ngModel)]="DoctorService.nDoctor.address" required
+[ngClass]="{'invalid-input': form.submitted && !address.valid}" minlength="3"><br><br>
+<div *ngIf="address.invalid && (address.dirty || address.touched )">
+    <div class="valid" *ngIf="address.errors?.['required']">
+        Address is required
+    </div>
+    <div class="valid" *ngIf="address.errors?.['minlength']">
+        Address must be at least 3 char
+    </div>
+</div>
 
 <label style="width: 120px;">Specialty </label>
-<input name="medical" type="text" [(ngModel)]="DoctorService.nDoctor.medicalSpecialty" required><br><br>
-
+<input name="medical" #medical="ngModel" type="text" [(ngModel)]="DoctorService.nDoctor.medicalSpecialty" required
+[ngClass]="{'invalid-input': form.submitted && !medical.valid}" minlength="3"><br><br>
+<div *ngIf="medical.invalid && (medical.dirty || medical.touched )">
+    <div class="valid" *ngIf="medical.errors?.['required']">
+        Specialty is required
+    </div>
+    <div class="valid" *ngIf="medical.errors?.['minlength']">
+        Specialty must be at least 3 char
+    </div>
+</div>
 
 <label style="width: 120px;">Username </label>
-<input name="username" type="text" [(ngModel)]="DoctorService.nDoctor.username" [(ngModel)]="userSerive.nUser.username" required><br><br>
-
+<input name="username" #username="ngModel" type="text" [(ngModel)]="DoctorService.nDoctor.username" [(ngModel)]="userSerive.nUser.username" required
+[ngClass]="{'invalid-input': form.submitted && !username.valid}" minlength="3"><br><br>
+<div *ngIf="username.invalid && (username.dirty || username.touched )">
+    <div class="valid" *ngIf="username.errors?.['required']">
+        Username is required
+    </div>
+    <div class="valid" *ngIf="username.errors?.['minlength']">
+        Username must be at least 3 char
+    </div>
+</div>
 
 <label style="width: 120px;">Password </label>
 <input name="password" type="text" [(ngModel)]="DoctorService.nDoctor.password" [(ngModel)]="userSerive.nUser.password" required><br><br>
 
 <label style="width: 120px;"> Image URL </label>
 <input name="imgurl" type="file" [(ngModel)]="DoctorService.nDoctor.imageURL"> 
+
+<input name="password" #password="ngModel" type="password" [(ngModel)]="DoctorService.nDoctor.password" [(ngModel)]="userSerive.nUser.password" required
+[ngClass]="{'invalid-input': form.submitted && !password.valid}" minlength="3"><br><br>
+<div *ngIf="password.invalid && (password.dirty || password.touched )">
+    <div class="valid" *ngIf="password.errors?.['required']">
+        Password is required
+    </div>
+    <div class="valid" *ngIf="password.errors?.['minlength']">
+        Password must be at least 3 char
+    </div>
+</div>
 
 <input type="button" style="margin-left: 40%;" [disabled]="form.invalid" (click)="save()" value="Add">
 <input type="button" [disabled]="form.invalid"  (click)="update()" value="Update">

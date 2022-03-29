@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -11,9 +12,11 @@ import { MedicineUpdateComponent } from '../medicine-update/medicine-update.comp
   styleUrls: ['./medicine-create.component.css']
 })
 export class MedicineCreateComponent implements OnInit {
-  
+  type: any
+  path=""
+  data:any
   nMedicine?:Medicine= new Medicine(0,"","","")
-  private updat: MedicineUpdateComponent= new MedicineUpdateComponent(this.medicineService)
+  private updat: MedicineUpdateComponent= new MedicineUpdateComponent(this.medicineService,this.router)
   constructor(public medicineService: MedicineService,public router: Router, public ar: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -26,13 +29,39 @@ export class MedicineCreateComponent implements OnInit {
         this.medicineService.nMedicine= this.nMedicine
       }
     })
+
+    this.data= JSON.parse(localStorage.getItem("data")||'{}') 
+    this.type= this.data.data.type
+    if(this.type== "admin")
+    {
+      this.path= "admin/medicineList"
+    }
+    else if(this.type== "Recpt")
+    {
+      this.path= "recept/medicineList"
+    }
+    else
+    {
+      this.path= "doctor/medicineList"
+    }
   }
 
   save()
   {
     this.medicineService.AddToList().subscribe((res)=>{
-      this.router.navigate(['admin/medicineList'])
-    },(error)=>{alert(`this id: ${this,this.medicineService.nMedicine._id} already exist`)})
+      this.router.navigate([this.path])
+    }, (error)=> {
+      if(error instanceof HttpErrorResponse)
+      {
+        if(error.status === 403)
+        {
+          alert("U don't have permission")
+          this.router.navigate(['forbidden'])
+        }
+        else if(error.status === 400)
+        {alert("this Id already exist")}
+      }
+    })
   }
 
   update()
@@ -40,7 +69,11 @@ export class MedicineCreateComponent implements OnInit {
     if(this.nMedicine != undefined)
     {
       this.updat.SaveMedicine(this.nMedicine)
-      this.router.navigate(['admin/medicineList'])
+      this.router.navigate([this.path])
+    }
+    else
+    {
+      this.router.navigate([this.path])
     }
   }
 }
