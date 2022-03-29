@@ -1,4 +1,3 @@
-
 const { mongoose } = require('./db.js');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -31,34 +30,7 @@ App.listen(3000, () => {
     console.log("Server started at port: 3000")
 })
 
-var upload = multer ({storage : storage}).single('file');
-var storage = multer.diskStorage({
-       destination:"./public/uploads/" , 
-       filename:(req,file,cb)=>{
-        cb(null, file, filename+"_"+Date.now()+path.extname(file.originalname))
-       }
-});
 
-
-router.post('/Upload', upload, function(req,res)
-{
-    var imageFile= req.file.filename;
-     var success= req.file.filename+"uploaded successfully";
-    
-         var imageDetails= new uploadModel({
-             imageURL: imageFile
-
-         });
-         imageDetails.save(function(err,doc)
-         {
-            if(err) throw err;
-             res.render('upload-file',{title:'Upload File', success:success})
-         }
-         )
-});
-// router.get('/upload', function(req,res){
-
-// });
 
 
 App.use('/login', loginController);

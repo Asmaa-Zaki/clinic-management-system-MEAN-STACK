@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\AngularApp",
-    "\\AngularApp\\src"
+    "\\AngularApp\\src",
+    "\\AngularApp\\src\\assets",
+    "\\AngularApp\\src\\environments"
   ],
-  "SelectedNode": "\\AngularApp\\src\\app",
+  "SelectedNode": "\\AngularApp\\src\\assets",
   "PreviewInSolutionExplorer": false
 }

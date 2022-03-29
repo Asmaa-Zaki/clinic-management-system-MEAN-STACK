@@ -25,7 +25,6 @@ import { PatientprofileComponent } from './patientprofile/patientprofile.compone
 import { PrescriptionCreateComponent } from './Prescription/prescription-create/prescription-create.component';
 import { PrescriptionReadComponent } from './Prescription/prescription-read/prescription-read.component';
 import { UsersReadComponent } from './Users/users-read/users-read.component';
-import {PatientprofileComponent} from "./patientprofile.component"
 import {HomeCopyComponent} from './home-copy/home-copy.component'
 import { ReceptGuard } from './Auth/recept.guard';
 import { AdminGuard } from './Auth/admin.guard';
