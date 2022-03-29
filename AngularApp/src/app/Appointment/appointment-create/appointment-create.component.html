@@ -11,7 +11,7 @@
        </div>       
         
         <label style="width: 100px;">DoctorId </label>
-        <input name="docid" #docid="ngModel" min="1" type="number" [(ngModel)]="appointmentService.nAppointment.doctorId"
+        <input name="docid" #docid="ngModel" min="1" type="number" [(ngModel)]="doctorId"
         required [ngClass]="{'invalid-input': form.submitted && !id.valid}"><br><br>
         <div *ngIf="docid.invalid && (docid.dirty || docid.touched )">
             <div class="valid" *ngIf="docid.errors?.['required']">
@@ -20,7 +20,7 @@
         </div>
         
         <label style="width: 100px;">PatientId </label>
-        <input name="patientId" #patientId="ngModel" min="1" type="number" [(ngModel)]="appointmentService.nAppointment.patientId"
+        <input name="patientId" #patientId="ngModel" min="1" type="number" [(ngModel)]="patientIId"
         required [ngClass]="{'invalid-input': form.submitted && !patientId.valid}"><br><br>
         <div *ngIf="patientId.invalid && (patientId.dirty || patientId.touched )">
             <div class="valid" *ngIf="patientId.errors?.['required']">

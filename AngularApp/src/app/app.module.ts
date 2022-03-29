@@ -23,7 +23,7 @@ import { FilterEmployeeNamePipe } from './pipes/filter-employee-name.pipe';
 import { HomeComponent } from './home/home.component';
 import { HomeCopyComponent } from './home-copy/home-copy.component';
 import { NavbarComponent } from './Core/navbar/navbar.component';
-import { ErrorComponent } from './error/error.component';
+import { ErrorComponent } from './notFound/error.component';
 import { ServiceCreateComponent } from './ClinicServices/service-create/service-create.component';
 import { ServiceDeleteComponent } from './ClinicServices/service-delete/service-delete.component';
 import { ServiceReadComponent } from './ClinicServices/service-read/service-read.component';
@@ -59,6 +59,7 @@ import { SignInComponent } from './User/sign-in/sign-in.component';
 import { UsersService } from './Features/users.service';
 import { AuthGuard } from './Auth/auth.guard';
 import { TokenInterceptorService } from './Features/token-interceptor.service';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +119,7 @@ import { TokenInterceptorService } from './Features/token-interceptor.service';
     UsersReadComponent,
     HomeCopyComponent,
     SignInComponent,
+    ForbiddenComponent,
   ],
   imports: [
     BrowserModule,

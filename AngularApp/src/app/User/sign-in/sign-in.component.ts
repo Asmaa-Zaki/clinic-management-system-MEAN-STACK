@@ -26,14 +26,6 @@ export class SignInComponent implements OnInit {
   constructor(private userSer: UsersService, public doctSer:DoctorService, public empServ: EmployeeService, public router: Router) { }
 
   ngOnInit(): void {
-    this.doctSer.GetList().subscribe((res) => {
-      this.doctSer.DocList = res as Doctor[];
-    })
-    this.empServ.GetList().subscribe((res)=>{
-      this.empServ.EmployeeList= res as Employee[]
-      console.log(this.empServ.EmployeeList)
-    })
-    
   }
 
   onSubmit(form: NgForm)
@@ -45,9 +37,21 @@ export class SignInComponent implements OnInit {
         this.token= this.localData.token
         console.log(this.token)
         this.userSer.setToken('token',this.token)
-        this.router.navigate(['admin'])
+        if(this.type=="Doctor")
+        {
+          this.router.navigate(['doctor/appointmentList'])
+        }
+        if(this.type=="Admin")
+        {
+          this.router.navigate(['admin/appointmentList'])
+        }
+        if(this.type=="Reciptionist")
+        {
+          this.router.navigate(['recept/appointmentList'])
+        }
+       
     },(err)=>{
-      alert(err.error.message)
+      alert("Invalid Username or Password")
     })
   }
 }

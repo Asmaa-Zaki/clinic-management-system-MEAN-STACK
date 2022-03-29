@@ -15,7 +15,7 @@ const router = express.Router()
 //-------------------------------------------Get List
 //read
 //localhost:3000/appointment/
-router.get('/', [auth.checkReceptionest], async (req, res) => {
+router.get('/', [auth.accessAll], async (req, res) => {
     const appoint = await appointment.find(req.appointment);
     if (appoint) return res.send(appoint);
     return res.status(400).send('Not Found Any Record');
@@ -91,7 +91,7 @@ router.put('/:id', [auth.checkReceptionest], async (req, res) => {
         endTime: req.body.endTime,
         medicalSpecialty: req.body.medicalSpecialty
     })
-    appointment.findByIdAndUpdate(req.params.id, { $set: newAppointment }, { new: true }, (err, doc) => {
+    appointment.findByIdAndUpdate(req.params.id, { $set: appoint }, { new: true }, (err, doc) => {
         if (!err)
             res.send(doc)
         else

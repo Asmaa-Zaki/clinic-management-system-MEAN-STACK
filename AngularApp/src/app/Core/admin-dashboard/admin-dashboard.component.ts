@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, ErrorHandler, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/Features/users.service';
-import { Doctor } from 'src/app/Module/doctor';
-import { Employee } from 'src/app/Module/employee';
+
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -10,23 +10,18 @@ import { Employee } from 'src/app/Module/employee';
 })
 export class AdminDashboardComponent implements OnInit {
   localData= JSON.parse(localStorage.getItem("data")||'{}')
-  doctor:Doctor= new Doctor(0, "", 0, 0, "", "", "", "")
-  admin: Employee= new Employee(0,"", "", "", 0, "", "", "admin")
-
-  title: string=""
-  doctorActive= false
-  reciptionistActive= false
-  nurseActive= false
-  adminActive= false
+  title: string=" Appointments"
   name= this.localData.data.username
   type= this.localData.data.type
-  
+ 
   constructor(public userService: UsersService) { }
 
   ngOnInit(): void {
-
+    if(this.type== undefined)
+    {
+      this.type= "Doctor"
+    }
   }
-
   logOut()
   {
     this.userService.deleteToken()

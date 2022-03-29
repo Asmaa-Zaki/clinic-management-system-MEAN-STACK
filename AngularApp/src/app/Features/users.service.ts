@@ -7,9 +7,8 @@ import { Users } from '../Module/users';
 })
 export class UsersService {
   @Input() nUser: Users= new Users(1, "", "", "")
-  static active= false
-  static current=""
-  static currentUser:any
+
+  Errror: any
 
   readonly baseURL= 'http://localhost:3000/login'
 
@@ -64,18 +63,8 @@ export class UsersService {
      }
   }
 
-//  jwt() {
-//     // create authorization header with jwt token
-//     let currentUser = JSON.parse(localStorage.getItem('token')||'{}');
-//     if (currentUser && currentUser.token) {
-//         let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
-//         return new RequestOptions({ headers: headers });
-//     }
-// }
-
   getToken()
   {
     return localStorage.getItem('token')
   }
-
 }

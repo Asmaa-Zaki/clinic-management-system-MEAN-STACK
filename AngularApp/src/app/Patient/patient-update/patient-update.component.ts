@@ -1,4 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PatientService } from 'src/app/Features/patient.service';
 import { Patient } from 'src/app/Module/patient';
 
@@ -9,7 +11,7 @@ import { Patient } from 'src/app/Module/patient';
 })
 export class PatientUpdateComponent implements OnInit {
   @Input() patient:Patient= new Patient(0,"",0,0,"","",0)
-  constructor(private patientService: PatientService) { }
+  constructor(private patientService: PatientService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -24,7 +26,18 @@ export class PatientUpdateComponent implements OnInit {
   {
     this.patientService.EditPat(pat).subscribe((res)=>{
       alert("updated")
-    }, (error)=>alert("not exist"))
+    }, (error)=> {
+      if(error instanceof HttpErrorResponse)
+      {
+        if(error.status === 403)
+        {
+          alert("U don't have permission")
+          this.router.navigate(['forbidden'])
+        }
+        else if(error.status === 400)
+        {alert("not exist")}
+      }
+    })
   }
 
 }

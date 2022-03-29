@@ -23,10 +23,6 @@
                     <div class="sb-sidenav-menu " style="padding-left: 10%; margin-top: -7%;">
                         <div class="nav">
                             <nav>
-                            <div class="sb-sidenav-menu-heading text-white" style="margin-bottom: -8%;"><a class="text-white text-decoration-none" [routerLink]="['UsersList']"><i class="fa fa-user m-1" ></i>Users</a></div>
-                            </nav>
-
-                            <nav>
                                 <div class="sb-sidenav-menu-heading text-white" style="margin-bottom: -8%;"><i class="fa fa-table m-1"></i>Appointments</div>
                             <a class="nav-link" [routerLink]="['appointmentCreate']" style="margin-bottom: -8%;" (click)="display(' Appointments')">
                                 <div class="sb-nav-link-icon"></div>
@@ -39,7 +35,7 @@
                             </nav>
                         </div>
 
-                        <div class="nav" *ngIf="doctorActive==false">
+                        <div class="nav">
                             <nav>
                                 <div class="sb-sidenav-menu-heading text-white" style="margin-bottom: -8%;"><i class="fa fa-table m-1"></i>Doctors</div>
                             <a class="nav-link" [routerLink]="['doctorCreate']" style="margin-bottom: -8%;" (click)="display(' Doctors')">

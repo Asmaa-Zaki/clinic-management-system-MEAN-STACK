@@ -11,7 +11,7 @@
        </div>
 
         <label style="width: 120px;">DoctorId </label>
-        <input name="doctorId" #doctorId="ngModel" type="number" min="1" [(ngModel)]="prescriptionService.nPrescription.doctorId.doctorName"
+        <input name="doctorId" #doctorId="ngModel" type="number" min="1" [(ngModel)]="prescriptionService.nPrescription.doctorId"
         required [ngClass]="{'invalid-input': form.submitted && !doctorId.valid}"><br><br>
         <div *ngIf="doctorId.invalid && (doctorId.dirty || doctorId.touched )">
             <div class="valid" *ngIf="doctorId.errors?.['required']">
@@ -20,7 +20,7 @@
         </div> 
 
         <label style="width: 120px;">Patient Name </label>
-        <input name="patientName"  #patientName="ngModel" type="text" [(ngModel)]="prescriptionService.nPrescription.patientId.patientName"
+        <input name="patientName"  #patientName="ngModel" type="text" [(ngModel)]="prescriptionService.nPrescription.patientId"
         required [ngClass]="{'invalid-input': form.submitted && !patientName.valid}"><br><br>
         <div *ngIf="patientName.invalid && (patientName.dirty || patientName.touched )">
             <div class="valid" *ngIf="patientName.errors?.['required']">
@@ -30,7 +30,7 @@
 
 
         <label style="width: 120px;">Medicine Name </label>
-        <input name="medicineName" #medicineName="ngModel" type="text" [(ngModel)]="prescriptionService.nPrescription.medicineId.medicineName"
+        <input name="medicineName" #medicineName="ngModel" type="text" [(ngModel)]="prescriptionService.nPrescription.medicineId"
         required [ngClass]="{'invalid-input': form.submitted && !medicineName.valid}" minlength="3"><br><br>
         <div *ngIf="medicineName.invalid && (medicineName.dirty || medicineName.touched )">
             <div class="valid" *ngIf="medicineName.errors?.['required']">

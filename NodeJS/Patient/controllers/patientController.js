@@ -7,7 +7,7 @@ const express = require('express');
 const router = express.Router()
 
 //-------------------------------------------Get List
-router.get('/', [auth.checkReceptionest], async (req, res) => {
+router.get('/', [auth.accessAll], async (req, res) => {
     const pat = await patient.find();
     if (pat) return res.send(pat);
     return res.status(400).send('Not Found Any Record');

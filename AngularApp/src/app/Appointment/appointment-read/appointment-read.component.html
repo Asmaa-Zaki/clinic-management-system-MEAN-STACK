@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-striped table-hover">
     <tr>
         <th>
             <label>Id</label>
@@ -40,8 +40,8 @@
     <tr
         *ngFor="let appoint of (appointmentService.AppiontList|filterbySpeciality:searchValue|sortComponent:direction:column:type)">
         <td>{{appoint._id}}</td>
-        <td>{{appoint.doctorId|json}}</td>
-        <td>{{appoint.patientId|json}}</td>
+        <td>{{appoint.doctorId?.doctorName}}</td>
+        <td>{{appoint.patientId?.patientName}}</td>
         <td>{{appoint.startTime}}</td>
         <td>{{appoint.endTime}}</td>
         <td>{{appoint.medicalSpecialty}}</td>

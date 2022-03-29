@@ -1,5 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppointmentService } from 'src/app/Features/appointment.service';
+import { UsersService } from 'src/app/Features/users.service';
 import { Appointment } from 'src/app/Module/appointment';
 
 @Component({
@@ -14,7 +17,7 @@ export class AppointmentReadComponent implements OnInit {
   column: string = ''
   type: string = ''
 
-  constructor(public appointmentService: AppointmentService) {
+  constructor(public appointmentService: AppointmentService, private userSer: UsersService, private router: Router) {
 
   }
 
@@ -25,6 +28,15 @@ export class AppointmentReadComponent implements OnInit {
   async show() {
     (await this.appointmentService.GetList()).subscribe((res) => {
       this.appointmentService.AppiontList = res as Appointment[];
+    }, (error)=> {
+      if(error instanceof HttpErrorResponse)
+      {
+        if(error.status === 403)
+        {
+          alert("U don't have permission")
+          this.router.navigate(['forbidden'])
+        }
+      }
     })
   }
 

@@ -1,4 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UsersService } from 'src/app/Features/users.service';
 import { Doctor } from 'src/app/Module/doctor';
 import { DoctorService } from '../../Features/doctor.service'
 
@@ -13,7 +16,7 @@ export class DoctorReadComponent implements OnInit {
   column: string=''
   type: string=''
 
-  constructor(public doctorService: DoctorService) { }
+  constructor(public doctorService: DoctorService, public userSer: UsersService, public router: Router) { }
 
   ngOnInit(): void {
     this.show()
@@ -23,6 +26,15 @@ show()
 {
   this.doctorService.GetList().subscribe((res) => {
     this.doctorService.DocList = res as Doctor[];
+  }, (error)=> {
+    if(error instanceof HttpErrorResponse)
+    {
+      if(error.status === 403)
+      {
+        alert("U don't have permission")
+        this.router.navigate(['forbidden'])
+      }
+    }
   })
 }
 

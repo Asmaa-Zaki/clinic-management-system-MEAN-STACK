@@ -1,4 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Invoice } from '../../Module/invoice';
 import { InvoiceService } from './../../Features/invoice.service';
 
@@ -10,7 +12,7 @@ import { InvoiceService } from './../../Features/invoice.service';
 export class InvoiceUpdateComponent implements OnInit {
   @Input() invoice: Invoice = new Invoice(0, 0, 0, new Date(2015 / 1 / 1), "");
 
-  constructor(private invoiceService: InvoiceService) { }
+  constructor(private invoiceService: InvoiceService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -22,6 +24,17 @@ export class InvoiceUpdateComponent implements OnInit {
   SaveInvoice(inv: Invoice) {
     this.invoiceService.EditInvoice(inv).subscribe((res) => {
       alert("updated")
-    }, (error) => alert("not exist"))
+    }, (error)=> {
+      if(error instanceof HttpErrorResponse)
+      {
+        if(error.status === 403)
+        {
+          alert("U don't have permission")
+          this.router.navigate(['forbidden'])
+        }
+        else if(error.status === 400)
+        {alert("not exist")}
+      }
+    })
   }
 }

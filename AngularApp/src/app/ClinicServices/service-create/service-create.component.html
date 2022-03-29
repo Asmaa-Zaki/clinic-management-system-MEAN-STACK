@@ -11,7 +11,7 @@
        </div>
 
         <label style="width: 100px;">DoctorId </label>
-        <input type="number" min="1" name="doctorId" #doctorId="ngModel" [(ngModel)]="clinicSerService.nClinicServ.doctorId.doctorName"
+        <input type="number" min="1" name="doctorId" #doctorId="ngModel" [(ngModel)]="clinicSerService.nClinicServ.doctorId"
         required [ngClass]="{'invalid-input': form.submitted && !doctorId.valid}"><br><br>
         <div *ngIf="doctorId.invalid && (doctorId.dirty || doctorId.touched )">
             <div class="valid" *ngIf="doctorId.errors?.['required']">

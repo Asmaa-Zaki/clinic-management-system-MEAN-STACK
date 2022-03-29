@@ -6,6 +6,7 @@ import { UsersService } from 'src/app/Features/users.service';
 import { Employee } from 'src/app/Module/employee';
 import { NavbarComponent } from 'src/app/Core/navbar/navbar.component';
 import { EmployeeUpdateComponent } from '../employee-update/employee-update.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-employee-create',
@@ -13,6 +14,9 @@ import { EmployeeUpdateComponent } from '../employee-update/employee-update.comp
   styleUrls: ['./employee-create.component.css']
 })
 export class EmployeeCreateComponent implements OnInit {
+  type: any
+  path= ""
+  data:any
 
   constructor(public employeeService: EmployeeService, public usersSer:UsersService ,public router: Router, public ar: ActivatedRoute) { }
 
@@ -29,15 +33,41 @@ export class EmployeeCreateComponent implements OnInit {
        this.employeeService.nEmployee=this.nEmp
      }
     })
+
+    this.data= JSON.parse(localStorage.getItem("data")||'{}') 
+    this.type= this.data.data.type
+    if(this.type== "admin")
+    {
+      this.path= "admin/employeeList"
+    }
+    else if(this.type== "Recpt")
+    {
+      this.path= "recept/employeeList"
+    }
+    else
+    {
+      this.path= "doctor/employeeList"
+    }
   }
 
   save()
   {
       this.employeeService.AddToList().subscribe((res)=>{
-          this.router.navigate(['admin/employeeList'])
+          this.router.navigate([this.path])
           alert("employee added")
           console.log(this.employeeService.nEmployee?.type)
-      },(error)=>{alert("this Id already exist")})
+      }, (error)=> {
+        if(error instanceof HttpErrorResponse)
+        {
+          if(error.status === 403)
+          {
+            alert("U don't have permission")
+            this.router.navigate(['forbidden'])
+          }
+          else if(error.status === 400)
+          {alert("this Id already exist")}
+        }
+      })
   }
 
   update()
@@ -45,7 +75,11 @@ export class EmployeeCreateComponent implements OnInit {
     if(this.nEmp!= undefined)
     {
       this.updat.SaveEmp(this.nEmp)
-      this.router.navigate(['admin/employeeList'])
+      this.router.navigate([this.path])
+    }
+    else
+    {
+      this.router.navigate([this.path])
     }
   }
 

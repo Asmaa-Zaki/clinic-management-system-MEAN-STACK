@@ -1,4 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ClinicServService } from 'src/app/Features/clinic-serv.service';
 import { ClinicServ } from 'src/app/Module/clinic-serv';
 
@@ -14,7 +16,7 @@ export class ServiceReadComponent implements OnInit {
   column: string=''
   type: string=''
 
-  constructor(public clinicservService: ClinicServService) { }
+  constructor(public clinicservService: ClinicServService, private router: Router) { }
 
   ngOnInit(): void {
     this.show()
@@ -24,6 +26,15 @@ show()
 {
   this.clinicservService.GetList().subscribe((res) => {
   this.clinicservService.ClinicServLists = res as ClinicServ[];
+  }, (error)=> {
+    if(error instanceof HttpErrorResponse)
+    {
+      if(error.status === 403)
+      {
+        alert("U don't have permission")
+        this.router.navigate(['forbidden'])
+      }
+    }
   })
 }
 
